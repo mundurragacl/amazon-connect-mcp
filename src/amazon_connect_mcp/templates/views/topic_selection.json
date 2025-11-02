@@ -1,0 +1,73 @@
+{
+  "name": "Topic Selection",
+  "description": "Cards view for agents to select the contact reason/topic",
+  "viewType": "Cards",
+  "template": {
+    "AttributeBar": [
+      {"Label": "Customer", "Value": "$.Customer.Name"},
+      {"Label": "Channel", "Value": "$.Contact.Channel"}
+    ],
+    "Heading": "What is the customer contacting about?",
+    "Back": {"Label": "Back"},
+    "Sections": [
+      {
+        "Summary": "Billing & Payments",
+        "Detail": "Invoice questions, payment issues, refunds, account balance",
+        "Icon": "Payment",
+        "Id": "billing"
+      },
+      {
+        "Summary": "Technical Support",
+        "Detail": "Product issues, errors, troubleshooting, how-to questions",
+        "Icon": "Support",
+        "Id": "technical"
+      },
+      {
+        "Summary": "Account Management",
+        "Detail": "Update info, password reset, account settings, preferences",
+        "Icon": "Account",
+        "Id": "account"
+      },
+      {
+        "Summary": "Orders & Shipping",
+        "Detail": "Order status, tracking, returns, exchanges",
+        "Icon": "Shipping",
+        "Id": "orders"
+      },
+      {
+        "Summary": "Sales & Upgrades",
+        "Detail": "New products, upgrades, pricing, promotions",
+        "Icon": "Sales",
+        "Id": "sales"
+      },
+      {
+        "Summary": "Complaint",
+        "Detail": "Service issues, escalations, feedback",
+        "Icon": "Warning",
+        "Id": "complaint"
+      },
+      {
+        "Summary": "General Inquiry",
+        "Detail": "Other questions not covered above",
+        "Icon": "Info",
+        "Id": "general"
+      }
+    ],
+    "NoMatchFound": {
+      "Heading": "No matching topic?",
+      "Description": "Select 'General Inquiry' or ask your supervisor"
+    }
+  },
+  "outputMapping": {
+    "selectedTopic": "$.ViewResultData.actionName"
+  },
+  "nextSteps": {
+    "billing": {"flow": "BillingGuideFlow"},
+    "technical": {"flow": "TechnicalSupportFlow"},
+    "account": {"flow": "AccountManagementFlow"},
+    "orders": {"flow": "OrdersFlow"},
+    "sales": {"flow": "SalesFlow"},
+    "complaint": {"flow": "ComplaintFlow"},
+    "general": {"flow": "GeneralInquiryFlow"}
+  }
+}

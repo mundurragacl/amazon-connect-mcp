@@ -1,0 +1,96 @@
+{
+  "name": "Amazon Connect Step-by-Step Guides Index",
+  "description": "Comprehensive index of industry-specific workflow guides for Amazon Connect",
+  "version": "1.0.0",
+  "categories": {
+    "healthcare": {
+      "name": "Healthcare",
+      "description": "Patient care and healthcare service workflows",
+      "file": "healthcare_guides.json",
+      "guides": [
+        "patient_onboarding",
+        "prescription_refill",
+        "appointment_scheduling",
+        "escalation_process"
+      ]
+    },
+    "financial_services": {
+      "name": "Financial Services",
+      "description": "Banking and financial service workflows",
+      "file": "financial_services_guides.json",
+      "guides": [
+        "account_opening",
+        "fraud_investigation",
+        "loan_application",
+        "escalation_process"
+      ]
+    },
+    "ecommerce_retail": {
+      "name": "E-Commerce/Retail",
+      "description": "Online retail and customer service workflows",
+      "file": "ecommerce_retail_guides.json",
+      "guides": [
+        "order_management",
+        "return_process",
+        "product_inquiry",
+        "escalation_process"
+      ]
+    },
+    "insurance": {
+      "name": "Insurance",
+      "description": "Insurance claims and policy service workflows",
+      "file": "insurance_guides.json",
+      "guides": [
+        "claims_intake",
+        "policy_inquiry",
+        "premium_payment",
+        "escalation_process"
+      ]
+    },
+    "technology_saas": {
+      "name": "Technology/SaaS",
+      "description": "Technical support and software service workflows",
+      "file": "technology_saas_guides.json",
+      "guides": [
+        "technical_troubleshooting",
+        "account_onboarding",
+        "feature_request",
+        "escalation_process"
+      ]
+    }
+  },
+  "common_workflows": {
+    "onboarding": {
+      "description": "Customer onboarding processes",
+      "industries": ["healthcare", "financial_services", "technology_saas"]
+    },
+    "troubleshooting": {
+      "description": "Issue resolution and troubleshooting",
+      "industries": ["technology_saas", "ecommerce_retail", "healthcare"]
+    },
+    "escalation": {
+      "description": "Complex issue escalation processes",
+      "industries": ["healthcare", "financial_services", "ecommerce_retail", "insurance", "technology_saas"]
+    },
+    "account_management": {
+      "description": "Account and service management",
+      "industries": ["financial_services", "insurance", "technology_saas"]
+    },
+    "transaction_processing": {
+      "description": "Transaction and order processing",
+      "industries": ["financial_services", "ecommerce_retail", "insurance"]
+    }
+  },
+  "usage_instructions": {
+    "implementation": "These guides can be implemented as Amazon Connect Step-by-Step Guides using the Connect console or APIs",
+    "customization": "Each guide can be customized with industry-specific fields, validation rules, and integration points",
+    "integration": "Guides integrate with Amazon Connect Cases, Customer Profiles, and third-party systems",
+    "best_practices": [
+      "Customize validation rules for your specific business requirements",
+      "Integrate with your CRM or ticketing systems for seamless workflows",
+      "Use dynamic content binding to populate fields from customer data",
+      "Implement proper error handling and fallback procedures",
+      "Train agents on guide usage and escalation procedures"
+    ]
+  }
+}

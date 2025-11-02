@@ -1,0 +1,87 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789090",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789090": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789091": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789092": {"position": {"x": 400, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789090",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you for holding. I'm connecting you to a specialist who can help with your request."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789091"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789091",
+      "Type": "CheckAttribute",
+      "Parameters": {
+        "Attribute": "CustomerTier",
+        "ComparisonValue": "VIP"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789092",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789093",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.CustomerTier", "VIP"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789094",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.ServiceType", "1"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789095",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.ServiceType", "2"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789092",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/general-support"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789093",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/vip-support"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789094",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/order-support"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789095",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/returns-exchanges"
+      }
+    }
+  ]
+}

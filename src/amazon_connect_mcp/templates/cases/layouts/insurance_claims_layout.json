@@ -1,0 +1,49 @@
+{
+  "name": "Insurance Claims Layout",
+  "description": "Layout for insurance industry cases with policy and claim details",
+  "_note": "Title and Status fields cannot be part of layouts - they are always displayed automatically. Custom fields must be created first with their IDs referenced here.",
+  "content": {
+    "basic": {
+      "topPanel": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Claim Overview",
+              "fields": [
+                {"id": "case_reason"},
+                {"id": "policy_number"},
+                {"id": "customer_id"}
+              ]
+            }
+          }
+        ]
+      },
+      "moreInfo": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Claim Details",
+              "fields": [
+                {"id": "claim_number"},
+                {"id": "summary"}
+              ]
+            }
+          },
+          {
+            "fieldGroup": {
+              "name": "Resolution",
+              "fields": [
+                {"id": "resolution_notes"}
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requiredCustomFields": [
+    {"name": "Policy Number", "type": "Text", "description": "Insurance policy number"},
+    {"name": "Claim Number", "type": "Text", "description": "Claim reference number"},
+    {"name": "Resolution Notes", "type": "Text", "description": "Case resolution notes"}
+  ]
+}

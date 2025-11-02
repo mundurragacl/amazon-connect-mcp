@@ -1,0 +1,147 @@
+{
+  "name": "Technical Support",
+  "description": "Template for technical support and troubleshooting cases",
+  "status": "Active",
+  "_llm_guidance": {
+    "workflow": [
+      "1. Create case with title, severity, and product information",
+      "2. Gather technical details: version, environment, error codes",
+      "3. Document reproduction steps and expected vs actual behavior",
+      "4. Investigate and update status as work progresses",
+      "5. Document workarounds if available during investigation",
+      "6. Record final resolution and close case"
+    ],
+    "bestPractices": [
+      "Set severity based on business impact, not technical complexity",
+      "Always capture error codes and messages when available",
+      "Document clear reproduction steps for faster resolution",
+      "Update status regularly to keep stakeholders informed"
+    ]
+  },
+  "requiredFields": {
+    "forCaseCreation": ["title", "severity", "product"],
+    "systemManaged": ["status", "created_date", "last_modified"]
+  },
+  "dependencies": {
+    "error_message": ["error_code"],
+    "resolution": ["status"]
+  },
+  "layout": {
+    "topPanel": [
+      {"fieldId": "title", "label": "Case Title"},
+      {"fieldId": "status", "label": "Status"},
+      {"fieldId": "severity", "label": "Severity"},
+      {"fieldId": "product", "label": "Product"}
+    ],
+    "moreInfo": [
+      {"fieldId": "product_version", "label": "Product Version"},
+      {"fieldId": "environment", "label": "Environment"},
+      {"fieldId": "error_code", "label": "Error Code"},
+      {"fieldId": "error_message", "label": "Error Message"},
+      {"fieldId": "steps_to_reproduce", "label": "Steps to Reproduce"},
+      {"fieldId": "expected_behavior", "label": "Expected Behavior"},
+      {"fieldId": "actual_behavior", "label": "Actual Behavior"},
+      {"fieldId": "workaround", "label": "Workaround"},
+      {"fieldId": "resolution", "label": "Resolution"}
+    ]
+  },
+  "customFields": {
+    "title": {
+      "type": "Text",
+      "required": true,
+      "maxLength": 200,
+      "example": "API timeout errors in production environment"
+    },
+    "status": {
+      "type": "SingleSelect",
+      "required": true,
+      "options": ["New", "Investigating", "Waiting for Info", "In Progress", "Testing Fix", "Resolved", "Closed"]
+    },
+    "severity": {
+      "type": "SingleSelect",
+      "required": true,
+      "options": ["Critical - System Down", "High - Major Impact", "Medium - Limited Impact", "Low - Minor Issue"]
+    },
+    "product": {
+      "type": "SingleSelect",
+      "required": true,
+      "options": ["Product A", "Product B", "Product C", "Mobile App", "Web Portal", "API", "Other"]
+    },
+    "product_version": {
+      "type": "Text",
+      "maxLength": 50,
+      "example": "v2.1.3"
+    },
+    "environment": {
+      "type": "SingleSelect",
+      "options": ["Production", "Staging", "Development", "Test"]
+    },
+    "error_code": {
+      "type": "Text",
+      "maxLength": 100,
+      "example": "ERR_TIMEOUT_500"
+    },
+    "error_message": {
+      "type": "Text",
+      "multiline": true,
+      "maxLength": 2000,
+      "example": "Connection timeout after 30 seconds when calling external API"
+    },
+    "steps_to_reproduce": {
+      "type": "Text",
+      "multiline": true,
+      "maxLength": 5000,
+      "example": "1. Login to application\n2. Navigate to reports section\n3. Click 'Generate Report'\n4. Error occurs after 30 seconds"
+    },
+    "expected_behavior": {
+      "type": "Text",
+      "multiline": true,
+      "maxLength": 2000,
+      "example": "Report should generate within 10 seconds and display results"
+    },
+    "actual_behavior": {
+      "type": "Text",
+      "multiline": true,
+      "maxLength": 2000,
+      "example": "Application shows timeout error and no report is generated"
+    },
+    "workaround": {
+      "type": "Text",
+      "multiline": true,
+      "maxLength": 2000,
+      "example": "Use smaller date ranges or export data in batches"
+    },
+    "resolution": {
+      "type": "Text",
+      "multiline": true,
+      "maxLength": 5000,
+      "example": "Increased API timeout from 30s to 60s and optimized database query"
+    }
+  },
+  "conditions": [
+    {
+      "type": "conditionallyRequired",
+      "targetField": "error_message",
+      "condition": {"field": "error_code", "isNotEmpty": true}
+    }
+  ],
+  "exampleUsage": {
+    "minimalCase": {
+      "title": "Login page not loading",
+      "severity": "High - Major Impact",
+      "product": "Web Portal"
+    },
+    "fullCase": {
+      "title": "API timeout errors in production environment",
+      "severity": "Critical - System Down",
+      "product": "API",
+      "product_version": "v2.1.3",
+      "environment": "Production",
+      "error_code": "ERR_TIMEOUT_500",
+      "error_message": "Connection timeout after 30 seconds when calling external API",
+      "steps_to_reproduce": "1. Login to application\n2. Navigate to reports section\n3. Click 'Generate Report'\n4. Error occurs after 30 seconds",
+      "expected_behavior": "Report should generate within 10 seconds and display results",
+      "actual_behavior": "Application shows timeout error and no report is generated"
+    }
+  }
+}

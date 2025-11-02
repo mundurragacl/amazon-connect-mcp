@@ -1,0 +1,181 @@
+{
+  "name": "Insurance Claims",
+  "description": "Template for insurance industry cases including claims, policy inquiries, and coverage questions",
+  "status": "Active",
+  "_llm_guidance": {
+    "workflow": [
+      "1. Create case domain if not exists using cases_create_domain",
+      "2. Create required custom fields using cases_create_field",
+      "3. Create case template using cases_create_template",
+      "4. Create case using create_case with template_id and field mappings"
+    ],
+    "fieldMapping": "Use template_get_case_workflow() to get actual field IDs for the target domain",
+    "validation": "All required fields must be provided. SingleSelect fields must use exact option values."
+  },
+  "requiredFields": {
+    "forCaseCreation": [
+      {"fieldId": "title"},
+      {"fieldId": "status"},
+      {"fieldId": "case_reason"}
+    ],
+    "systemManaged": [
+      {"fieldId": "created_date"},
+      {"fieldId": "last_modified"},
+      {"fieldId": "case_id"}
+    ]
+  },
+  "dependencies": {
+    "domain": "Required - cases domain must exist",
+    "fields": "Custom fields must be created before template usage",
+    "layout": "Optional - insurance_claims_layout recommended"
+  },
+  "layoutName": "Insurance Claims Layout",
+  "caseReasonOptions": [
+    "New Claim",
+    "Claim Status",
+    "Claim Dispute",
+    "Policy Inquiry",
+    "Coverage Question",
+    "Premium Payment",
+    "Policy Change",
+    "Document Request",
+    "Beneficiary Update",
+    "General Inquiry"
+  ],
+  "priorityOptions": [
+    "Emergency - Immediate",
+    "High - Active Claim",
+    "Medium - Standard",
+    "Low - Information"
+  ],
+  "claimTypeOptions": [
+    "Auto - Collision",
+    "Auto - Comprehensive",
+    "Home - Property Damage",
+    "Home - Liability",
+    "Health - Medical",
+    "Health - Dental",
+    "Life - Death Benefit",
+    "Disability",
+    "Travel",
+    "Other"
+  ],
+  "claimStatusOptions": [
+    "Submitted",
+    "Under Review",
+    "Additional Info Needed",
+    "Approved",
+    "Partially Approved",
+    "Denied",
+    "Appealed",
+    "Closed"
+  ],
+  "customFields": [
+    {
+      "name": "Priority",
+      "type": "SingleSelect",
+      "required": true,
+      "options": [
+        "Emergency - Immediate",
+        "High - Active Claim",
+        "Medium - Standard",
+        "Low - Information"
+      ]
+    },
+    {
+      "name": "Policy Number",
+      "type": "Text",
+      "required": false,
+      "example": "POL-2024-001234"
+    },
+    {
+      "name": "Claim Number",
+      "type": "Text",
+      "required": false,
+      "example": "CLM-2024-567890"
+    },
+    {
+      "name": "Claim Type",
+      "type": "SingleSelect",
+      "required": false,
+      "options": [
+        "Auto - Collision",
+        "Auto - Comprehensive",
+        "Home - Property Damage",
+        "Home - Liability",
+        "Health - Medical",
+        "Health - Dental",
+        "Life - Death Benefit",
+        "Disability",
+        "Travel",
+        "Other"
+      ]
+    },
+    {
+      "name": "Claim Status",
+      "type": "SingleSelect",
+      "required": false,
+      "options": [
+        "Submitted",
+        "Under Review",
+        "Additional Info Needed",
+        "Approved",
+        "Partially Approved",
+        "Denied",
+        "Appealed",
+        "Closed"
+      ]
+    },
+    {
+      "name": "Date of Loss",
+      "type": "DateTime",
+      "required": false,
+      "example": "2024-01-15T10:30:00Z"
+    },
+    {
+      "name": "Claim Amount",
+      "type": "Number",
+      "required": false,
+      "example": 15000.00
+    },
+    {
+      "name": "Deductible",
+      "type": "Number",
+      "required": false,
+      "example": 500.00
+    },
+    {
+      "name": "Adjuster Name",
+      "type": "Text",
+      "required": false,
+      "example": "John Smith"
+    },
+    {
+      "name": "Resolution Notes",
+      "type": "Text",
+      "required": false,
+      "example": "Claim processed and approved for full amount"
+    }
+  ],
+  "exampleUsage": {
+    "minimalCase": {
+      "title": "Auto Collision Claim",
+      "status": "Open",
+      "case_reason": "New Claim"
+    },
+    "fullCase": {
+      "title": "Auto Collision Claim - Policy POL-2024-001234",
+      "status": "Open",
+      "case_reason": "New Claim",
+      "Priority": "High - Active Claim",
+      "Policy Number": "POL-2024-001234",
+      "Claim Number": "CLM-2024-567890",
+      "Claim Type": "Auto - Collision",
+      "Claim Status": "Under Review",
+      "Date of Loss": "2024-01-15T10:30:00Z",
+      "Claim Amount": 15000.00,
+      "Deductible": 500.00,
+      "Adjuster Name": "John Smith"
+    }
+  }
+}

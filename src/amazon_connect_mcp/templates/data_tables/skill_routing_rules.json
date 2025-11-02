@@ -1,0 +1,81 @@
+{
+  "name": "Skill-Based Routing Rules",
+  "description": "Routing rules based on contact reason and required agent skills",
+  "attributes": [
+    {"name": "contact_reason", "type": "text", "isPrimaryKey": true, "description": "Contact reason or intent"},
+    {"name": "required_skill", "type": "text", "required": true, "description": "Primary skill required"},
+    {"name": "secondary_skill", "type": "text", "description": "Secondary/backup skill"},
+    {"name": "target_queue", "type": "text", "required": true, "description": "Target queue name"},
+    {"name": "overflow_queue", "type": "text", "description": "Overflow queue if primary unavailable"},
+    {"name": "min_proficiency", "type": "number", "description": "Minimum skill proficiency (1-5)"},
+    {"name": "priority_boost", "type": "number", "default": 0, "description": "Additional priority for this reason"},
+    {"name": "estimated_handle_time", "type": "number", "description": "Expected handle time in seconds"},
+    {"name": "self_service_eligible", "type": "boolean", "default": false, "description": "Can be handled by self-service"}
+  ],
+  "sampleData": [
+    {
+      "contact_reason": "Billing",
+      "required_skill": "Billing",
+      "secondary_skill": "General",
+      "target_queue": "Billing-Queue",
+      "overflow_queue": "General-Queue",
+      "min_proficiency": 3,
+      "priority_boost": 0,
+      "estimated_handle_time": 300,
+      "self_service_eligible": true
+    },
+    {
+      "contact_reason": "Technical Support",
+      "required_skill": "Technical",
+      "secondary_skill": null,
+      "target_queue": "Technical-Queue",
+      "overflow_queue": "General-Queue",
+      "min_proficiency": 4,
+      "priority_boost": 10,
+      "estimated_handle_time": 600,
+      "self_service_eligible": false
+    },
+    {
+      "contact_reason": "Sales",
+      "required_skill": "Sales",
+      "secondary_skill": "General",
+      "target_queue": "Sales-Queue",
+      "overflow_queue": "General-Queue",
+      "min_proficiency": 3,
+      "priority_boost": 20,
+      "estimated_handle_time": 480,
+      "self_service_eligible": false
+    },
+    {
+      "contact_reason": "Cancellation",
+      "required_skill": "Retention",
+      "secondary_skill": "Sales",
+      "target_queue": "Retention-Queue",
+      "overflow_queue": "Sales-Queue",
+      "min_proficiency": 4,
+      "priority_boost": 30,
+      "estimated_handle_time": 600,
+      "self_service_eligible": false
+    },
+    {
+      "contact_reason": "Fraud",
+      "required_skill": "Fraud",
+      "secondary_skill": null,
+      "target_queue": "Fraud-Queue",
+      "overflow_queue": null,
+      "min_proficiency": 5,
+      "priority_boost": 50,
+      "estimated_handle_time": 900,
+      "self_service_eligible": false
+    }
+  ],
+  "flowUsage": {
+    "description": "Determine routing based on detected contact reason",
+    "example": {
+      "action": "Evaluate",
+      "primaryAttribute": "contact_reason",
+      "primaryValue": "$.Attributes.ContactReason",
+      "returnAttributes": ["target_queue", "required_skill", "priority_boost", "self_service_eligible"]
+    }
+  }
+}

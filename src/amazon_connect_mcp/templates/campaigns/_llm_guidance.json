@@ -1,0 +1,62 @@
+{
+  "_category_guidance": {
+    "description": "Outbound Campaigns for proactive customer outreach via voice, SMS, or email",
+    "prerequisites": [
+      "Instance must be onboarded: campaigns_get_onboarding_status(connect_instance_id)",
+      "If not onboarded: campaigns_start_onboarding(connect_instance_id)",
+      "Need a STANDARD queue (not AGENT queue)",
+      "Need a contact flow (OUTBOUND_WHISPER type preferred, or CONTACT_FLOW)",
+      "Need a claimed phone number: config_list_phone_numbers(instance_id)"
+    ],
+    "workflow": [
+      "1. Check onboarding: campaigns_get_onboarding_status(connect_instance_id)",
+      "2. Get queue ID: list_queues(instance_id) - use STANDARD queue",
+      "3. Get contact flow ID: config_list_contact_flows(instance_id) - use OUTBOUND_WHISPER",
+      "4. Get phone numbers: config_list_phone_numbers(instance_id) - need claimed phone",
+      "5. Create campaign: campaigns_create(name, connect_instance_id, channel_subtype_config)",
+      "6. Start campaign: campaigns_start(campaign_id) - REQUIRED before adding contacts",
+      "7. Add contacts: campaigns_put_outbound_requests(campaign_id, outbound_requests)",
+      "8. Monitor: campaigns_get_state(campaign_id)"
+    ],
+    "criticalNotes": [
+      "⚠️ Use IDs only, NOT full ARNs for connectContactFlowId and connectQueueId",
+      "⚠️ Campaign must be RUNNING before put_outbound_requests will work",
+      "⚠️ connectQueueId goes at telephony level, NOT inside defaultOutboundConfig",
+      "⚠️ Either provide connectSourcePhoneNumber OR use queue with claimed phone"
+    ],
+    "channelSubtypeConfigStructure": {
+      "telephony": {
+        "connectQueueId": "QUEUE_ID_ONLY (not ARN)",
+        "outboundMode": {
+          "progressive": {"bandwidthAllocation": 1.0}
+        },
+        "defaultOutboundConfig": {
+          "connectContactFlowId": "CONTACT_FLOW_ID_ONLY (not ARN)",
+          "connectSourcePhoneNumber": "+1XXXXXXXXXX (E.164 format, optional if queue has phone)"
+        }
+      }
+    },
+    "outboundModes": {
+      "progressive": "Agent-assisted, one call per available agent",
+      "predictive": "Algorithm predicts agent availability",
+      "agentless": "Automated calls without agent (IVR only)",
+      "preview": "Agent previews contact before dialing"
+    },
+    "outboundRequestStructure": {
+      "clientToken": "unique-id-for-idempotency",
+      "expirationTime": "2026-01-05T21:00:00 (ISO 8601, no timezone)",
+      "channelSubtypeParameters": {
+        "telephony": {
+          "destinationPhoneNumber": "+15559876543",
+          "attributes": {"key": "value"}
+        }
+      }
+    },
+    "campaignStates": [
+      "Initialized - Created but not started",
+      "Running - Active and accepting contacts",
+      "Paused - Temporarily stopped",
+      "Stopped - Fully stopped"
+    ]
+  }
+}

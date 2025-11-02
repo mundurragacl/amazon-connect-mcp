@@ -1,0 +1,113 @@
+{
+  "name": "Travel & Hospitality",
+  "description": "Template for travel and hospitality cases including reservations, cancellations, and loyalty programs",
+  "status": "Active",
+  "_llm_guidance": {
+    "workflow_steps": [
+      "1. Capture customer identification and confirmation number",
+      "2. Verify booking details and travel dates",
+      "3. Identify case reason and priority level",
+      "4. Check loyalty status for applicable benefits",
+      "5. Document resolution and follow-up actions"
+    ],
+    "critical_notes": [
+      "Always verify customer identity before accessing booking details",
+      "Check cancellation policies before processing refund requests",
+      "Escalate VIP/Elite loyalty members to specialized queue",
+      "Document all changes to reservations with timestamps"
+    ]
+  },
+  "requiredFields": {
+    "forCaseCreation": [{"fieldId": "title"}, {"fieldId": "status"}, {"fieldId": "case_reason"}],
+    "systemManaged": [{"fieldId": "created_date"}, {"fieldId": "last_modified"}, {"fieldId": "case_id"}]
+  },
+  "dependencies": {
+    "customer_profiles": "Required for loyalty status verification",
+    "booking_system": "Integration needed for reservation lookups",
+    "payment_gateway": "Required for refund processing"
+  },
+  "layoutName": "Travel Hospitality Layout",
+  "caseReasonOptions": [
+    "Reservation Inquiry",
+    "Booking Modification",
+    "Cancellation Request",
+    "Refund Request",
+    "Loyalty Program",
+    "Complaint",
+    "Lost & Found",
+    "Special Request",
+    "Billing Dispute",
+    "Travel Advisory",
+    "General Inquiry"
+  ],
+  "customFields": [
+    {
+      "name": "Confirmation Number",
+      "type": "Text",
+      "required": false,
+      "example": "ABC123456"
+    },
+    {
+      "name": "Travel Date",
+      "type": "DateTime",
+      "required": false,
+      "example": "2024-03-15T10:00:00Z"
+    },
+    {
+      "name": "Destination",
+      "type": "Text",
+      "required": false,
+      "example": "New York, NY"
+    },
+    {
+      "name": "Loyalty Member ID",
+      "type": "Text",
+      "required": false,
+      "example": "GOLD789012"
+    },
+    {
+      "name": "Booking Amount",
+      "type": "Number",
+      "required": false,
+      "example": 1250.00
+    },
+    {
+      "name": "Priority Level",
+      "type": "SingleSelect",
+      "required": false,
+      "options": ["Standard", "Priority", "VIP", "Elite"]
+    },
+    {
+      "name": "Service Type",
+      "type": "SingleSelect",
+      "required": false,
+      "options": ["Hotel", "Flight", "Car Rental", "Package", "Cruise", "Tour"]
+    },
+    {
+      "name": "Resolution Notes",
+      "type": "Text",
+      "required": false,
+      "example": "Processed refund for cancelled reservation"
+    }
+  ],
+  "exampleUsage": {
+    "minimalCase": {
+      "title": "Booking Inquiry",
+      "status": "Open",
+      "case_reason": "Reservation Inquiry"
+    },
+    "fullCase": {
+      "title": "VIP Cancellation Request - Refund Required",
+      "status": "Open",
+      "case_reason": "Cancellation Request",
+      "confirmation_number": "HTL987654",
+      "travel_date": "2024-04-20T14:00:00Z",
+      "destination": "Miami, FL",
+      "loyalty_member_id": "ELITE456789",
+      "booking_amount": 2800.00,
+      "priority_level": "VIP",
+      "service_type": "Hotel",
+      "resolution_notes": "Elite member requesting full refund due to medical emergency"
+    }
+  }
+}

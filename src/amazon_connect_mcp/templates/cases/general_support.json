@@ -1,0 +1,115 @@
+{
+  "name": "General Support",
+  "description": "Standard template for general customer support cases",
+  "status": "Active",
+  
+  "_llm_guidance": {
+    "workflow": [
+      "1. Check/create Customer Profile first (customer_id requires profile ARN)",
+      "2. Create custom fields if they don't exist (use cases_list_fields to check)",
+      "3. Create case with minimal required fields: title + customer_id",
+      "4. Update case with additional fields after creation"
+    ],
+    "critical_notes": [
+      "customer_id MUST be a profile ARN format: arn:aws:profile:{region}:{account}:domains/{domain}/profiles/{id}",
+      "SingleSelect fields require exact value matches from the options arrays",
+      "case_reason values must match options configured in the Connect instance, not this template",
+      "Create case with minimal fields first, then update - avoids validation failures"
+    ],
+    "common_errors": {
+      "customer_id_not_valid": "Use profiles_create_profile first, then construct ARN",
+      "field_value_doesnt_match": "SingleSelect value not in allowed options - check instance config",
+      "field_already_exists": "Field exists - use cases_list_fields to get existing field IDs"
+    }
+  },
+
+  "requiredFields": {
+    "_note": "Only 'title' is truly required for case creation. customer_id is system-required.",
+    "forCaseCreation": ["title", "customer_id"],
+    "systemManaged": ["status", "case_id", "created_datetime"]
+  },
+
+  "dependencies": {
+    "customerProfile": {
+      "required": true,
+      "tool": "profiles_create_profile",
+      "arnFormat": "arn:aws:profile:{region}:{account}:domains/{domain_name}/profiles/{profile_id}"
+    }
+  },
+
+  "customFields": [
+    {
+      "name": "Priority",
+      "type": "SingleSelect",
+      "required": true,
+      "options": ["Urgent", "High", "Medium", "Low"],
+      "_note": "Options must be configured in Connect instance field settings"
+    },
+    {
+      "name": "Category",
+      "type": "SingleSelect",
+      "required": false,
+      "options": ["General Inquiry", "Billing", "Technical", "Sales", "Complaint", "Other"]
+    },
+    {
+      "name": "Description",
+      "type": "Text",
+      "required": false,
+      "multiline": true,
+      "maxLength": 5000,
+      "example": "Customer experiencing login issues with their account"
+    },
+    {
+      "name": "Contact Reason",
+      "type": "Text",
+      "required": false,
+      "maxLength": 500,
+      "example": "Account access problem"
+    },
+    {
+      "name": "Resolution Notes",
+      "type": "Text",
+      "required": false,
+      "multiline": true,
+      "maxLength": 5000,
+      "example": "Reset password and verified account access restored"
+    },
+    {
+      "name": "Customer Satisfaction",
+      "type": "SingleSelect",
+      "required": false,
+      "options": ["Very Satisfied", "Satisfied", "Neutral", "Dissatisfied", "Very Dissatisfied"]
+    },
+    {
+      "name": "Follow Up Required",
+      "type": "Boolean",
+      "required": false
+    },
+    {
+      "name": "Follow Up Date",
+      "type": "DateTime",
+      "required": false
+    }
+  ],
+
+  "exampleUsage": {
+    "minimalCase": {
+      "fields": {
+        "title": "Customer Account Access Issue",
+        "customer_id": "arn:aws:profile:us-east-1:123456789:domains/MyDomain/profiles/abc123"
+      }
+    },
+    "fullCase": {
+      "fields": {
+        "title": "Customer Account Access Issue - Password Reset Required",
+        "customer_id": "arn:aws:profile:us-east-1:123456789:domains/MyDomain/profiles/abc123",
+        "Priority": "Medium",
+        "Category": "Technical",
+        "Description": "Customer experiencing login issues with their account after recent password policy update",
+        "Contact Reason": "Account access problem",
+        "Resolution Notes": "Reset password and verified account access restored",
+        "Follow Up Required": false
+      }
+    }
+  }
+}

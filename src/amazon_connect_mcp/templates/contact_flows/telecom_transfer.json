@@ -1,0 +1,87 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789100",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789100": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789101": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789102": {"position": {"x": 400, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789100",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Please hold while I connect you to the right department for your service needs."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789101"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789101",
+      "Type": "CheckAttribute",
+      "Parameters": {
+        "Attribute": "ServiceType",
+        "ComparisonValue": "Outage"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789102",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789103",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.ServiceType", "Outage"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789104",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.CustomerType", "Business"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789105",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.ServiceType", "2"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789102",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/general-support"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789103",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/outage-support"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789104",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/business-support"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789105",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/technical-support"
+      }
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "_llm_guidance": {
+    "workflow": [
+      "1. profiles_create_domain(domain_name='ecommerce-customers')",
+      "2. profiles_create_profile(domain_name, first_name, last_name, phone, email, attributes)"
+    ],
+    "exampleUsage": {
+      "minimalProfile": {
+        "domain_name": "ecommerce-customers",
+        "first_name": "Sarah",
+        "last_name": "Johnson",
+        "phone": "+1-555-456-7890",
+        "email": "sarah.j@example.com"
+      },
+      "fullProfile": {
+        "domain_name": "ecommerce-customers",
+        "first_name": "Sarah",
+        "last_name": "Johnson",
+        "phone": "+1-555-456-7890",
+        "email": "sarah.j@example.com",
+        "attributes": {
+          "customerId": "CUST-456789",
+          "loyaltyTier": "Gold",
+          "loyaltyPoints": "12500",
+          "totalOrders": "47",
+          "totalSpent": "3250.00",
+          "preferredShippingMethod": "Express",
+          "favoriteCategories": "Electronics,Home",
+          "emailSubscriptions": "Promotions,New Arrivals"
+        }
+      }
+    },
+    "industryNotes": [
+      "PCI compliance for payment data",
+      "Loyalty tier affects routing priority",
+      "Order history enables proactive support",
+      "Return rate may indicate support needs"
+    ]
+  },
+  "name": "E-Commerce Retail Customer Profile",
+  "description": "Unified customer profile layout for e-commerce and retail with order history, preferences, and loyalty data",
+  "industry": "E-Commerce/Retail",
+  "profileType": "Customer",
+  "requiredFields": {
+    "standard": ["_firstName", "_lastName", "_phone", "_email"],
+    "recommended": ["customerId", "loyaltyTier", "totalOrders"]
+  },
+  "layout": {
+    "sections": [
+      {
+        "id": "customer_identity",
+        "title": "Customer Identity",
+        "priority": 1,
+        "fields": [
+          {"key": "_firstName", "label": "First Name", "required": true},
+          {"key": "_lastName", "label": "Last Name", "required": true},
+          {"key": "_phone", "label": "Phone", "required": true},
+          {"key": "_email", "label": "Email", "required": true},
+          {"key": "dateOfBirth", "label": "Date of Birth", "type": "date"},
+          {"key": "customerId", "label": "Customer ID", "type": "text", "unique": true},
+          {"key": "accountCreatedDate", "label": "Account Created", "type": "date"}
+        ]
+      },
+      {
+        "id": "order_history",
+        "title": "Order History",
+        "priority": 2,
+        "fields": [
+          {"key": "totalOrders", "label": "Total Orders", "type": "number"},
+          {"key": "totalSpent", "label": "Total Spent", "type": "currency"},
+          {"key": "averageOrderValue", "label": "Average Order Value", "type": "currency"},
+          {"key": "lastOrderDate", "label": "Last Order", "type": "date"},
+          {"key": "lastOrderAmount", "label": "Last Order Amount", "type": "currency"},
+          {"key": "recentOrders", "label": "Recent Orders", "type": "list"},
+          {"key": "returnRate", "label": "Return Rate", "type": "percentage"}
+        ]
+      },
+      {
+        "id": "shipping_billing",
+        "title": "Shipping & Billing",
+        "priority": 3,
+        "fields": [
+          {"key": "defaultShippingAddress", "label": "Default Shipping Address", "type": "address"},
+          {"key": "billingAddress", "label": "Billing Address", "type": "address"},
+          {"key": "alternateAddresses", "label": "Alternate Addresses", "type": "list"},
+          {"key": "preferredShippingMethod", "label": "Preferred Shipping", "type": "select", "options": ["Standard", "Express", "Overnight", "Pickup"]},
+          {"key": "paymentMethods", "label": "Payment Methods", "type": "list"},
+          {"key": "defaultPaymentMethod", "label": "Default Payment", "type": "text", "masked": true}
+        ]
+      },
+      {
+        "id": "preferences_behavior",
+        "title": "Preferences & Behavior",
+        "priority": 4,
+        "fields": [
+          {"key": "favoriteCategories", "label": "Favorite Categories", "type": "multiselect"},
+          {"key": "brandPreferences", "label": "Brand Preferences", "type": "list"},
+          {"key": "sizePreferences", "label": "Size Preferences", "type": "object"},
+          {"key": "priceRange", "label": "Typical Price Range", "type": "range"},
+          {"key": "shoppingFrequency", "label": "Shopping Frequency", "type": "select", "options": ["Weekly", "Monthly", "Seasonal", "Occasional"]},
+          {"key": "devicePreference", "label": "Shopping Device", "type": "select", "options": ["Mobile", "Desktop", "Tablet", "In-Store"]}
+        ]
+      },
+      {
+        "id": "loyalty_rewards",
+        "title": "Loyalty & Rewards",
+        "priority": 5,
+        "fields": [
+          {"key": "loyaltyTier", "label": "Loyalty Tier", "type": "select", "options": ["Bronze", "Silver", "Gold", "Platinum", "VIP"]},
+          {"key": "loyaltyPoints", "label": "Loyalty Points", "type": "number"},
+          {"key": "rewardsBalance", "label": "Rewards Balance", "type": "currency"},
+          {"key": "memberSince", "label": "Member Since", "type": "date"},
+          {"key": "referralCount", "label": "Referrals Made", "type": "number"},
+          {"key": "reviewsWritten", "label": "Reviews Written", "type": "number"},
+          {"key": "wishlistItems", "label": "Wishlist Items", "type": "number"}
+        ]
+      },
+      {
+        "id": "communication_marketing",
+        "title": "Communication & Marketing",
+        "priority": 6,
+        "fields": [
+          {"key": "emailSubscriptions", "label": "Email Subscriptions", "type": "multiselect", "options": ["Promotions", "New Arrivals", "Back in Stock", "Recommendations"]},
+          {"key": "smsOptIn", "label": "SMS Notifications", "type": "boolean"},
+          {"key": "pushNotifications", "label": "Push Notifications", "type": "boolean"},
+          {"key": "catalogMailings", "label": "Catalog Mailings", "type": "boolean"},
+          {"key": "personalizedRecommendations", "label": "Personalized Recommendations", "type": "boolean"},
+          {"key": "socialMediaConnected", "label": "Social Media Connected", "type": "multiselect", "options": ["Facebook", "Instagram", "Twitter", "Pinterest"]}
+        ]
+      },
+      {
+        "id": "support_history",
+        "title": "Support History",
+        "priority": 7,
+        "fields": [
+          {"key": "supportTickets", "label": "Support Tickets", "type": "number"},
+          {"key": "lastContactDate", "label": "Last Contact", "type": "date"},
+          {"key": "preferredSupportChannel", "label": "Preferred Support", "type": "select", "options": ["Phone", "Email", "Chat", "Social Media"]},
+          {"key": "satisfactionScore", "label": "Satisfaction Score", "type": "number"},
+          {"key": "escalationHistory", "label": "Escalation History", "type": "list"},
+          {"key": "resolutionTime", "label": "Avg Resolution Time", "type": "duration"}
+        ]
+      }
+    ]
+  },
+  "integrations": {
+    "ecommerce_platforms": ["Shopify", "Magento", "WooCommerce", "BigCommerce"],
+    "inventory_management": true,
+    "payment_processing": true,
+    "shipping_carriers": true,
+    "marketing_automation": true
+  },
+  "compliance": {
+    "pci_compliant": true,
+    "gdpr_compliant": true,
+    "ccpa_compliant": true,
+    "data_encryption": true,
+    "audit_logging": true,
+    "access_controls": ["role_based", "customer_consent"]
+  }
+}

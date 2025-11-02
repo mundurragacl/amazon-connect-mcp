@@ -1,0 +1,43 @@
+{
+  "name": "Technology Support Layout",
+  "description": "Layout for technology/SaaS support cases with product and issue details",
+  "_note": "Title and Status fields cannot be part of layouts - they are always displayed automatically",
+  "content": {
+    "basic": {
+      "topPanel": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Issue Overview",
+              "fields": [
+                {"id": "case_reason"},
+                {"id": "severity"},
+                {"id": "customer_id"}
+              ]
+            }
+          }
+        ]
+      },
+      "moreInfo": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Technical Details",
+              "fields": [
+                {"id": "product_name"},
+                {"id": "error_code"},
+                {"id": "summary"}
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requiredCustomFields": [
+    {"name": "Severity", "type": "SingleSelect"},
+    {"name": "Product Name", "type": "Text"},
+    {"name": "Error Code", "type": "Text"},
+    {"name": "Resolution Notes", "type": "Text"}
+  ]
+}

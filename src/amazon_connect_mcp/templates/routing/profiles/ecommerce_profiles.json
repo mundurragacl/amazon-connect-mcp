@@ -1,0 +1,59 @@
+{
+  "name": "E-Commerce Agent Profiles",
+  "description": "Routing profiles for e-commerce and retail agents",
+  "industry": "E-Commerce/Retail",
+  "profiles": [
+    {
+      "name": "Order-Support-Agent",
+      "description": "Order and shipping support",
+      "defaultOutboundQueue": "Order-Support",
+      "mediaConcurrencies": [
+        {"Channel": "VOICE", "Concurrency": 1},
+        {"Channel": "CHAT", "Concurrency": 3}
+      ],
+      "queueConfigs": [
+        {"QueueName": "Order-Support", "Priority": 1, "Delay": 0},
+        {"QueueName": "Product-Support", "Priority": 2, "Delay": 30}
+      ]
+    },
+    {
+      "name": "Returns-Specialist",
+      "description": "Returns and refunds processing",
+      "defaultOutboundQueue": "Returns-Refunds",
+      "mediaConcurrencies": [
+        {"Channel": "VOICE", "Concurrency": 1},
+        {"Channel": "CHAT", "Concurrency": 2}
+      ],
+      "queueConfigs": [
+        {"QueueName": "Returns-Refunds", "Priority": 1, "Delay": 0},
+        {"QueueName": "Order-Support", "Priority": 2, "Delay": 30}
+      ]
+    },
+    {
+      "name": "VIP-Support-Agent",
+      "description": "Priority support for loyalty members",
+      "defaultOutboundQueue": "VIP-Customers",
+      "mediaConcurrencies": [
+        {"Channel": "VOICE", "Concurrency": 1},
+        {"Channel": "CHAT", "Concurrency": 2}
+      ],
+      "queueConfigs": [
+        {"QueueName": "VIP-Customers", "Priority": 1, "Delay": 0},
+        {"QueueName": "Order-Support", "Priority": 2, "Delay": 15}
+      ]
+    },
+    {
+      "name": "Sales-Agent",
+      "description": "Sales and upselling",
+      "defaultOutboundQueue": "Sales",
+      "mediaConcurrencies": [
+        {"Channel": "VOICE", "Concurrency": 1},
+        {"Channel": "CHAT", "Concurrency": 2}
+      ],
+      "queueConfigs": [
+        {"QueueName": "Sales", "Priority": 1, "Delay": 0},
+        {"QueueName": "Product-Support", "Priority": 2, "Delay": 30}
+      ]
+    }
+  ]
+}

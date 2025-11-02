@@ -1,0 +1,147 @@
+{
+  "_llm_guidance": {
+    "workflow": [
+      "1. profiles_create_domain(domain_name='financial-customers')",
+      "2. profiles_create_profile(domain_name, first_name, last_name, phone, email, attributes)"
+    ],
+    "exampleUsage": {
+      "minimalProfile": {
+        "domain_name": "financial-customers",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "phone": "+1-555-987-6543",
+        "email": "jane.doe@example.com"
+      },
+      "fullProfile": {
+        "domain_name": "financial-customers",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "phone": "+1-555-987-6543",
+        "email": "jane.doe@example.com",
+        "attributes": {
+          "customerId": "CUST-789012",
+          "customerSegment": "Premier",
+          "relationshipManager": "Michael Brown",
+          "memberSince": "2018-06-15",
+          "creditScore": "780",
+          "riskRating": "Low",
+          "kycStatus": "Verified",
+          "preferredContactMethod": "Secure Message"
+        }
+      }
+    },
+    "industryNotes": [
+      "PCI-DSS compliance required for payment data",
+      "KYC/AML verification mandatory",
+      "Encrypt SSN and sensitive financial data",
+      "Fraud alerts should trigger priority routing"
+    ]
+  },
+  "name": "Financial Services Customer Profile",
+  "description": "Unified customer profile layout for banking and financial services with account relationships and risk management",
+  "industry": "Financial Services",
+  "profileType": "Customer",
+  "requiredFields": {
+    "standard": ["_firstName", "_lastName", "_phone", "_email"],
+    "recommended": ["customerId", "customerSegment", "kycStatus"]
+  },
+  "layout": {
+    "sections": [
+      {
+        "id": "customer_identity",
+        "title": "Customer Identity",
+        "priority": 1,
+        "fields": [
+          {"key": "_firstName", "label": "First Name", "required": true},
+          {"key": "_lastName", "label": "Last Name", "required": true},
+          {"key": "_phone", "label": "Phone", "required": true},
+          {"key": "_email", "label": "Email", "required": true},
+          {"key": "dateOfBirth", "label": "Date of Birth", "type": "date", "required": true},
+          {"key": "socialSecurityNumber", "label": "SSN", "type": "encrypted", "masked": true, "required": true},
+          {"key": "customerId", "label": "Customer ID", "type": "text", "unique": true},
+          {"key": "taxId", "label": "Tax ID", "type": "encrypted", "masked": true}
+        ]
+      },
+      {
+        "id": "account_relationship",
+        "title": "Account Relationship",
+        "priority": 2,
+        "fields": [
+          {"key": "customerSegment", "label": "Customer Segment", "type": "select", "options": ["Retail", "Private", "Business", "Premier"]},
+          {"key": "relationshipManager", "label": "Relationship Manager", "type": "text"},
+          {"key": "memberSince", "label": "Member Since", "type": "date"},
+          {"key": "relationshipValue", "label": "Total Relationship Value", "type": "currency"},
+          {"key": "creditScore", "label": "Credit Score", "type": "number", "sensitive": true},
+          {"key": "riskRating", "label": "Risk Rating", "type": "select", "options": ["Low", "Medium", "High", "Restricted"]}
+        ]
+      },
+      {
+        "id": "account_summary",
+        "title": "Account Summary",
+        "priority": 3,
+        "fields": [
+          {"key": "checkingAccounts", "label": "Checking Accounts", "type": "list"},
+          {"key": "savingsAccounts", "label": "Savings Accounts", "type": "list"},
+          {"key": "creditCards", "label": "Credit Cards", "type": "list"},
+          {"key": "loans", "label": "Loans", "type": "list"},
+          {"key": "investments", "label": "Investment Accounts", "type": "list"},
+          {"key": "totalAssets", "label": "Total Assets", "type": "currency"},
+          {"key": "totalLiabilities", "label": "Total Liabilities", "type": "currency"}
+        ]
+      },
+      {
+        "id": "transaction_behavior",
+        "title": "Transaction Behavior",
+        "priority": 4,
+        "fields": [
+          {"key": "lastTransactionDate", "label": "Last Transaction", "type": "datetime"},
+          {"key": "monthlyTransactionVolume", "label": "Monthly Volume", "type": "number"},
+          {"key": "averageTransactionAmount", "label": "Average Amount", "type": "currency"},
+          {"key": "preferredChannels", "label": "Preferred Channels", "type": "multiselect", "options": ["ATM", "Online", "Mobile", "Branch", "Phone"]},
+          {"key": "fraudAlerts", "label": "Fraud Alerts", "type": "boolean"},
+          {"key": "disputedTransactions", "label": "Disputed Transactions", "type": "number"}
+        ]
+      },
+      {
+        "id": "contact_preferences",
+        "title": "Contact Preferences",
+        "priority": 5,
+        "fields": [
+          {"key": "preferredContactMethod", "label": "Preferred Contact", "type": "select", "options": ["Phone", "Email", "SMS", "Mail", "Secure Message"]},
+          {"key": "contactTimePreference", "label": "Best Time to Contact", "type": "select", "options": ["Morning", "Afternoon", "Evening", "Anytime"]},
+          {"key": "languagePreference", "label": "Language", "type": "select", "options": ["English", "Spanish", "French", "Mandarin", "Other"]},
+          {"key": "marketingOptIn", "label": "Marketing Communications", "type": "boolean"},
+          {"key": "paperlessStatements", "label": "Paperless Statements", "type": "boolean"},
+          {"key": "mobileAlerts", "label": "Mobile Alerts", "type": "boolean"}
+        ]
+      },
+      {
+        "id": "compliance_kyc",
+        "title": "Compliance & KYC",
+        "priority": 6,
+        "fields": [
+          {"key": "kycStatus", "label": "KYC Status", "type": "select", "options": ["Verified", "Pending", "Incomplete", "Expired"]},
+          {"key": "amlRiskLevel", "label": "AML Risk Level", "type": "select", "options": ["Low", "Medium", "High"]},
+          {"key": "sanctionsCheck", "label": "Sanctions Check", "type": "select", "options": ["Clear", "Match", "Pending"]},
+          {"key": "pepStatus", "label": "PEP Status", "type": "boolean"},
+          {"key": "lastKycUpdate", "label": "Last KYC Update", "type": "date"},
+          {"key": "complianceNotes", "label": "Compliance Notes", "type": "textarea", "sensitive": true}
+        ]
+      }
+    ]
+  },
+  "integrations": {
+    "core_banking": ["Temenos", "FIS", "Jack Henry", "Fiserv"],
+    "fraud_detection": true,
+    "credit_bureau": true,
+    "regulatory_reporting": true
+  },
+  "compliance": {
+    "pci_compliant": true,
+    "sox_compliant": true,
+    "gdpr_compliant": true,
+    "data_encryption": true,
+    "audit_logging": true,
+    "access_controls": ["role_based", "customer_consent", "regulatory_approval"]
+  }
+}

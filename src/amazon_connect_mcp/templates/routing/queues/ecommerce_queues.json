@@ -1,0 +1,51 @@
+{
+  "name": "E-Commerce Queue Configuration",
+  "description": "Queue configuration for retail and e-commerce",
+  "industry": "E-Commerce/Retail",
+  "queues": [
+    {
+      "name": "Order-Support",
+      "description": "Order status and shipping inquiries",
+      "maxContacts": 100,
+      "hoursOfOperationId": "ecommerce_hours",
+      "outboundCallerIdName": "Order Support"
+    },
+    {
+      "name": "Returns-Refunds",
+      "description": "Returns processing and refund requests",
+      "maxContacts": 60,
+      "hoursOfOperationId": "ecommerce_hours",
+      "outboundCallerIdName": "Returns Team"
+    },
+    {
+      "name": "Product-Support",
+      "description": "Product questions and recommendations",
+      "maxContacts": 40,
+      "hoursOfOperationId": "ecommerce_hours",
+      "outboundCallerIdName": "Product Support"
+    },
+    {
+      "name": "VIP-Customers",
+      "description": "Priority support for loyalty members",
+      "maxContacts": 25,
+      "hoursOfOperationId": "ecommerce_hours",
+      "outboundCallerIdName": "VIP Support",
+      "priority": "high"
+    },
+    {
+      "name": "Escalations",
+      "description": "Escalated issues and complaints",
+      "maxContacts": 15,
+      "hoursOfOperationId": "ecommerce_hours",
+      "outboundCallerIdName": "Customer Relations",
+      "priority": "high"
+    },
+    {
+      "name": "Sales",
+      "description": "Sales inquiries and upselling",
+      "maxContacts": 50,
+      "hoursOfOperationId": "ecommerce_hours",
+      "outboundCallerIdName": "Sales Team"
+    }
+  ]
+}

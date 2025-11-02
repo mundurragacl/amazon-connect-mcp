@@ -1,0 +1,77 @@
+{
+  "name": "Telecom Service Screen Pop",
+  "description": "Service and account information for telecommunications contact centers",
+  "industry": "Telecommunications",
+  "viewType": "Detail",
+  "template": {
+    "Head": {
+      "Title": "Service Overview",
+      "Configuration": {"Layout": {"Columns": ["8", "4"]}}
+    },
+    "Body": [
+      {
+        "_id": "outage_alert",
+        "Type": "AlertBanner",
+        "Props": {
+          "Visible": "$.Service.OutageInArea",
+          "Variant": "warning",
+          "Message": "SERVICE ALERT: Known outage in customer's area. Est. restoration: $.Service.OutageETA"
+        }
+      },
+      {
+        "_id": "customer_card",
+        "Type": "Card",
+        "Props": {
+          "Heading": "$.Customer.Name",
+          "Icon": "Phone",
+          "Status": "$.Customer.AccountStatus",
+          "Description": "Account: $.Customer.AccountNumber | Plan: $.Customer.PlanName"
+        }
+      },
+      {
+        "_id": "service_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Service Details"},
+        "Content": [
+          {"Label": "Phone Number", "Value": "$.Service.PhoneNumber", "Copyable": true},
+          {"Label": "Plan", "Value": "$.Service.PlanName"},
+          {"Label": "Data Used", "Value": "$.Service.DataUsed"},
+          {"Label": "Data Remaining", "Value": "$.Service.DataRemaining"},
+          {"Label": "Bill Cycle", "Value": "$.Service.BillCycleEnd"}
+        ]
+      },
+      {
+        "_id": "billing_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Billing"},
+        "Content": [
+          {"Label": "Current Balance", "Value": "$.Billing.CurrentBalance"},
+          {"Label": "Due Date", "Value": "$.Billing.DueDate"},
+          {"Label": "Last Payment", "Value": "$.Billing.LastPayment"},
+          {"Label": "Autopay", "Value": "$.Billing.AutopayStatus"}
+        ]
+      },
+      {
+        "_id": "device_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Device"},
+        "Content": [
+          {"Label": "Device", "Value": "$.Device.Model"},
+          {"Label": "IMEI", "Value": "$.Device.IMEI", "Copyable": true},
+          {"Label": "Upgrade Eligible", "Value": "$.Device.UpgradeEligible"}
+        ]
+      },
+      {
+        "_id": "quick_actions",
+        "Type": "Container",
+        "Content": [
+          {"_id": "troubleshoot_btn", "Type": "Button", "Props": {"Action": "Troubleshoot", "Variant": "primary"}, "Content": ["Troubleshoot"]},
+          {"_id": "upgrade_btn", "Type": "Button", "Props": {"Action": "DeviceUpgrade"}, "Content": ["Upgrade"]},
+          {"_id": "plan_btn", "Type": "Button", "Props": {"Action": "ChangePlan"}, "Content": ["Change Plan"]},
+          {"_id": "payment_btn", "Type": "Button", "Props": {"Action": "MakePayment"}, "Content": ["Payment"]}
+        ]
+      }
+    ]
+  },
+  "actions": ["Troubleshoot", "DeviceUpgrade", "ChangePlan", "MakePayment", "ReportOutage", "SuspendService", "CreateCase"]
+}

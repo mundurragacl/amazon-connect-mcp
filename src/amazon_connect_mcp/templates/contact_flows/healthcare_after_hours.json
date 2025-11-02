@@ -1,0 +1,102 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789020",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789020": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789021": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789022": {"position": {"x": 400, "y": 20}},
+      "12345678-1234-1234-1234-123456789023": {"position": {"x": 600, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789020",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you for calling [Hospital Name]. Our offices are currently closed. If this is a medical emergency, please hang up and dial 911 immediately."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789021"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789021",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "For urgent medical concerns that cannot wait until morning, press 1 to be connected to our on-call nurse. To leave a message for your provider, press 2. For prescription refill requests, press 3.",
+        "MaxDigits": 1,
+        "Timeout": "8"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789022",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789022",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "1"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789023",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "2"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789023",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "3"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789022",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/nurse-on-call"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789023",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Please leave your name, date of birth, phone number, and detailed message after the tone. We will return your call within 24 hours during business days."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789024"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789024",
+      "Type": "StoreCustomerInput",
+      "Parameters": {
+        "InputTimeLimitSeconds": "120"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789025"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789025",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you for your message. We will contact you as soon as possible. Goodbye."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789026"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789026",
+      "Type": "DisconnectParticipant"
+    }
+  ]
+}

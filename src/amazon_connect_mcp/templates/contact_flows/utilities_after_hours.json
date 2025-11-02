@@ -1,0 +1,95 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789150",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789150": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789151": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789152": {"position": {"x": 400, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789150",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you for calling [Utility Company]. If you smell gas or have a utility emergency, hang up and call 911 immediately. Our customer service hours are Monday through Friday 7 AM to 7 PM."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789151"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789151",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "To report a power outage, press 1. For gas emergencies, press 2. For water service issues, press 3. For all other inquiries, press 9.",
+        "MaxDigits": 1,
+        "Timeout": "8"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789152",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789153",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "1"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789154",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "2"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789155",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "3"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789152",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "For billing questions and account information, please use our website or mobile app, or call back during business hours."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789156"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789153",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/outage-24x7"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789154",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/gas-emergency-24x7"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789155",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/water-emergency-24x7"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789156",
+      "Type": "DisconnectParticipant"
+    }
+  ]
+}

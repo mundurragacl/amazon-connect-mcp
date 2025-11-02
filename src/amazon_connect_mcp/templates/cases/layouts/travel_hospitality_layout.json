@@ -1,0 +1,41 @@
+{
+  "name": "Travel & Hospitality Layout",
+  "description": "Layout for travel and hospitality cases with reservation details",
+  "_note": "Title and Status fields cannot be part of layouts - they are always displayed automatically",
+  "content": {
+    "basic": {
+      "topPanel": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Booking Overview",
+              "fields": [
+                {"id": "case_reason"},
+                {"id": "confirmation_number"},
+                {"id": "customer_id"}
+              ]
+            }
+          }
+        ]
+      },
+      "moreInfo": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Travel Details",
+              "fields": [
+                {"id": "travel_date"},
+                {"id": "summary"}
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requiredCustomFields": [
+    {"name": "Confirmation Number", "type": "Text"},
+    {"name": "Travel Date", "type": "DateTime"},
+    {"name": "Resolution Notes", "type": "Text"}
+  ]
+}

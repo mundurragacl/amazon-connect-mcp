@@ -1,0 +1,139 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789050",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789050": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789051": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789052": {"position": {"x": 400, "y": 20}},
+      "12345678-1234-1234-1234-123456789053": {"position": {"x": 600, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789050",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you for calling [Telecom Company]. Your call may be recorded for quality and training purposes."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789051"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789051",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "If you're experiencing a service outage, press 1. For technical support, press 2. For billing questions, press 3. For new service or upgrades, press 4. For business customers, press 5. For all other inquiries, press 9.",
+        "MaxDigits": 1,
+        "Timeout": "8"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789052",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789053",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "1"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789054",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "5"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789052",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "ServiceType": "$.CustomerInput",
+          "CustomerType": "Residential"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789055"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789053",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "ServiceType": "Outage",
+          "Priority": "High"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789056"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789054",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "ServiceType": "Business",
+          "CustomerType": "Business",
+          "Priority": "High"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789057"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789055",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "Please enter your phone number including area code, or press 0 to speak with a representative.",
+        "MaxDigits": 10,
+        "Timeout": "15"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789058"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789056",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/outage-support"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789057",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/business-support"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789058",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "PhoneNumber": "$.CustomerInput"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789059"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789059",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/technical-support"
+      }
+    }
+  ]
+}

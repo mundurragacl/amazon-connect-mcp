@@ -1,0 +1,21 @@
+{
+  "name": "Healthcare Hours of Operation",
+  "description": "Hours of operation for healthcare contact center with extended hours and on-call support",
+  "industry": "Healthcare",
+  "timeZone": "America/New_York",
+  "config": [
+    {"Day": "MONDAY", "StartTime": {"Hours": 7, "Minutes": 0}, "EndTime": {"Hours": 20, "Minutes": 0}},
+    {"Day": "TUESDAY", "StartTime": {"Hours": 7, "Minutes": 0}, "EndTime": {"Hours": 20, "Minutes": 0}},
+    {"Day": "WEDNESDAY", "StartTime": {"Hours": 7, "Minutes": 0}, "EndTime": {"Hours": 20, "Minutes": 0}},
+    {"Day": "THURSDAY", "StartTime": {"Hours": 7, "Minutes": 0}, "EndTime": {"Hours": 20, "Minutes": 0}},
+    {"Day": "FRIDAY", "StartTime": {"Hours": 7, "Minutes": 0}, "EndTime": {"Hours": 18, "Minutes": 0}},
+    {"Day": "SATURDAY", "StartTime": {"Hours": 8, "Minutes": 0}, "EndTime": {"Hours": 14, "Minutes": 0}},
+    {"Day": "SUNDAY", "StartTime": {"Hours": 0, "Minutes": 0}, "EndTime": {"Hours": 0, "Minutes": 0}}
+  ],
+  "afterHoursConfig": {
+    "action": "answering_service",
+    "urgentLineAvailable": true,
+    "urgentLineQueue": "Urgent-OnCall",
+    "message": "Our office is currently closed. For medical emergencies, please hang up and dial 911. For urgent matters, press 1 to reach our on-call service. Otherwise, please leave a message and we will return your call on the next business day."
+  }
+}

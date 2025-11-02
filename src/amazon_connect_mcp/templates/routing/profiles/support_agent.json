@@ -1,0 +1,54 @@
+{
+  "name": "Support Agent Profile",
+  "description": "Routing profile for general support agents handling voice, chat, and tasks",
+  
+  "_llm_guidance": {
+    "tool": "config_create_routing_profile",
+    "prerequisite": "queue_id - create queue first with config_create_queue",
+    "workflow": [
+      "1. Ensure session is set (set_session with instance_id and region)",
+      "2. Create hours of operation (config_create_hours_of_operation)",
+      "3. Create queue with hours_id (config_create_queue)",
+      "4. Call config_create_routing_profile with queue_id as default_outbound_queue_id"
+    ]
+  },
+
+  "exampleUsage": {
+    "tool_call": {
+      "tool": "config_create_routing_profile",
+      "params": {
+        "name": "Support Agent Profile",
+        "default_outbound_queue_id": "<queue_id_from_previous_step>",
+        "description": "Routing profile for general support agents",
+        "media_concurrencies": [
+          {"Channel": "VOICE", "Concurrency": 1},
+          {"Channel": "CHAT", "Concurrency": 3},
+          {"Channel": "TASK", "Concurrency": 5}
+        ]
+      }
+    }
+  },
+
+  "defaultOutboundQueueTemplate": "general_support",
+  "mediaConcurrencies": [
+    {
+      "Channel": "VOICE",
+      "Concurrency": 1,
+      "CrossChannelBehavior": {"BehaviorType": "ROUTE_CURRENT_CHANNEL_ONLY"}
+    },
+    {
+      "Channel": "CHAT",
+      "Concurrency": 3,
+      "CrossChannelBehavior": {"BehaviorType": "ROUTE_ANY_CHANNEL"}
+    },
+    {
+      "Channel": "TASK",
+      "Concurrency": 5,
+      "CrossChannelBehavior": {"BehaviorType": "ROUTE_ANY_CHANNEL"}
+    }
+  ],
+  "tags": {
+    "Role": "Support",
+    "Level": "Standard"
+  }
+}

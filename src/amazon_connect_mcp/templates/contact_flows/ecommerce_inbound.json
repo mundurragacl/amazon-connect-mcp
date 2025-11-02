@@ -1,0 +1,121 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789040",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789040": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789041": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789042": {"position": {"x": 400, "y": 20}},
+      "12345678-1234-1234-1234-123456789043": {"position": {"x": 600, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789040",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you for calling [Store Name] customer service. Your call may be recorded for quality purposes. We appreciate your business!"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789041"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789041",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "For order status and tracking, press 1. For returns and exchanges, press 2. For product information and availability, press 3. For billing and payment questions, press 4. For VIP customer service, press 5. For all other inquiries, press 9.",
+        "MaxDigits": 1,
+        "Timeout": "8"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789042",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789043",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "5"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789042",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "ServiceType": "$.CustomerInput",
+          "CustomerTier": "Standard"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789044"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789043",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "ServiceType": "VIP",
+          "CustomerTier": "VIP",
+          "Priority": "High"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789045"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789044",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "Please enter your order number if you have one, or press 0 to speak with a representative.",
+        "MaxDigits": 10,
+        "Timeout": "15"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789046",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789046",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "0"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789045",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/vip-support"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789046",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "OrderNumber": "$.CustomerInput"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789047"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789047",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/customer-service"
+      }
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "EvaluationFormTitle": "Telecommunications Customer Service Evaluation",
+  "Description": "Comprehensive evaluation form for telecommunications customer service focusing on technical support, service issues, and network knowledge",
+  "ScoringStrategy": {
+    "Mode": "QUESTION_ONLY",
+    "Status": "ENABLED"
+  },
+  "Items": [
+    {
+      "Section": {
+        "Title": "Technical Knowledge & Troubleshooting",
+        "RefId": "technical_section",
+        "Instructions": "Evaluate agent's technical knowledge and troubleshooting capabilities",
+        "Weight": 30.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Technical Problem Diagnosis",
+              "Instructions": "Did the agent accurately diagnose the technical issue and identify root causes?",
+              "RefId": "technical_diagnosis",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Accurate diagnosis with comprehensive analysis", "Score": 5},
+                  {"Text": "Good - Correct diagnosis with minor clarifications", "Score": 4},
+                  {"Text": "Satisfactory - Generally accurate diagnosis", "Score": 3},
+                  {"Text": "Needs Improvement - Some diagnostic errors", "Score": 2},
+                  {"Text": "Unsatisfactory - Incorrect or no diagnosis", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Troubleshooting Steps Effectiveness",
+              "Instructions": "Were the troubleshooting steps logical, effective, and clearly explained?",
+              "RefId": "troubleshooting_steps",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Systematic, effective troubleshooting", "Score": 5},
+                  {"Text": "Good - Logical steps with good explanations", "Score": 4},
+                  {"Text": "Satisfactory - Standard troubleshooting approach", "Score": 3},
+                  {"Text": "Needs Improvement - Some ineffective steps", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor troubleshooting methodology", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 35.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Network & Service Knowledge",
+              "Instructions": "Did the agent demonstrate appropriate knowledge of network infrastructure and services?",
+              "RefId": "network_knowledge",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Expert network and service knowledge", "Score": 5},
+                  {"Text": "Good - Strong technical knowledge", "Score": 4},
+                  {"Text": "Satisfactory - Adequate technical knowledge", "Score": 3},
+                  {"Text": "Needs Improvement - Limited technical knowledge", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor technical knowledge", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 25.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Service & Account Management",
+        "RefId": "service_section",
+        "Instructions": "Assess handling of service changes, billing, and account management",
+        "Weight": 25.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Service Plan Knowledge",
+              "Instructions": "Did the agent demonstrate accurate knowledge of service plans, features, and pricing?",
+              "RefId": "service_plan_knowledge",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Comprehensive service plan expertise", "Score": 5},
+                  {"Text": "Good - Strong service plan knowledge", "Score": 4},
+                  {"Text": "Satisfactory - Adequate service plan knowledge", "Score": 3},
+                  {"Text": "Needs Improvement - Limited service plan knowledge", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor service plan knowledge", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Billing & Account Accuracy",
+              "Instructions": "Was billing information and account details handled accurately?",
+              "RefId": "billing_accuracy",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Perfect billing accuracy with clear explanations", "Score": 5},
+                  {"Text": "Good - Accurate billing with minor clarifications", "Score": 4},
+                  {"Text": "Satisfactory - Generally accurate billing information", "Score": 3},
+                  {"Text": "Needs Improvement - Some billing inaccuracies", "Score": 2},
+                  {"Text": "Unsatisfactory - Significant billing errors", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 35.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Service Change Processing",
+              "Instructions": "How effectively did the agent process service changes, upgrades, or modifications?",
+              "RefId": "service_changes",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Seamless service change processing", "Score": 5},
+                  {"Text": "Good - Efficient service change handling", "Score": 4},
+                  {"Text": "Satisfactory - Standard service change process", "Score": 3},
+                  {"Text": "Needs Improvement - Some service change issues", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor service change handling", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 25.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Outage & Emergency Response",
+        "RefId": "outage_section",
+        "Instructions": "Evaluate handling of service outages and emergency situations",
+        "Weight": 20.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Outage Information & Updates",
+              "Instructions": "Did the agent provide accurate outage information and realistic timeframes?",
+              "RefId": "outage_information",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Comprehensive outage info with proactive updates", "Score": 5},
+                  {"Text": "Good - Accurate outage information provided", "Score": 4},
+                  {"Text": "Satisfactory - Basic outage information", "Score": 3},
+                  {"Text": "Needs Improvement - Limited outage information", "Score": 2},
+                  {"Text": "Unsatisfactory - Inaccurate or no outage information", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 60.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Alternative Solutions",
+              "Instructions": "Did the agent offer appropriate alternative solutions during service disruptions?",
+              "RefId": "alternative_solutions",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Creative, helpful alternative solutions", "Score": 5},
+                  {"Text": "Good - Appropriate alternatives offered", "Score": 4},
+                  {"Text": "Satisfactory - Some alternatives provided", "Score": 3},
+                  {"Text": "Needs Improvement - Limited alternatives", "Score": 2},
+                  {"Text": "Unsatisfactory - No alternatives offered", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Communication & Customer Education",
+        "RefId": "communication_section",
+        "Instructions": "Assess communication skills and customer education efforts",
+        "Weight": 15.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Technical Communication Clarity",
+              "Instructions": "Did the agent explain technical concepts in terms the customer could understand?",
+              "RefId": "technical_communication",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Perfect technical translation for customer", "Score": 5},
+                  {"Text": "Good - Clear technical explanations", "Score": 4},
+                  {"Text": "Satisfactory - Generally understandable", "Score": 3},
+                  {"Text": "Needs Improvement - Some technical jargon issues", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor technical communication", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 60.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Customer Education & Prevention",
+              "Instructions": "Did the agent educate the customer on preventing future issues or optimizing service?",
+              "RefId": "customer_education",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Comprehensive customer education", "Score": 5},
+                  {"Text": "Good - Good educational guidance", "Score": 4},
+                  {"Text": "Satisfactory - Some educational information", "Score": 3},
+                  {"Text": "Needs Improvement - Limited education efforts", "Score": 2},
+                  {"Text": "Unsatisfactory - No customer education", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Problem Resolution & Follow-up",
+        "RefId": "resolution_section",
+        "Instructions": "Evaluate effectiveness of problem resolution and follow-up procedures",
+        "Weight": 10.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Issue Resolution Completeness",
+              "Instructions": "Was the customer's technical or service issue completely resolved?",
+              "RefId": "resolution_completeness",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Issue completely resolved with verification", "Score": 5},
+                  {"Text": "Good - Issue resolved with minor follow-up needed", "Score": 4},
+                  {"Text": "Satisfactory - Issue mostly resolved", "Score": 3},
+                  {"Text": "Needs Improvement - Partial resolution", "Score": 2},
+                  {"Text": "Unsatisfactory - Issue not resolved", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 70.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Follow-up & Escalation Management",
+              "Instructions": "Did the agent establish appropriate follow-up or escalation procedures?",
+              "RefId": "followup_escalation",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Perfect follow-up and escalation planning", "Score": 5},
+                  {"Text": "Good - Appropriate follow-up established", "Score": 4},
+                  {"Text": "Satisfactory - Basic follow-up planned", "Score": 3},
+                  {"Text": "Needs Improvement - Unclear follow-up", "Score": 2},
+                  {"Text": "Unsatisfactory - No follow-up established", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 30.0
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

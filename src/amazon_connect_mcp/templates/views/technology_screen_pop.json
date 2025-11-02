@@ -1,0 +1,78 @@
+{
+  "name": "Technology Support Screen Pop",
+  "description": "Technical support view for technology and SaaS companies with product and subscription info",
+  "industry": "Technology/SaaS",
+  "viewType": "Detail",
+  "template": {
+    "Head": {
+      "Title": "Support Request",
+      "Configuration": {"Layout": {"Columns": ["8", "4"]}}
+    },
+    "Body": [
+      {
+        "_id": "system_alert",
+        "Type": "AlertBanner",
+        "Props": {
+          "Visible": "$.System.KnownIssue",
+          "Variant": "info",
+          "Message": "KNOWN ISSUE: $.System.KnownIssueDescription - Status: $.System.IssueStatus"
+        }
+      },
+      {
+        "_id": "customer_card",
+        "Type": "Card",
+        "Props": {
+          "Heading": "$.Customer.CompanyName",
+          "Icon": "Building",
+          "Status": "$.Customer.SupportTier",
+          "Description": "Contact: $.Customer.Name | Plan: $.Subscription.PlanName"
+        }
+      },
+      {
+        "_id": "subscription_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Subscription"},
+        "Content": [
+          {"Label": "Plan", "Value": "$.Subscription.PlanName"},
+          {"Label": "Status", "Value": "$.Subscription.Status"},
+          {"Label": "Users", "Value": "$.Subscription.UserCount"},
+          {"Label": "Renewal Date", "Value": "$.Subscription.RenewalDate"},
+          {"Label": "MRR", "Value": "$.Subscription.MRR"}
+        ]
+      },
+      {
+        "_id": "product_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Product Information"},
+        "Content": [
+          {"Label": "Product", "Value": "$.Product.Name"},
+          {"Label": "Version", "Value": "$.Product.Version"},
+          {"Label": "Environment", "Value": "$.Product.Environment"},
+          {"Label": "Last Login", "Value": "$.Product.LastLogin"}
+        ]
+      },
+      {
+        "_id": "support_history",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Support History"},
+        "Content": [
+          {"Label": "Open Tickets", "Value": "$.Support.OpenTickets"},
+          {"Label": "Last Ticket", "Value": "$.Support.LastTicketSubject"},
+          {"Label": "CSAT Score", "Value": "$.Support.CSATScore"},
+          {"Label": "Escalations", "Value": "$.Support.EscalationCount"}
+        ]
+      },
+      {
+        "_id": "quick_actions",
+        "Type": "Container",
+        "Content": [
+          {"_id": "ticket_btn", "Type": "Button", "Props": {"Action": "CreateTicket", "Variant": "primary"}, "Content": ["Create Ticket"]},
+          {"_id": "remote_btn", "Type": "Button", "Props": {"Action": "RemoteSession"}, "Content": ["Remote Session"]},
+          {"_id": "docs_btn", "Type": "Button", "Props": {"Action": "SendDocumentation"}, "Content": ["Send Docs"]},
+          {"_id": "escalate_btn", "Type": "Button", "Props": {"Action": "Escalate", "Variant": "destructive"}, "Content": ["Escalate"]}
+        ]
+      }
+    ]
+  },
+  "actions": ["CreateTicket", "RemoteSession", "SendDocumentation", "Escalate", "ViewLogs", "ResetPassword", "CreateCase"]
+}

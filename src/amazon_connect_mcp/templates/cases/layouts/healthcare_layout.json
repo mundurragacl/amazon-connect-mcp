@@ -1,0 +1,40 @@
+{
+  "name": "Healthcare Support Layout",
+  "description": "Layout for healthcare industry cases with patient information and HIPAA-compliant field organization",
+  "_note": "Title and Status fields cannot be part of layouts - they are always displayed automatically. Custom fields must be created first with their IDs referenced here.",
+  "content": {
+    "basic": {
+      "topPanel": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Patient Overview",
+              "fields": [
+                {"id": "case_reason"},
+                {"id": "patient_id"},
+                {"id": "customer_id"}
+              ]
+            }
+          }
+        ]
+      },
+      "moreInfo": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Case Details",
+              "fields": [
+                {"id": "summary"},
+                {"id": "resolution_notes"}
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requiredCustomFields": [
+    {"name": "Patient ID", "type": "Text", "description": "Patient identifier"},
+    {"name": "Resolution Notes", "type": "Text", "description": "Case resolution notes"}
+  ]
+}

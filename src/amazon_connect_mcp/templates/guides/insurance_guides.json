@@ -1,0 +1,247 @@
+{
+  "name": "Insurance Step-by-Step Guides",
+  "description": "Comprehensive workflow guides for insurance customer service and claims",
+  "industry": "Insurance",
+  "guides": {
+    "claims_intake": {
+      "name": "Insurance Claims Intake Process",
+      "description": "Initial claims reporting and documentation workflow",
+      "steps": [
+        {
+          "id": "claim_initiation",
+          "title": "Initiate Claim Report",
+          "description": "Begin the claims reporting process",
+          "actions": [
+            "Verify policyholder identity",
+            "Confirm policy is active and in good standing",
+            "Obtain basic incident information",
+            "Assign claim number and create file"
+          ],
+          "validation": "Claim initiated with valid policy",
+          "nextStep": "incident_details"
+        },
+        {
+          "id": "incident_details",
+          "title": "Gather Incident Details",
+          "description": "Collect comprehensive incident information",
+          "actions": [
+            "Document date, time, and location of incident",
+            "Record detailed description of what happened",
+            "Identify all parties involved",
+            "Note any injuries or property damage",
+            "Collect witness information if available"
+          ],
+          "validation": "Complete incident details documented",
+          "nextStep": "documentation_collection"
+        },
+        {
+          "id": "documentation_collection",
+          "title": "Collect Supporting Documentation",
+          "description": "Gather required claim documentation",
+          "actions": [
+            "Request police report if applicable",
+            "Collect photos of damage or incident scene",
+            "Obtain medical reports for injury claims",
+            "Gather repair estimates or invoices",
+            "Document any other relevant evidence"
+          ],
+          "validation": "Required documentation collected",
+          "nextStep": "claim_assignment"
+        },
+        {
+          "id": "claim_assignment",
+          "title": "Assign Claim for Processing",
+          "description": "Route claim to appropriate adjuster",
+          "actions": [
+            "Determine claim complexity and type",
+            "Assign to appropriate adjuster or team",
+            "Set initial reserves if required",
+            "Schedule follow-up activities",
+            "Notify policyholder of next steps"
+          ],
+          "validation": "Claim assigned and policyholder notified",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "policy_inquiry": {
+      "name": "Policy Information Process",
+      "description": "Handle customer policy questions and changes",
+      "steps": [
+        {
+          "id": "policy_verification",
+          "title": "Verify Policy Information",
+          "description": "Confirm customer identity and policy details",
+          "actions": [
+            "Verify customer identity using security questions",
+            "Locate policy in system",
+            "Confirm policy status and effective dates",
+            "Review coverage details"
+          ],
+          "validation": "Policy verified and located",
+          "nextStep": "inquiry_assessment"
+        },
+        {
+          "id": "inquiry_assessment",
+          "title": "Assess Customer Inquiry",
+          "description": "Understand the customer's policy question or need",
+          "actions": [
+            "Listen to customer's specific question",
+            "Determine if it's informational or requires changes",
+            "Review policy terms and conditions",
+            "Identify any restrictions or requirements"
+          ],
+          "validation": "Inquiry type and requirements identified",
+          "nextStep": "information_provision"
+        },
+        {
+          "id": "information_provision",
+          "title": "Provide Policy Information",
+          "description": "Answer questions or explain policy details",
+          "actions": [
+            "Explain relevant policy provisions",
+            "Clarify coverage limits and deductibles",
+            "Discuss any exclusions that apply",
+            "Provide examples if helpful"
+          ],
+          "validation": "Information provided clearly",
+          "nextStep": "change_processing"
+        },
+        {
+          "id": "change_processing",
+          "title": "Process Policy Changes",
+          "description": "Make requested policy modifications if applicable",
+          "actions": [
+            "Process coverage changes if requested",
+            "Update beneficiary information if needed",
+            "Adjust payment methods or schedules",
+            "Generate updated policy documents",
+            "Confirm changes with customer"
+          ],
+          "validation": "Changes processed and confirmed",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "premium_payment": {
+      "name": "Premium Payment Process",
+      "description": "Handle premium payments and billing inquiries",
+      "steps": [
+        {
+          "id": "payment_inquiry",
+          "title": "Assess Payment Inquiry",
+          "description": "Understand customer's payment need or question",
+          "actions": [
+            "Verify customer and policy information",
+            "Review current billing status",
+            "Check for any past due amounts",
+            "Understand customer's payment intent"
+          ],
+          "validation": "Payment status assessed",
+          "nextStep": "payment_options"
+        },
+        {
+          "id": "payment_options",
+          "title": "Present Payment Options",
+          "description": "Explain available payment methods and options",
+          "actions": [
+            "Review available payment methods",
+            "Explain payment processing timeframes",
+            "Discuss automatic payment options",
+            "Clarify any fees or restrictions"
+          ],
+          "validation": "Payment options explained",
+          "nextStep": "payment_processing"
+        },
+        {
+          "id": "payment_processing",
+          "title": "Process Payment",
+          "description": "Execute the customer's payment",
+          "actions": [
+            "Collect payment information securely",
+            "Process payment through system",
+            "Verify payment acceptance",
+            "Update account with payment",
+            "Provide confirmation number"
+          ],
+          "validation": "Payment processed successfully",
+          "nextStep": "confirmation"
+        },
+        {
+          "id": "confirmation",
+          "title": "Confirm Payment and Follow-up",
+          "description": "Confirm payment and provide next steps",
+          "actions": [
+            "Confirm payment amount and date",
+            "Provide receipt or confirmation",
+            "Update policy status if applicable",
+            "Schedule future payments if requested"
+          ],
+          "validation": "Payment confirmed and documented",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "escalation_process": {
+      "name": "Insurance Escalation Process",
+      "description": "Handle complex insurance issues requiring escalation",
+      "steps": [
+        {
+          "id": "escalation_evaluation",
+          "title": "Evaluate Escalation Need",
+          "description": "Assess if escalation is required",
+          "actions": [
+            "Review issue complexity and impact",
+            "Check regulatory or legal implications",
+            "Assess customer relationship and history",
+            "Determine appropriate escalation level"
+          ],
+          "validation": "Escalation need and level determined",
+          "nextStep": "escalation_preparation"
+        },
+        {
+          "id": "escalation_preparation",
+          "title": "Prepare Escalation Documentation",
+          "description": "Gather comprehensive case information",
+          "actions": [
+            "Document complete issue history",
+            "Gather all relevant policy information",
+            "Note previous resolution attempts",
+            "Identify regulatory considerations",
+            "Prepare customer impact assessment"
+          ],
+          "validation": "Escalation documentation complete",
+          "nextStep": "escalation_routing"
+        },
+        {
+          "id": "escalation_routing",
+          "title": "Route to Appropriate Team",
+          "description": "Transfer to specialist or supervisor",
+          "actions": [
+            "Identify correct escalation team",
+            "Contact receiving team or supervisor",
+            "Provide comprehensive case briefing",
+            "Ensure smooth customer transition",
+            "Confirm all information transferred"
+          ],
+          "validation": "Successfully escalated to specialist",
+          "nextStep": "resolution_monitoring"
+        },
+        {
+          "id": "resolution_monitoring",
+          "title": "Monitor Resolution",
+          "description": "Track case resolution and follow-up",
+          "actions": [
+            "Monitor case progress and timeline",
+            "Ensure regulatory compliance",
+            "Communicate updates to customer",
+            "Document final resolution",
+            "Update customer service records"
+          ],
+          "validation": "Case resolved and properly documented",
+          "nextStep": "completion"
+        }
+      ]
+    }
+  }
+}

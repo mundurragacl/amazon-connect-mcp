@@ -1,0 +1,55 @@
+{
+  "name": "Screen Pop",
+  "description": "Detail view displayed when agent accepts a contact - shows customer info and quick actions",
+  "viewType": "Detail",
+  "template": {
+    "AttributeBar": [
+      {"Label": "Queue", "Value": "$.Contact.Queue"},
+      {"Label": "Channel", "Value": "$.Contact.Channel"},
+      {"Label": "Wait Time", "Value": "$.Contact.WaitTime"}
+    ],
+    "Heading": "Customer: $.Customer.Name",
+    "Description": "Contact received at $.Contact.InitiationTimestamp",
+    "Sections": [
+      {
+        "type": "AttributeSection",
+        "heading": "Customer Information",
+        "items": [
+          {"Label": "Name", "Value": "$.Customer.Name"},
+          {"Label": "Phone", "Value": "$.Customer.PhoneNumber", "Copyable": true},
+          {"Label": "Email", "Value": "$.Customer.Email", "Copyable": true},
+          {"Label": "Account", "Value": "$.Customer.AccountNumber", "Copyable": true},
+          {"Label": "Customer Since", "Value": "$.Customer.CustomerSince"},
+          {"Label": "Tier", "Value": "$.Customer.Tier"}
+        ]
+      },
+      {
+        "type": "AttributeSection",
+        "heading": "Recent Activity",
+        "items": [
+          {"Label": "Last Contact", "Value": "$.Customer.LastContactDate"},
+          {"Label": "Open Cases", "Value": "$.Customer.OpenCaseCount"},
+          {"Label": "Last Case", "Value": "$.Customer.LastCaseTitle", "LinkType": "case", "ResourceId": "$.Customer.LastCaseId"}
+        ]
+      }
+    ],
+    "Actions": [
+      {"Label": "Create Case", "Id": "create_case"},
+      {"Label": "View Profile", "Id": "view_profile"},
+      {"Label": "Transfer", "Id": "transfer"},
+      {"Label": "Schedule Callback", "Id": "schedule_callback"}
+    ]
+  },
+  "dataBindings": {
+    "Contact": {
+      "Queue": "$.Attributes.Queue",
+      "Channel": "$.Channel",
+      "WaitTime": "$.Attributes.QueueTime",
+      "InitiationTimestamp": "$.InitiationTimestamp"
+    },
+    "Customer": {
+      "source": "CustomerProfiles",
+      "fields": ["Name", "PhoneNumber", "Email", "AccountNumber", "CustomerSince", "Tier", "LastContactDate", "OpenCaseCount", "LastCaseTitle", "LastCaseId"]
+    }
+  }
+}

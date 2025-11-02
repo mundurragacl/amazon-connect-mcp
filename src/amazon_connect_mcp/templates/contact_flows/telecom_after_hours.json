@@ -1,0 +1,119 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789140",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789140": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789141": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789142": {"position": {"x": 400, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789140",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you for calling [Telecom Company]. Our customer service is currently closed. Business hours are Monday through Friday 7 AM to 9 PM, and weekends 8 AM to 6 PM."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789141"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789141",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "If you're experiencing a service outage, press 1 for our automated outage reporting system. For technical support, press 2 to leave a message. For all other inquiries, press 3.",
+        "MaxDigits": 1,
+        "Timeout": "8"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789142",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789143",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "1"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789144",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "2"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789142",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "For account information and bill pay, please use our mobile app or website. For urgent issues, please call back during business hours."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789145"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789143",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Please enter your phone number including area code to report an outage, or visit our website for current outage information."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789146"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789144",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Please leave your name, phone number, and detailed description of your technical issue. Our team will call you back within 24 hours."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789147"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789145",
+      "Type": "DisconnectParticipant"
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789146",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "",
+        "MaxDigits": 10,
+        "Timeout": "15"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789148"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789147",
+      "Type": "StoreCustomerInput",
+      "Parameters": {
+        "InputTimeLimitSeconds": "120"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789145"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789148",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you. Your outage report has been recorded. You can check status updates on our website or mobile app."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789145"
+      }
+    }
+  ]
+}

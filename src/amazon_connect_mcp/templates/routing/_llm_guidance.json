@@ -1,0 +1,105 @@
+{
+  "_description": "LLM guidance for routing configuration - MUST read before any routing operations",
+
+  "CRITICAL_FIRST_STEP": {
+    "action": "ALWAYS call set_session FIRST",
+    "tool": "set_session",
+    "params": {"instance_id": "<instance_id>", "region": "<region>"},
+    "why": "ALL config tools fail with ResourceNotFoundException if region doesn't match"
+  },
+
+  "routingConfigWorkflow": {
+    "step0_setRegion": {
+      "tool": "set_session",
+      "params": {"instance_id": "<instance_id>", "region": "<region>"},
+      "CRITICAL": "Do this FIRST - ResourceNotFoundException means wrong region"
+    },
+    "step1_createHoursOfOperation": {
+      "tool": "config_create_hours_of_operation",
+      "required": true,
+      "note": "Must create hours BEFORE queues (queues reference hours_of_operation_id)"
+    },
+    "step2_createQueues": {
+      "tool": "config_create_queue",
+      "required": true,
+      "dependencies": ["hours_of_operation_id from step 1"],
+      "note": "Must create queues BEFORE routing profiles"
+    },
+    "step3_createRoutingProfile": {
+      "tool": "config_create_routing_profile",
+      "required": true,
+      "dependencies": ["queue_id from step 2 (for default_outbound_queue_id)"]
+    },
+    "step4_createContactFlow": {
+      "tool": "config_create_contact_flow",
+      "optional": true,
+      "dependencies": ["queue_ids for TransferContactToQueue actions"],
+      "note": "Contact flow content must be valid JSON string"
+    }
+  },
+
+  "dependencyOrder": [
+    "1. set_session (CRITICAL - do first)",
+    "2. Hours of Operation (no dependencies)",
+    "3. Queues (requires hours_of_operation_id)",
+    "4. Routing Profiles (requires queue_id)",
+    "5. Contact Flows (requires queue_ids for routing)",
+    "6. Users (requires routing_profile_id, security_profile_ids, AND password)"
+  ],
+
+  "userCreation": {
+    "tool": "config_create_user",
+    "CRITICAL": "Password is REQUIRED for CONNECT_MANAGED instances",
+    "requiredParams": ["username", "routing_profile_id", "security_profile_ids", "password"],
+    "optionalParams": ["first_name", "last_name", "phone_type"],
+    "passwordRequirements": "Min 8 chars, uppercase, lowercase, number, special char",
+    "example": {
+      "username": "agent-001",
+      "password": "SecurePass123!",
+      "routing_profile_id": "<from step 4>",
+      "security_profile_ids": ["<Agent security profile ID>"]
+    },
+    "getSecurityProfileIds": "Use config_list_security_profiles to get IDs (Agent, Admin, etc.)"
+  },
+
+  "hoursOfOperationConfig": {
+    "format": {
+      "Day": "MONDAY|TUESDAY|WEDNESDAY|THURSDAY|FRIDAY|SATURDAY|SUNDAY",
+      "StartTime": {"Hours": "0-23", "Minutes": "0-59"},
+      "EndTime": {"Hours": "0-23", "Minutes": "0-59"}
+    },
+    "example": [
+      {"Day": "MONDAY", "StartTime": {"Hours": 8, "Minutes": 0}, "EndTime": {"Hours": 17, "Minutes": 0}}
+    ],
+    "timezones": ["America/New_York", "America/Los_Angeles", "America/Chicago", "Europe/London", "Asia/Tokyo"]
+  },
+
+  "contactFlowContent": {
+    "note": "Must be JSON string, not object",
+    "flowTypes": ["CONTACT_FLOW", "CUSTOMER_QUEUE", "CUSTOMER_HOLD", "CUSTOMER_WHISPER", "AGENT_HOLD", "AGENT_WHISPER", "OUTBOUND_WHISPER", "AGENT_TRANSFER", "QUEUE_TRANSFER"],
+    "tip": "Use json.dumps() on template content before passing to create_contact_flow"
+  },
+
+  "commonErrors": {
+    "ResourceNotFoundException": {
+      "cause": "Wrong region - most common error",
+      "solution": "Call set_session(instance_id, region) FIRST before any operations"
+    },
+    "DuplicateResourceException": {
+      "cause": "Resource with same name exists",
+      "solution": "Use list_* tools to check existing resources first"
+    },
+    "InvalidParameterException": {
+      "cause": "Check parameter format - especially config arrays and JSON content",
+      "solution": "Verify Day is uppercase (MONDAY not monday), Hours/Minutes are integers"
+    }
+  },
+
+  "bestPractices": [
+    "1. ALWAYS call set_session first with correct region",
+    "2. List existing resources before creating new ones",
+    "3. Follow dependency order: Hours → Queues → Profiles → Flows",
+    "4. Use config_list_* tools to get IDs for dependencies",
+    "5. Contact flow content must be JSON string, not object"
+  ]
+}

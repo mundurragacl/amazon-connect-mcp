@@ -1,0 +1,94 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789120",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789120": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789121": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789122": {"position": {"x": 400, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789120",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you for calling [Bank Name]. Our customer service hours are Monday through Friday, 8 AM to 6 PM, and Saturday 9 AM to 2 PM."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789121"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789121",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "If you suspect fraud or unauthorized transactions, press 1 for our 24-hour fraud hotline. For account balances and recent transactions, press 2. For all other inquiries, press 3 to leave a message.",
+        "MaxDigits": 1,
+        "Timeout": "8"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789122",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789123",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "1"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789124",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "2"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789122",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Please leave your name, account number, phone number, and detailed message. We will return your call during business hours within one business day."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789125"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789123",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/fraud-24x7"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789124",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "For account information, please use our mobile app or online banking, or call back during business hours. Thank you."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789126"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789125",
+      "Type": "StoreCustomerInput",
+      "Parameters": {
+        "InputTimeLimitSeconds": "120"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789126"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789126",
+      "Type": "DisconnectParticipant"
+    }
+  ]
+}

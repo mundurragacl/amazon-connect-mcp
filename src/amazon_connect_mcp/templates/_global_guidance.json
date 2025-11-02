@@ -1,0 +1,168 @@
+{
+  "_description": "GLOBAL LLM GUIDANCE - Read this BEFORE using any Amazon Connect MCP tools",
+
+  "CRITICAL_FIRST_STEP": {
+    "action": "ALWAYS call set_session FIRST before any other tool",
+    "tool": "set_session",
+    "params": {
+      "instance_id": "<your-instance-id>",
+      "region": "<instance-region>"
+    },
+    "why": "Most tools fail with ResourceNotFoundException if region doesn't match instance",
+    "how_to_get_region": "Use list_instances() to see all instances with their regions"
+  },
+
+  "CRITICAL_RESOURCE_REGIONS": {
+    "warning": "Resources are region-specific! A domain_id from us-west-2 won't work if session is us-east-1",
+    "pattern": [
+      "1. set_session with correct region FIRST",
+      "2. List resources in THAT region (cases_list_domains, profiles_list_domains)",
+      "3. Use IDs from step 2 - don't reuse IDs from different regions"
+    ],
+    "common_mistake": "Using a domain_id or resource_id obtained in a different region"
+  },
+
+  "commonPatterns": {
+    "beforeAnyOperation": [
+      "1. list_instances() - find instance and its region",
+      "2. set_session(instance_id, region) - set context",
+      "3. List resources in that region (don't assume IDs from previous sessions)",
+      "4. Now proceed with other tools using fresh IDs"
+    ],
+    "beforeCreatingResources": [
+      "1. Use list_* tools to check if resource exists IN CURRENT REGION",
+      "2. Get IDs of dependencies (hours → queues → profiles)",
+      "3. Create with minimal params, update after"
+    ],
+    "casesWorkflow": [
+      "1. set_session(instance_id, region)",
+      "2. cases_list_domains() or list_domains_for_instance() - get domain_id for THIS region",
+      "3. cases_list_templates(domain_id) - get template_id",
+      "4. profiles_list_domains() - get profiles domain for THIS region",
+      "5. profiles_create_profile() - get profile_id",
+      "6. Construct ARN: arn:aws:profile:{region}:{account}:domains/{domain}/profiles/{id}",
+      "7. create_case(domain_id, template_id, fields={title, customer_id=ARN})"
+    ]
+  },
+
+  "arnFormats": {
+    "profile": "arn:aws:profile:{region}:{account}:domains/{domain_name}/profiles/{profile_id}",
+    "instance": "arn:aws:connect:{region}:{account}:instance/{instance_id}",
+    "queue": "arn:aws:connect:{region}:{account}:instance/{instance_id}/queue/{queue_id}",
+    "contact_flow": "arn:aws:connect:{region}:{account}:instance/{instance_id}/contact-flow/{flow_id}"
+  },
+
+  "errorRecovery": {
+    "ResourceNotFoundException": {
+      "meaning": "Wrong region or resource doesn't exist",
+      "fix": "Call set_session with correct region first"
+    },
+    "ValidationException": {
+      "meaning": "Invalid parameter format or value",
+      "fix": "Check parameter types, required fields, enum values"
+    },
+    "DuplicateResourceException": {
+      "meaning": "Resource already exists",
+      "fix": "Use list_* to get existing resource ID instead"
+    },
+    "AccessDeniedException": {
+      "meaning": "IAM permissions issue",
+      "fix": "Check AWS credentials and IAM policies"
+    },
+    "InvalidParameterException_TimeRange": {
+      "meaning": "Time range invalid for metrics API",
+      "fix": "Use times in the PAST, within last 24h for real-time, up to 35 days for historical"
+    }
+  },
+
+  "analyticsGuidance": {
+    "timeRangeRules": {
+      "CRITICAL": "Start and end times MUST be in the PAST relative to current UTC time",
+      "maxRange": "35 days for historical metrics",
+      "format": "ISO 8601 with Z suffix: 2025-01-03T00:00:00Z",
+      "commonMistake": "Using future dates or dates too far in the past"
+    },
+    "exampleUsage": {
+      "last24Hours": {
+        "start_time": "Calculate: current_utc - 24 hours",
+        "end_time": "Calculate: current_utc - 1 minute (not future)"
+      }
+    }
+  },
+
+  "wizardGuidance": {
+    "wizard_get_iac_template": {
+      "returns": "Template path reference, NOT full template content",
+      "toGetFullTemplate": "Use template_get(category='iac', name='basic_instance', subcategory='cloudformation')",
+      "deploymentCommand": "Included in response - copy and run with AWS CLI"
+    }
+  },
+
+  "aiToolsGuidance": {
+    "workflow": [
+      "1. set_session(instance_id, region) - CRITICAL first step",
+      "2. ai_list_assistants() - get assistant_id",
+      "3. ai_list_knowledge_bases() - get knowledge_base_id (no params needed)",
+      "4. Use other AI tools with IDs from steps 2-3"
+    ],
+    "knowledgeBaseTypes": {
+      "QUICK_RESPONSES": "Use with ai_list_quick_responses, ai_search_quick_responses",
+      "CUSTOM": "Use with ai_search_content",
+      "MESSAGE_TEMPLATES": "Message templates for agents"
+    },
+    "searchTools": {
+      "ai_query_assistant": "Best for natural language questions - returns ranked results",
+      "ai_search_content": "Search within a specific knowledge base by name filter",
+      "ai_search_quick_responses": "Search quick responses by content"
+    },
+    "sessionTools": {
+      "ai_create_session": "Creates session for tracking recommendations",
+      "ai_get_recommendations": "Returns recommendations (needs active contact context for results)"
+    }
+  },
+
+  "aiToolsGuidance": {
+    "workflow": [
+      "1. set_session(instance_id, region) - CRITICAL first step",
+      "2. ai_list_assistants() - get assistant_id",
+      "3. ai_list_knowledge_bases(assistant_id) - get knowledge_base_id",
+      "4. Use other AI tools with these IDs"
+    ],
+    "knowledgeBaseTypes": {
+      "QUICK_RESPONSES": "Use ai_list_quick_responses, ai_search_quick_responses",
+      "CUSTOM": "Use ai_search_content for articles/documents",
+      "MESSAGE_TEMPLATES": "Message templates for agents"
+    },
+    "searchFormats": {
+      "ai_search_content": {
+        "searchExpression": "Simple string - tool builds filter internally"
+      },
+      "ai_search_quick_responses": {
+        "query_text": "Simple string - tool builds query internally"
+      }
+    },
+    "sessionWorkflow": {
+      "description": "Sessions track conversation context for recommendations",
+      "steps": [
+        "1. ai_create_session(assistant_id, name) - get session_id",
+        "2. ai_query_assistant(assistant_id, query_text) - ask questions",
+        "3. ai_get_recommendations(assistant_id, session_id) - get contextual recommendations"
+      ]
+    }
+  },
+
+  "toolCategories": {
+    "alwaysSafe": ["list_instances", "get_session", "template_list", "template_get"],
+    "requiresSession": ["All config_*, cases_*, analytics_*, contacts_* tools"],
+    "requiresRegion": ["All tools except list_instances and template tools"]
+  },
+
+  "bestPractices": [
+    "1. ALWAYS set_session first with correct region",
+    "2. List before create - avoid duplicates",
+    "3. Create with minimal fields, update after",
+    "4. Follow dependency order for routing config",
+    "5. Use Text fields when unsure about SingleSelect options",
+    "6. Store IDs after lookup to avoid repeated calls"
+  ]
+}

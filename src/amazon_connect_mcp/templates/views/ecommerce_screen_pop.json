@@ -1,0 +1,65 @@
+{
+  "name": "E-Commerce Order Screen Pop",
+  "description": "Order and customer information for retail and e-commerce contact centers",
+  "industry": "E-Commerce/Retail",
+  "viewType": "Detail",
+  "template": {
+    "Head": {
+      "Title": "Order Information",
+      "Configuration": {"Layout": {"Columns": ["7", "5"]}}
+    },
+    "Body": [
+      {
+        "_id": "customer_card",
+        "Type": "Card",
+        "Props": {
+          "Heading": "$.Customer.Name",
+          "Icon": "User",
+          "Status": "$.Customer.LoyaltyTier",
+          "Description": "Loyalty Points: $.Customer.LoyaltyPoints | Lifetime Value: $.Customer.LifetimeValue"
+        }
+      },
+      {
+        "_id": "order_card",
+        "Type": "Card",
+        "Props": {
+          "Heading": "Order #$.Order.OrderNumber",
+          "Icon": "Package",
+          "Status": "$.Order.Status",
+          "Description": "Placed: $.Order.OrderDate | Total: $.Order.OrderTotal"
+        }
+      },
+      {
+        "_id": "shipping_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Shipping Information"},
+        "Content": [
+          {"Label": "Carrier", "Value": "$.Order.Carrier"},
+          {"Label": "Tracking", "Value": "$.Order.TrackingNumber", "Copyable": true, "LinkType": "external"},
+          {"Label": "Est. Delivery", "Value": "$.Order.EstimatedDelivery"},
+          {"Label": "Ship To", "Value": "$.Order.ShippingAddress"}
+        ]
+      },
+      {
+        "_id": "items_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Order Items"},
+        "Content": [
+          {"Label": "Items", "Value": "$.Order.ItemCount"},
+          {"Label": "Products", "Value": "$.Order.ProductSummary"}
+        ]
+      },
+      {
+        "_id": "quick_actions",
+        "Type": "Container",
+        "Content": [
+          {"_id": "track_btn", "Type": "Button", "Props": {"Action": "TrackOrder", "Variant": "primary"}, "Content": ["Track Order"]},
+          {"_id": "return_btn", "Type": "Button", "Props": {"Action": "InitiateReturn"}, "Content": ["Start Return"]},
+          {"_id": "refund_btn", "Type": "Button", "Props": {"Action": "ProcessRefund"}, "Content": ["Refund"]},
+          {"_id": "cancel_btn", "Type": "Button", "Props": {"Action": "CancelOrder", "Variant": "destructive"}, "Content": ["Cancel Order"]}
+        ]
+      }
+    ]
+  },
+  "actions": ["TrackOrder", "InitiateReturn", "ProcessRefund", "CancelOrder", "ModifyOrder", "ApplyDiscount", "CreateCase"]
+}

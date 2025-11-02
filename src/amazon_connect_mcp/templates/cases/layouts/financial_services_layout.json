@@ -1,0 +1,49 @@
+{
+  "name": "Financial Services Layout",
+  "description": "Layout for financial services cases with account and transaction details",
+  "_note": "Title and Status fields cannot be part of layouts - they are always displayed automatically. Custom fields must be created first with their IDs referenced here.",
+  "content": {
+    "basic": {
+      "topPanel": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Account Overview",
+              "fields": [
+                {"id": "case_reason"},
+                {"id": "account_number"},
+                {"id": "customer_id"}
+              ]
+            }
+          }
+        ]
+      },
+      "moreInfo": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Transaction Details",
+              "fields": [
+                {"id": "transaction_id"},
+                {"id": "summary"}
+              ]
+            }
+          },
+          {
+            "fieldGroup": {
+              "name": "Resolution",
+              "fields": [
+                {"id": "resolution_notes"}
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requiredCustomFields": [
+    {"name": "Account Number", "type": "Text", "description": "Customer account number"},
+    {"name": "Transaction ID", "type": "Text", "description": "Transaction reference"},
+    {"name": "Resolution Notes", "type": "Text", "description": "Case resolution notes"}
+  ]
+}

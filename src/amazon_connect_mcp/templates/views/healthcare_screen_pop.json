@@ -1,0 +1,72 @@
+{
+  "name": "Healthcare Patient Screen Pop",
+  "description": "Patient information display for healthcare contact centers with HIPAA-compliant layout",
+  "industry": "Healthcare",
+  "viewType": "Detail",
+  "template": {
+    "Head": {
+      "Title": "Patient Information",
+      "Configuration": {"Layout": {"Columns": ["8", "4"]}}
+    },
+    "Body": [
+      {
+        "_id": "patient_header",
+        "Type": "Container",
+        "Props": {"Variant": "filled"},
+        "Content": [
+          {
+            "_id": "patient_card",
+            "Type": "Card",
+            "Props": {
+              "Heading": "$.Patient.Name",
+              "Icon": "User",
+              "Status": "$.Patient.VerificationStatus",
+              "Description": "DOB: $.Patient.DateOfBirth | MRN: $.Patient.MRN"
+            }
+          }
+        ]
+      },
+      {
+        "_id": "quick_actions",
+        "Type": "Container",
+        "Content": [
+          {"_id": "verify_btn", "Type": "Button", "Props": {"Action": "VerifyIdentity", "Variant": "primary"}, "Content": ["Verify Identity"]},
+          {"_id": "schedule_btn", "Type": "Button", "Props": {"Action": "ScheduleAppointment"}, "Content": ["Schedule Appointment"]},
+          {"_id": "refill_btn", "Type": "Button", "Props": {"Action": "PrescriptionRefill"}, "Content": ["Rx Refill"]}
+        ]
+      },
+      {
+        "_id": "insurance_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Insurance Information"},
+        "Content": [
+          {"Label": "Primary Insurance", "Value": "$.Patient.PrimaryInsurance"},
+          {"Label": "Member ID", "Value": "$.Patient.InsuranceMemberId", "Copyable": true},
+          {"Label": "Group Number", "Value": "$.Patient.GroupNumber"},
+          {"Label": "Coverage Status", "Value": "$.Patient.CoverageStatus"}
+        ]
+      },
+      {
+        "_id": "appointments_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Appointments"},
+        "Content": [
+          {"Label": "Next Appointment", "Value": "$.Patient.NextAppointment"},
+          {"Label": "Provider", "Value": "$.Patient.PrimaryProvider"},
+          {"Label": "Location", "Value": "$.Patient.PreferredLocation"},
+          {"Label": "Last Visit", "Value": "$.Patient.LastVisitDate"}
+        ]
+      },
+      {
+        "_id": "alerts_section",
+        "Type": "AlertBanner",
+        "Props": {
+          "Visible": "$.Patient.HasAlerts",
+          "Variant": "warning",
+          "Message": "$.Patient.AlertMessage"
+        }
+      }
+    ]
+  },
+  "actions": ["VerifyIdentity", "ScheduleAppointment", "PrescriptionRefill", "ViewMedicalRecords", "TransferToNurse", "CreateCase"]
+}

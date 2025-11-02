@@ -1,0 +1,269 @@
+{
+  "EvaluationFormTitle": "Financial Services Quality Evaluation",
+  "Description": "Comprehensive evaluation form for financial services interactions focusing on compliance, accuracy, and customer trust",
+  "ScoringStrategy": {
+    "Mode": "QUESTION_ONLY",
+    "Status": "ENABLED"
+  },
+  "Items": [
+    {
+      "Section": {
+        "Title": "Regulatory Compliance & Security",
+        "RefId": "compliance_section",
+        "Instructions": "Evaluate adherence to financial regulations and security protocols",
+        "Weight": 30.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Customer Authentication",
+              "Instructions": "Did the agent properly authenticate the customer before discussing account information?",
+              "RefId": "customer_authentication",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Multi-factor authentication completed", "Score": 5},
+                  {"Text": "Good - Proper authentication with all required elements", "Score": 4},
+                  {"Text": "Satisfactory - Basic authentication completed", "Score": 3},
+                  {"Text": "Needs Improvement - Incomplete authentication", "Score": 2},
+                  {"Text": "Unsatisfactory - No proper authentication", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Regulatory Disclosures",
+              "Instructions": "Were all required regulatory disclosures provided appropriately?",
+              "RefId": "regulatory_disclosures",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - All disclosures provided clearly", "Score": 5},
+                  {"Text": "Good - Required disclosures provided", "Score": 4},
+                  {"Text": "Satisfactory - Most disclosures provided", "Score": 3},
+                  {"Text": "Needs Improvement - Some disclosures missing", "Score": 2},
+                  {"Text": "Unsatisfactory - Required disclosures not provided", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 35.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Fraud Prevention Awareness",
+              "Instructions": "Did the agent demonstrate appropriate fraud prevention awareness and protocols?",
+              "RefId": "fraud_prevention",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Proactive fraud prevention measures", "Score": 5},
+                  {"Text": "Good - Appropriate fraud awareness", "Score": 4},
+                  {"Text": "Satisfactory - Basic fraud prevention", "Score": 3},
+                  {"Text": "Needs Improvement - Limited fraud awareness", "Score": 2},
+                  {"Text": "Unsatisfactory - No fraud prevention measures", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 25.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Financial Accuracy & Knowledge",
+        "RefId": "accuracy_section",
+        "Instructions": "Assess accuracy of financial information and product knowledge",
+        "Weight": 25.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Account Information Accuracy",
+              "Instructions": "Was account information provided accurately and completely?",
+              "RefId": "account_accuracy",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Perfect accuracy with clear explanations", "Score": 5},
+                  {"Text": "Good - Accurate with minor clarifications", "Score": 4},
+                  {"Text": "Satisfactory - Generally accurate", "Score": 3},
+                  {"Text": "Needs Improvement - Some inaccuracies", "Score": 2},
+                  {"Text": "Unsatisfactory - Significant inaccuracies", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 50.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Product Knowledge",
+              "Instructions": "Did the agent demonstrate appropriate knowledge of financial products and services?",
+              "RefId": "product_knowledge",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Expert product knowledge", "Score": 5},
+                  {"Text": "Good - Strong product knowledge", "Score": 4},
+                  {"Text": "Satisfactory - Adequate product knowledge", "Score": 3},
+                  {"Text": "Needs Improvement - Limited product knowledge", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor product knowledge", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 50.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Customer Trust & Relationship",
+        "RefId": "trust_section",
+        "Instructions": "Evaluate building of customer trust and relationship management",
+        "Weight": 20.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Trust Building",
+              "Instructions": "Did the agent effectively build trust and confidence with the customer?",
+              "RefId": "trust_building",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Strong trust established", "Score": 5},
+                  {"Text": "Good - Good rapport and trust", "Score": 4},
+                  {"Text": "Satisfactory - Basic trust established", "Score": 3},
+                  {"Text": "Needs Improvement - Limited trust building", "Score": 2},
+                  {"Text": "Unsatisfactory - Trust not established", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 60.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Transparency & Honesty",
+              "Instructions": "Was the agent transparent about fees, terms, and limitations?",
+              "RefId": "transparency",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Complete transparency", "Score": 5},
+                  {"Text": "Good - Transparent with clear explanations", "Score": 4},
+                  {"Text": "Satisfactory - Generally transparent", "Score": 3},
+                  {"Text": "Needs Improvement - Some transparency issues", "Score": 2},
+                  {"Text": "Unsatisfactory - Lack of transparency", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Communication & Professionalism",
+        "RefId": "communication_section",
+        "Instructions": "Assess communication effectiveness and professional demeanor",
+        "Weight": 15.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Professional Communication",
+              "Instructions": "Was the agent's communication professional and appropriate for financial services?",
+              "RefId": "professional_communication",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Exemplary professional communication", "Score": 5},
+                  {"Text": "Good - Professional with minor improvements", "Score": 4},
+                  {"Text": "Satisfactory - Generally professional", "Score": 3},
+                  {"Text": "Needs Improvement - Some professionalism issues", "Score": 2},
+                  {"Text": "Unsatisfactory - Unprofessional communication", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 50.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Financial Terminology Usage",
+              "Instructions": "Did the agent use financial terminology appropriately and explain complex concepts clearly?",
+              "RefId": "terminology_usage",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Perfect terminology usage and explanations", "Score": 5},
+                  {"Text": "Good - Appropriate terminology with clear explanations", "Score": 4},
+                  {"Text": "Satisfactory - Generally appropriate terminology", "Score": 3},
+                  {"Text": "Needs Improvement - Some terminology issues", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor terminology usage", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 50.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Problem Resolution & Follow-up",
+        "RefId": "resolution_section",
+        "Instructions": "Evaluate effectiveness of issue resolution and customer satisfaction",
+        "Weight": 10.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Issue Resolution",
+              "Instructions": "How effectively did the agent resolve the customer's financial concern?",
+              "RefId": "issue_resolution",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Issue completely resolved", "Score": 5},
+                  {"Text": "Good - Issue mostly resolved with clear next steps", "Score": 4},
+                  {"Text": "Satisfactory - Some progress made", "Score": 3},
+                  {"Text": "Needs Improvement - Limited progress", "Score": 2},
+                  {"Text": "Unsatisfactory - No meaningful resolution", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 70.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Customer Satisfaction",
+              "Instructions": "Did the customer appear satisfied with the service provided?",
+              "RefId": "customer_satisfaction",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Customer highly satisfied", "Score": 5},
+                  {"Text": "Good - Customer satisfied", "Score": 4},
+                  {"Text": "Satisfactory - Customer moderately satisfied", "Score": 3},
+                  {"Text": "Needs Improvement - Customer somewhat dissatisfied", "Score": 2},
+                  {"Text": "Unsatisfactory - Customer dissatisfied", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 30.0
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

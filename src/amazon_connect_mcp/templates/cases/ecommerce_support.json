@@ -1,0 +1,146 @@
+{
+  "name": "E-Commerce Support",
+  "description": "Template for retail and e-commerce cases including orders, returns, and shipping issues",
+  "status": "Active",
+  
+  "_llm_guidance": {
+    "workflow": [
+      "1. Check/create Customer Profile first (customer_id requires profile ARN)",
+      "2. Create custom fields if they don't exist (use cases_list_fields to check)",
+      "3. Create case with minimal required fields: title + customer_id",
+      "4. Update case with additional fields after creation"
+    ],
+    "critical_notes": [
+      "customer_id MUST be a profile ARN format: arn:aws:profile:{region}:{account}:domains/{domain}/profiles/{id}",
+      "SingleSelect fields require exact value matches from the options arrays",
+      "case_reason values must match options configured in the Connect instance, not this template",
+      "Create case with minimal fields first, then update - avoids validation failures"
+    ],
+    "common_errors": {
+      "customer_id_not_valid": "Use profiles_create_profile first, then construct ARN",
+      "field_value_doesnt_match": "SingleSelect value not in allowed options - check instance config",
+      "field_already_exists": "Field exists - use cases_list_fields to get existing field IDs"
+    }
+  },
+
+  "requiredFields": {
+    "_note": "Only 'title' is truly required for case creation. customer_id is system-required.",
+    "forCaseCreation": ["title", "customer_id"],
+    "systemManaged": ["status", "case_id", "created_datetime"]
+  },
+
+  "dependencies": {
+    "customerProfile": {
+      "required": true,
+      "tool": "profiles_create_profile",
+      "arnFormat": "arn:aws:profile:{region}:{account}:domains/{domain_name}/profiles/{profile_id}"
+    }
+  },
+
+  "customFields": [
+    {
+      "name": "Priority",
+      "type": "SingleSelect",
+      "required": true,
+      "options": ["Urgent - Time Sensitive", "High - Customer Impacted", "Medium - Standard Request", "Low - Information Only"],
+      "_note": "Options must be configured in Connect instance field settings"
+    },
+    {
+      "name": "Order Number",
+      "type": "Text",
+      "required": false,
+      "example": "ORD-2026-001234"
+    },
+    {
+      "name": "Order Date",
+      "type": "DateTime",
+      "required": false,
+      "example": "2026-01-03T10:00:00Z"
+    },
+    {
+      "name": "Order Total",
+      "type": "Number",
+      "required": false,
+      "example": 149.99
+    },
+    {
+      "name": "Payment Method",
+      "type": "SingleSelect",
+      "required": false,
+      "options": ["Credit Card", "Debit Card", "PayPal", "Apple Pay", "Google Pay", "Gift Card", "Store Credit", "Buy Now Pay Later"]
+    },
+    {
+      "name": "Product Name",
+      "type": "Text",
+      "required": false,
+      "example": "Wireless Bluetooth Headphones"
+    },
+    {
+      "name": "Product SKU",
+      "type": "Text",
+      "required": false,
+      "example": "WBH-2024-BLK"
+    },
+    {
+      "name": "Quantity",
+      "type": "Number",
+      "required": false,
+      "example": 1
+    },
+    {
+      "name": "Return Reason",
+      "type": "SingleSelect",
+      "required": false,
+      "options": ["Changed Mind", "Wrong Size/Fit", "Defective/Damaged", "Not as Described", "Wrong Item", "Better Price Found", "Arrived Too Late", "Other"]
+    },
+    {
+      "name": "Tracking Number",
+      "type": "Text",
+      "required": false,
+      "example": "1Z999AA1234567890"
+    },
+    {
+      "name": "Shipping Carrier",
+      "type": "SingleSelect",
+      "required": false,
+      "options": ["UPS", "FedEx", "USPS", "DHL", "Amazon Logistics", "Other"]
+    },
+    {
+      "name": "Delivery Date",
+      "type": "DateTime",
+      "required": false
+    },
+    {
+      "name": "Resolution Notes",
+      "type": "Text",
+      "required": false,
+      "example": "Customer received damaged item, requesting return and refund"
+    },
+    {
+      "name": "Refund Amount",
+      "type": "Number",
+      "required": false,
+      "example": 149.99
+    }
+  ],
+
+  "exampleUsage": {
+    "minimalCase": {
+      "fields": {
+        "title": "Customer Return Request - Damaged Item",
+        "customer_id": "arn:aws:profile:us-west-2:123456789:domains/MyDomain/profiles/abc123"
+      }
+    },
+    "fullCase": {
+      "fields": {
+        "title": "Customer Return Request - Damaged Bluetooth Headphones",
+        "customer_id": "arn:aws:profile:us-west-2:123456789:domains/MyDomain/profiles/abc123",
+        "Order Number": "ORD-2026-001234",
+        "Product Name": "Wireless Bluetooth Headphones",
+        "Product SKU": "WBH-2024-BLK",
+        "Tracking Number": "1Z999AA1234567890",
+        "Resolution Notes": "Customer received damaged item, requesting return and refund"
+      }
+    }
+  }
+}

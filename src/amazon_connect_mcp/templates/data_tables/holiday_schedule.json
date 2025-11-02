@@ -1,0 +1,108 @@
+{
+  "name": "Holiday Schedule",
+  "description": "Data table for managing contact center holiday closures and custom messages",
+  "attributes": [
+    {
+      "name": "date",
+      "type": "text",
+      "isPrimaryKey": true,
+      "description": "Holiday date in YYYY-MM-DD format"
+    },
+    {
+      "name": "holiday_name",
+      "type": "text",
+      "required": true,
+      "description": "Name of the holiday"
+    },
+    {
+      "name": "is_closed",
+      "type": "boolean",
+      "required": true,
+      "default": true,
+      "description": "Whether the contact center is closed"
+    },
+    {
+      "name": "reduced_hours",
+      "type": "boolean",
+      "default": false,
+      "description": "Whether operating on reduced hours"
+    },
+    {
+      "name": "open_time",
+      "type": "text",
+      "description": "Opening time if reduced hours (HH:MM format)"
+    },
+    {
+      "name": "close_time",
+      "type": "text",
+      "description": "Closing time if reduced hours (HH:MM format)"
+    },
+    {
+      "name": "custom_message",
+      "type": "text",
+      "description": "Custom IVR message for this holiday"
+    },
+    {
+      "name": "redirect_queue",
+      "type": "text",
+      "description": "Queue to redirect to if partially open"
+    }
+  ],
+  "sampleData": [
+    {
+      "date": "2026-01-01",
+      "holiday_name": "New Year's Day",
+      "is_closed": true,
+      "reduced_hours": false,
+      "custom_message": "Happy New Year! Our offices are closed today. We will reopen on January 2nd."
+    },
+    {
+      "date": "2026-07-04",
+      "holiday_name": "Independence Day",
+      "is_closed": true,
+      "reduced_hours": false,
+      "custom_message": "Happy Independence Day! Our offices are closed today."
+    },
+    {
+      "date": "2026-11-26",
+      "holiday_name": "Thanksgiving",
+      "is_closed": true,
+      "reduced_hours": false,
+      "custom_message": "Happy Thanksgiving! Our offices are closed today and tomorrow."
+    },
+    {
+      "date": "2026-11-27",
+      "holiday_name": "Day After Thanksgiving",
+      "is_closed": false,
+      "reduced_hours": true,
+      "open_time": "10:00",
+      "close_time": "14:00",
+      "custom_message": "We are operating on reduced hours today from 10 AM to 2 PM."
+    },
+    {
+      "date": "2026-12-24",
+      "holiday_name": "Christmas Eve",
+      "is_closed": false,
+      "reduced_hours": true,
+      "open_time": "08:00",
+      "close_time": "12:00",
+      "custom_message": "We are closing early today at noon for Christmas Eve."
+    },
+    {
+      "date": "2026-12-25",
+      "holiday_name": "Christmas Day",
+      "is_closed": true,
+      "reduced_hours": false,
+      "custom_message": "Merry Christmas! Our offices are closed today."
+    }
+  ],
+  "flowUsage": {
+    "description": "Use Data Table block to check if current date is a holiday",
+    "example": {
+      "action": "Evaluate",
+      "primaryAttribute": "date",
+      "primaryValue": "$.System.CurrentDate",
+      "returnAttributes": ["is_closed", "custom_message", "reduced_hours", "open_time", "close_time"]
+    }
+  }
+}

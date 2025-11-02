@@ -1,0 +1,115 @@
+{
+  "name": "Healthcare Support",
+  "description": "Template for healthcare industry support cases including patient inquiries, insurance claims, and appointment issues",
+  "status": "Active",
+
+  "_llm_guidance": {
+    "workflow": [
+      "1. Check/create Customer Profile first (customer_id requires profile ARN)",
+      "2. Create custom fields if they don't exist (use cases_list_fields to check)",
+      "3. Create case with minimal required fields: title + customer_id",
+      "4. Update case with additional fields after creation"
+    ],
+    "critical_notes": [
+      "customer_id MUST be a profile ARN format: arn:aws:profile:{region}:{account}:domains/{domain}/profiles/{id}",
+      "SingleSelect fields require exact value matches from the options arrays",
+      "Create case with minimal fields first, then update - avoids validation failures",
+      "HIPAA: Avoid storing PHI in case titles - use Patient ID references only"
+    ]
+  },
+
+  "requiredFields": {
+    "_note": "Only 'title' is truly required for case creation. customer_id is system-required.",
+    "forCaseCreation": ["title", "customer_id"],
+    "systemManaged": ["status", "case_id", "created_datetime"]
+  },
+
+  "dependencies": {
+    "customerProfile": {
+      "required": true,
+      "tool": "profiles_create_profile",
+      "arnFormat": "arn:aws:profile:{region}:{account}:domains/{domain_name}/profiles/{profile_id}"
+    }
+  },
+
+  "customFields": [
+    {
+      "name": "Priority",
+      "type": "SingleSelect",
+      "required": true,
+      "options": ["Urgent - Immediate Attention", "High - Same Day", "Medium - Within 48 Hours", "Low - Standard Processing"]
+    },
+    {
+      "name": "Patient ID",
+      "type": "Text",
+      "required": false,
+      "example": "PAT-2026-001234"
+    },
+    {
+      "name": "Date of Service",
+      "type": "DateTime",
+      "required": false,
+      "example": "2026-01-03T10:00:00Z"
+    },
+    {
+      "name": "Provider Name",
+      "type": "Text",
+      "required": false,
+      "example": "Dr. Smith"
+    },
+    {
+      "name": "Facility Location",
+      "type": "Text",
+      "required": false,
+      "example": "Main Campus - Building A"
+    },
+    {
+      "name": "Insurance ID",
+      "type": "Text",
+      "required": false,
+      "example": "INS-ABC123456"
+    },
+    {
+      "name": "Claim Number",
+      "type": "Text",
+      "required": false,
+      "example": "CLM-2026-001234"
+    },
+    {
+      "name": "Authorization Number",
+      "type": "Text",
+      "required": false,
+      "example": "AUTH-2026-5678"
+    },
+    {
+      "name": "Resolution Notes",
+      "type": "Text",
+      "required": false,
+      "example": "Appointment rescheduled per patient request"
+    },
+    {
+      "name": "Follow Up Date",
+      "type": "DateTime",
+      "required": false
+    }
+  ],
+
+  "exampleUsage": {
+    "minimalCase": {
+      "fields": {
+        "title": "Appointment Rescheduling Request",
+        "customer_id": "arn:aws:profile:us-west-2:123456789:domains/MyDomain/profiles/abc123"
+      }
+    },
+    "fullCase": {
+      "fields": {
+        "title": "Prior Authorization Request - MRI",
+        "customer_id": "arn:aws:profile:us-west-2:123456789:domains/MyDomain/profiles/abc123",
+        "Patient ID": "PAT-2026-001234",
+        "Provider Name": "Dr. Smith",
+        "Insurance ID": "INS-ABC123456",
+        "Authorization Number": "AUTH-2026-5678"
+      }
+    }
+  }
+}

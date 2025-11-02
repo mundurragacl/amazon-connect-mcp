@@ -1,0 +1,82 @@
+{
+  "name": "Healthcare Provider Directory",
+  "description": "Provider and department routing for healthcare contact centers",
+  "industry": "Healthcare",
+  "attributes": [
+    {"name": "department_code", "type": "text", "isPrimaryKey": true, "description": "Department or specialty code"},
+    {"name": "department_name", "type": "text", "required": true, "description": "Department display name"},
+    {"name": "queue_name", "type": "text", "required": true, "description": "Target queue"},
+    {"name": "transfer_number", "type": "text", "description": "Direct transfer number if applicable"},
+    {"name": "hours_start", "type": "text", "description": "Operating hours start (HH:MM)"},
+    {"name": "hours_end", "type": "text", "description": "Operating hours end (HH:MM)"},
+    {"name": "after_hours_action", "type": "text", "description": "After hours: voicemail, answering_service, emergency"},
+    {"name": "appointment_scheduling", "type": "boolean", "default": true, "description": "Supports appointment scheduling"},
+    {"name": "urgent_line_available", "type": "boolean", "default": false, "description": "Has urgent/emergency line"}
+  ],
+  "sampleData": [
+    {
+      "department_code": "PCP",
+      "department_name": "Primary Care",
+      "queue_name": "PrimaryCare-Queue",
+      "transfer_number": null,
+      "hours_start": "08:00",
+      "hours_end": "17:00",
+      "after_hours_action": "answering_service",
+      "appointment_scheduling": true,
+      "urgent_line_available": true
+    },
+    {
+      "department_code": "CARD",
+      "department_name": "Cardiology",
+      "queue_name": "Specialty-Queue",
+      "transfer_number": "+15551234001",
+      "hours_start": "08:00",
+      "hours_end": "16:30",
+      "after_hours_action": "answering_service",
+      "appointment_scheduling": true,
+      "urgent_line_available": true
+    },
+    {
+      "department_code": "BILL",
+      "department_name": "Billing",
+      "queue_name": "Billing-Queue",
+      "transfer_number": null,
+      "hours_start": "08:00",
+      "hours_end": "18:00",
+      "after_hours_action": "voicemail",
+      "appointment_scheduling": false,
+      "urgent_line_available": false
+    },
+    {
+      "department_code": "RX",
+      "department_name": "Pharmacy",
+      "queue_name": "Pharmacy-Queue",
+      "transfer_number": "+15551234002",
+      "hours_start": "08:00",
+      "hours_end": "20:00",
+      "after_hours_action": "voicemail",
+      "appointment_scheduling": false,
+      "urgent_line_available": false
+    },
+    {
+      "department_code": "LAB",
+      "department_name": "Laboratory",
+      "queue_name": "Lab-Queue",
+      "transfer_number": null,
+      "hours_start": "06:00",
+      "hours_end": "18:00",
+      "after_hours_action": "voicemail",
+      "appointment_scheduling": true,
+      "urgent_line_available": false
+    }
+  ],
+  "flowUsage": {
+    "description": "Route calls to appropriate healthcare department",
+    "example": {
+      "action": "Evaluate",
+      "primaryAttribute": "department_code",
+      "primaryValue": "$.Attributes.Department",
+      "returnAttributes": ["queue_name", "hours_start", "hours_end", "after_hours_action"]
+    }
+  }
+}

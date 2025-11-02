@@ -1,0 +1,86 @@
+{
+  "name": "Healthcare Disposition Form",
+  "description": "After-call work form for healthcare contact centers",
+  "industry": "Healthcare",
+  "viewType": "Form",
+  "template": {
+    "Head": {"Title": "Call Disposition", "Configuration": {"Layout": {"Columns": ["12"]}}},
+    "Body": [
+      {
+        "_id": "disposition_form",
+        "Type": "Form",
+        "Props": {"Id": "HealthcareDisposition"},
+        "Content": [
+          {
+            "_id": "call_reason",
+            "Type": "Select",
+            "Props": {
+              "Label": "Call Reason",
+              "Required": true,
+              "Options": [
+                "Appointment Scheduling",
+                "Appointment Cancellation",
+                "Appointment Reschedule",
+                "Prescription Refill",
+                "Lab Results",
+                "Billing Inquiry",
+                "Insurance Verification",
+                "Referral Request",
+                "Medical Records",
+                "Provider Message",
+                "General Inquiry",
+                "Other"
+              ]
+            }
+          },
+          {
+            "_id": "outcome",
+            "Type": "Select",
+            "Props": {
+              "Label": "Call Outcome",
+              "Required": true,
+              "Options": [
+                "Resolved - First Call",
+                "Resolved - Callback Required",
+                "Transferred to Clinical Staff",
+                "Transferred to Billing",
+                "Appointment Scheduled",
+                "Message Taken",
+                "Escalated",
+                "Patient Callback Requested",
+                "Unresolved"
+              ]
+            }
+          },
+          {
+            "_id": "appointment_scheduled",
+            "Type": "Checkbox",
+            "Props": {"Label": "Appointment Scheduled", "Id": "appointmentScheduled"}
+          },
+          {
+            "_id": "hipaa_verified",
+            "Type": "Checkbox",
+            "Props": {"Label": "HIPAA Verification Completed", "Id": "hipaaVerified"}
+          },
+          {
+            "_id": "follow_up_required",
+            "Type": "Checkbox",
+            "Props": {"Label": "Follow-up Required", "Id": "followUpRequired"}
+          },
+          {
+            "_id": "notes",
+            "Type": "TextArea",
+            "Props": {"Label": "Call Notes", "Rows": 4, "Placeholder": "Enter call summary and any relevant details..."}
+          }
+        ]
+      },
+      {
+        "_id": "submit_btn",
+        "Type": "Button",
+        "Props": {"Action": "SubmitDisposition", "Variant": "primary"},
+        "Content": ["Complete Call"]
+      }
+    ]
+  },
+  "actions": ["SubmitDisposition"]
+}

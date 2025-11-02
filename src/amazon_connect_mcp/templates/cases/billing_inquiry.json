@@ -1,0 +1,134 @@
+{
+  "_llm_guidance": {
+    "workflow": [
+      "1. Use template_get_case_workflow() to get field mappings for this domain",
+      "2. Map template fields to actual domain field IDs from the workflow response",
+      "3. Create case with create_case() using mapped field IDs and values",
+      "4. For refund requests, ensure refund_amount is provided when refund_requested=true"
+    ],
+    "bestPractices": [
+      "Always validate account_number format before case creation",
+      "For disputed amounts, require supporting documentation",
+      "Set appropriate priority based on billing_issue_type",
+      "Use conditional logic for refund-related fields"
+    ]
+  },
+  "name": "Billing Inquiry",
+  "description": "Template for billing and payment related cases with conditional refund processing",
+  "status": "Active",
+  "requiredFields": {
+    "forCaseCreation": ["title", "status", "billing_issue_type"],
+    "systemManaged": ["created_date", "last_modified", "case_id"]
+  },
+  "dependencies": {
+    "conditionalFields": {
+      "refund_amount": {
+        "dependsOn": "refund_requested",
+        "condition": "equals",
+        "value": true,
+        "required": true
+      }
+    }
+  },
+  "layout": {
+    "topPanel": [
+      {"fieldId": "title", "label": "Case Title"},
+      {"fieldId": "status", "label": "Status"},
+      {"fieldId": "billing_issue_type", "label": "Issue Type"},
+      {"fieldId": "account_number", "label": "Account Number"}
+    ],
+    "moreInfo": [
+      {"fieldId": "invoice_number", "label": "Invoice Number"},
+      {"fieldId": "amount_disputed", "label": "Amount Disputed"},
+      {"fieldId": "billing_period", "label": "Billing Period"},
+      {"fieldId": "description", "label": "Description"},
+      {"fieldId": "refund_requested", "label": "Refund Requested"},
+      {"fieldId": "refund_amount", "label": "Refund Amount"},
+      {"fieldId": "resolution_notes", "label": "Resolution Notes"}
+    ]
+  },
+  "customFields": {
+    "title": {
+      "type": "Text",
+      "required": true,
+      "maxLength": 200,
+      "example": "Incorrect charge on invoice #12345"
+    },
+    "status": {
+      "type": "SingleSelect",
+      "required": true,
+      "options": ["Open", "Under Review", "Pending Approval", "Approved", "Denied", "Closed"],
+      "default": "Open"
+    },
+    "billing_issue_type": {
+      "type": "SingleSelect",
+      "required": true,
+      "options": ["Incorrect Charge", "Missing Payment", "Refund Request", "Payment Plan", "Invoice Question", "Other"]
+    },
+    "account_number": {
+      "type": "Text",
+      "maxLength": 50,
+      "example": "ACC-123456789"
+    },
+    "invoice_number": {
+      "type": "Text",
+      "maxLength": 50,
+      "example": "INV-2024-001234"
+    },
+    "amount_disputed": {
+      "type": "Number",
+      "example": 99.99
+    },
+    "billing_period": {
+      "type": "Text",
+      "maxLength": 50,
+      "example": "January 2024"
+    },
+    "description": {
+      "type": "Text",
+      "multiline": true,
+      "maxLength": 5000,
+      "example": "Customer reports being charged twice for the same service on invoice #12345"
+    },
+    "refund_requested": {
+      "type": "Boolean",
+      "default": false
+    },
+    "refund_amount": {
+      "type": "Number",
+      "example": 99.99
+    },
+    "resolution_notes": {
+      "type": "Text",
+      "multiline": true,
+      "maxLength": 5000,
+      "example": "Verified duplicate charge, processed refund of $99.99"
+    }
+  },
+  "conditions": [
+    {
+      "type": "conditionallyRequired",
+      "targetField": "refund_amount",
+      "condition": {"field": "refund_requested", "equals": true}
+    }
+  ],
+  "exampleUsage": {
+    "minimalCase": {
+      "title": "Billing question about recent charge",
+      "status": "Open",
+      "billing_issue_type": "Invoice Question"
+    },
+    "fullCase": {
+      "title": "Incorrect charge on January invoice",
+      "status": "Open",
+      "billing_issue_type": "Incorrect Charge",
+      "account_number": "ACC-123456789",
+      "invoice_number": "INV-2024-001234",
+      "amount_disputed": 99.99,
+      "billing_period": "January 2024",
+      "description": "Customer was charged twice for premium service upgrade",
+      "refund_requested": true,
+      "refund_amount": 99.99
+    }
+  }
+}

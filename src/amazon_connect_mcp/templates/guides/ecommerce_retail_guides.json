@@ -1,0 +1,239 @@
+{
+  "name": "E-Commerce/Retail Step-by-Step Guides",
+  "description": "Comprehensive workflow guides for e-commerce and retail customer service",
+  "industry": "E-Commerce/Retail",
+  "guides": {
+    "order_management": {
+      "name": "Order Management Process",
+      "description": "Handle customer order inquiries and modifications",
+      "steps": [
+        {
+          "id": "order_lookup",
+          "title": "Locate Customer Order",
+          "description": "Find and verify customer order details",
+          "actions": [
+            "Request order number or email address",
+            "Verify customer identity",
+            "Locate order in system",
+            "Review order status and details"
+          ],
+          "validation": "Order located and customer verified",
+          "nextStep": "issue_identification"
+        },
+        {
+          "id": "issue_identification",
+          "title": "Identify Order Issue",
+          "description": "Understand the customer's order concern",
+          "actions": [
+            "Listen to customer concern",
+            "Review order timeline and status",
+            "Check for any system alerts or issues",
+            "Determine appropriate resolution path"
+          ],
+          "validation": "Issue identified and resolution path determined",
+          "nextStep": "resolution_execution"
+        },
+        {
+          "id": "resolution_execution",
+          "title": "Execute Resolution",
+          "description": "Implement the appropriate solution",
+          "actions": [
+            "Apply necessary order modifications",
+            "Process refunds or exchanges if needed",
+            "Update shipping information if required",
+            "Communicate changes to customer"
+          ],
+          "validation": "Resolution implemented successfully",
+          "nextStep": "confirmation"
+        },
+        {
+          "id": "confirmation",
+          "title": "Confirm Resolution",
+          "description": "Ensure customer satisfaction with resolution",
+          "actions": [
+            "Confirm customer understands resolution",
+            "Provide updated order information",
+            "Send confirmation email",
+            "Offer additional assistance"
+          ],
+          "validation": "Customer satisfied with resolution",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "return_process": {
+      "name": "Return and Refund Process",
+      "description": "Process customer returns and refunds efficiently",
+      "steps": [
+        {
+          "id": "return_eligibility",
+          "title": "Verify Return Eligibility",
+          "description": "Check if item is eligible for return",
+          "actions": [
+            "Locate original order",
+            "Check return policy timeframe",
+            "Verify item condition requirements",
+            "Review any special return restrictions"
+          ],
+          "validation": "Return eligibility confirmed",
+          "nextStep": "return_authorization"
+        },
+        {
+          "id": "return_authorization",
+          "title": "Generate Return Authorization",
+          "description": "Create return authorization for customer",
+          "actions": [
+            "Generate return merchandise authorization (RMA)",
+            "Create prepaid return shipping label",
+            "Provide return instructions to customer",
+            "Set return tracking in system"
+          ],
+          "validation": "Return authorization created",
+          "nextStep": "return_processing"
+        },
+        {
+          "id": "return_processing",
+          "title": "Process Return",
+          "description": "Handle returned merchandise",
+          "actions": [
+            "Track return shipment status",
+            "Inspect returned item upon receipt",
+            "Process refund or exchange",
+            "Update inventory if applicable"
+          ],
+          "validation": "Return processed successfully",
+          "nextStep": "customer_notification"
+        },
+        {
+          "id": "customer_notification",
+          "title": "Notify Customer",
+          "description": "Inform customer of return completion",
+          "actions": [
+            "Send return completion notification",
+            "Provide refund timeline information",
+            "Confirm refund method and amount",
+            "Offer additional assistance"
+          ],
+          "validation": "Customer notified of completion",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "product_inquiry": {
+      "name": "Product Information Process",
+      "description": "Handle customer product questions and recommendations",
+      "steps": [
+        {
+          "id": "product_identification",
+          "title": "Identify Product Interest",
+          "description": "Understand customer product needs",
+          "actions": [
+            "Ask about specific product or category",
+            "Understand intended use or purpose",
+            "Identify budget considerations",
+            "Note any specific requirements"
+          ],
+          "validation": "Product needs identified",
+          "nextStep": "product_research"
+        },
+        {
+          "id": "product_research",
+          "title": "Research Product Options",
+          "description": "Find suitable product options",
+          "actions": [
+            "Search product catalog",
+            "Review product specifications",
+            "Check availability and pricing",
+            "Identify similar or alternative products"
+          ],
+          "validation": "Product options identified",
+          "nextStep": "recommendation"
+        },
+        {
+          "id": "recommendation",
+          "title": "Provide Product Recommendation",
+          "description": "Recommend best product options",
+          "actions": [
+            "Present top product recommendations",
+            "Explain key features and benefits",
+            "Compare different options",
+            "Provide pricing and availability"
+          ],
+          "validation": "Recommendations provided",
+          "nextStep": "purchase_assistance"
+        },
+        {
+          "id": "purchase_assistance",
+          "title": "Assist with Purchase",
+          "description": "Help customer complete purchase if desired",
+          "actions": [
+            "Guide through ordering process",
+            "Apply any available discounts",
+            "Confirm shipping and billing information",
+            "Process order and provide confirmation"
+          ],
+          "validation": "Purchase assistance provided",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "escalation_process": {
+      "name": "Retail Escalation Process",
+      "description": "Handle complex retail customer service issues",
+      "steps": [
+        {
+          "id": "escalation_assessment",
+          "title": "Assess Escalation Need",
+          "description": "Determine if escalation is necessary",
+          "actions": [
+            "Evaluate issue complexity",
+            "Check customer history and value",
+            "Review available resolution options",
+            "Assess potential business impact"
+          ],
+          "validation": "Escalation need confirmed",
+          "nextStep": "escalation_preparation"
+        },
+        {
+          "id": "escalation_preparation",
+          "title": "Prepare Escalation",
+          "description": "Gather information for escalation team",
+          "actions": [
+            "Document complete issue history",
+            "Gather relevant order information",
+            "Note previous resolution attempts",
+            "Identify customer preferences"
+          ],
+          "validation": "Escalation documentation prepared",
+          "nextStep": "escalation_transfer"
+        },
+        {
+          "id": "escalation_transfer",
+          "title": "Transfer to Specialist",
+          "description": "Hand off to appropriate escalation team",
+          "actions": [
+            "Contact appropriate escalation team",
+            "Provide comprehensive case briefing",
+            "Ensure smooth customer handoff",
+            "Confirm specialist has all information"
+          ],
+          "validation": "Successfully transferred to specialist",
+          "nextStep": "follow_up"
+        },
+        {
+          "id": "follow_up",
+          "title": "Follow-up and Documentation",
+          "description": "Ensure resolution and document outcome",
+          "actions": [
+            "Monitor case resolution progress",
+            "Follow up with customer if needed",
+            "Document final resolution",
+            "Update customer service records"
+          ],
+          "validation": "Case resolved and documented",
+          "nextStep": "completion"
+        }
+      ]
+    }
+  }
+}

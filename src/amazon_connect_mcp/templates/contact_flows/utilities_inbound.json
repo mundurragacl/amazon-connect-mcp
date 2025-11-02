@@ -1,0 +1,148 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789060",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789060": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789061": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789062": {"position": {"x": 400, "y": 20}},
+      "12345678-1234-1234-1234-123456789063": {"position": {"x": 600, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789060",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you for calling [Utility Company]. Your call may be recorded for quality purposes. If you smell gas or have an emergency, hang up and call 911 immediately."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789061"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789061",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "To report a power outage, press 1. For gas emergencies, press 2. For billing questions, press 3. To start or stop service, press 4. For payment arrangements, press 5. For all other inquiries, press 9.",
+        "MaxDigits": 1,
+        "Timeout": "8"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789062",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789063",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "1"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789064",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "2"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789062",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "ServiceType": "$.CustomerInput",
+          "Priority": "Normal"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789065"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789063",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "ServiceType": "Outage",
+          "Priority": "High"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789066"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789064",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "ServiceType": "Emergency",
+          "Priority": "Critical"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789067"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789065",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "Please enter your account number, or press 0 to speak with a representative.",
+        "MaxDigits": 12,
+        "Timeout": "15"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789068"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789066",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you for reporting an outage. Please stay on the line to provide your location information to help us restore service quickly."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789069"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789067",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/emergency-response"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789068",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "AccountNumber": "$.CustomerInput"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789070"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789069",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/outage-reporting"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789070",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/customer-service"
+      }
+    }
+  ]
+}

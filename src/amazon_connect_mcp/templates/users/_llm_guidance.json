@@ -1,0 +1,27 @@
+{
+  "_category_guidance": {
+    "description": "Amazon Connect Users (Agents) configuration",
+    "prerequisites": [
+      "Need routing_profile_id: config_list_routing_profiles(instance_id)",
+      "Need security_profile_ids: config_list_security_profiles(instance_id)"
+    ],
+    "workflow": [
+      "1. Get routing profiles: config_list_routing_profiles(instance_id)",
+      "2. Get security profiles: config_list_security_profiles(instance_id)",
+      "3. Create user: config_create_user(instance_id, username, routing_profile_id, security_profile_ids, ...)"
+    ],
+    "criticalNotes": [
+      "security_profile_ids is a LIST, not a single ID",
+      "Common security profiles: 'Agent', 'Admin', 'CallCenterManager', 'QualityAnalyst'",
+      "Password must meet complexity requirements if using CONNECT_MANAGED identity",
+      "phone_type defaults to 'SOFT_PHONE'"
+    ],
+    "securityProfileMapping": {
+      "Agent": "Basic agent permissions - handle contacts",
+      "Admin": "Full administrative access",
+      "CallCenterManager": "Supervisor permissions - real-time metrics, agent management",
+      "QualityAnalyst": "Quality management - evaluations, recordings"
+    },
+    "phoneTypes": ["SOFT_PHONE", "DESK_PHONE"]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Business Hours",
+  "description": "Standard business hours Monday-Friday 8am-5pm",
+  "timezone": "America/New_York",
+  
+  "_llm_guidance": {
+    "tool": "config_create_hours_of_operation",
+    "critical": "Set region first with set_session or pass region parameter",
+    "configFormat": "Day/StartTime/EndTime must use PascalCase for API (MONDAY not monday, Hours not hours)"
+  },
+
+  "config": [
+    {"Day": "MONDAY", "StartTime": {"Hours": 8, "Minutes": 0}, "EndTime": {"Hours": 17, "Minutes": 0}},
+    {"Day": "TUESDAY", "StartTime": {"Hours": 8, "Minutes": 0}, "EndTime": {"Hours": 17, "Minutes": 0}},
+    {"Day": "WEDNESDAY", "StartTime": {"Hours": 8, "Minutes": 0}, "EndTime": {"Hours": 17, "Minutes": 0}},
+    {"Day": "THURSDAY", "StartTime": {"Hours": 8, "Minutes": 0}, "EndTime": {"Hours": 17, "Minutes": 0}},
+    {"Day": "FRIDAY", "StartTime": {"Hours": 8, "Minutes": 0}, "EndTime": {"Hours": 17, "Minutes": 0}}
+  ],
+
+  "exampleUsage": {
+    "tool_call": {
+      "tool": "config_create_hours_of_operation",
+      "params": {
+        "instance_id": "<your-instance-id>",
+        "name": "Business Hours",
+        "time_zone": "America/New_York",
+        "config": [
+          {"Day": "MONDAY", "StartTime": {"Hours": 8, "Minutes": 0}, "EndTime": {"Hours": 17, "Minutes": 0}},
+          {"Day": "TUESDAY", "StartTime": {"Hours": 8, "Minutes": 0}, "EndTime": {"Hours": 17, "Minutes": 0}},
+          {"Day": "WEDNESDAY", "StartTime": {"Hours": 8, "Minutes": 0}, "EndTime": {"Hours": 17, "Minutes": 0}},
+          {"Day": "THURSDAY", "StartTime": {"Hours": 8, "Minutes": 0}, "EndTime": {"Hours": 17, "Minutes": 0}},
+          {"Day": "FRIDAY", "StartTime": {"Hours": 8, "Minutes": 0}, "EndTime": {"Hours": 17, "Minutes": 0}}
+        ],
+        "region": "us-east-1"
+      }
+    }
+  }
+}

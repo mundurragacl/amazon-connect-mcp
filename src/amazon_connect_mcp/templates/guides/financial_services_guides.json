@@ -1,0 +1,214 @@
+{
+  "name": "Financial Services Step-by-Step Guides",
+  "description": "Comprehensive workflow guides for banking and financial services",
+  "industry": "Financial Services",
+  "guides": {
+    "account_opening": {
+      "name": "New Account Opening Process",
+      "description": "Complete workflow for opening new customer accounts",
+      "steps": [
+        {
+          "id": "customer_identification",
+          "title": "Customer Identification & Verification",
+          "description": "Verify customer identity per KYC requirements",
+          "actions": [
+            "Collect full legal name and date of birth",
+            "Request government-issued photo ID",
+            "Verify Social Security Number",
+            "Confirm current address with documentation",
+            "Check against OFAC and sanctions lists"
+          ],
+          "validation": "Identity verified and compliance checks passed",
+          "nextStep": "account_selection"
+        },
+        {
+          "id": "account_selection",
+          "title": "Account Type Selection",
+          "description": "Help customer choose appropriate account type",
+          "actions": [
+            "Review customer banking needs",
+            "Explain available account options",
+            "Compare fees and features",
+            "Recommend suitable account type"
+          ],
+          "validation": "Account type selected",
+          "nextStep": "application_completion"
+        },
+        {
+          "id": "application_completion",
+          "title": "Complete Application",
+          "description": "Fill out account application with customer",
+          "actions": [
+            "Complete application form",
+            "Review terms and conditions",
+            "Obtain required signatures",
+            "Process initial deposit"
+          ],
+          "validation": "Application completed and signed",
+          "nextStep": "account_setup"
+        },
+        {
+          "id": "account_setup",
+          "title": "Account Setup & Services",
+          "description": "Set up account and additional services",
+          "actions": [
+            "Create account in system",
+            "Set up online banking access",
+            "Order debit card if requested",
+            "Explain account features and services"
+          ],
+          "validation": "Account active and services configured",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "fraud_investigation": {
+      "name": "Fraud Investigation Process",
+      "description": "Handle suspected fraudulent activity on accounts",
+      "steps": [
+        {
+          "id": "fraud_verification",
+          "title": "Verify Fraud Report",
+          "description": "Confirm fraudulent activity with customer",
+          "actions": [
+            "Review disputed transactions with customer",
+            "Verify customer identity thoroughly",
+            "Document fraud details and timeline",
+            "Assess potential security compromises"
+          ],
+          "validation": "Fraud confirmed and documented",
+          "nextStep": "account_security"
+        },
+        {
+          "id": "account_security",
+          "title": "Secure Customer Account",
+          "description": "Implement immediate security measures",
+          "actions": [
+            "Place fraud alert on account",
+            "Block compromised cards immediately",
+            "Reset online banking credentials",
+            "Review and update security settings"
+          ],
+          "validation": "Account secured from further fraud",
+          "nextStep": "investigation_initiation"
+        },
+        {
+          "id": "investigation_initiation",
+          "title": "Initiate Fraud Investigation",
+          "description": "Start formal investigation process",
+          "actions": [
+            "Create fraud case in system",
+            "Gather supporting documentation",
+            "Submit to fraud investigation team",
+            "Provide case number to customer"
+          ],
+          "validation": "Investigation case created",
+          "nextStep": "customer_communication"
+        },
+        {
+          "id": "customer_communication",
+          "title": "Customer Communication & Follow-up",
+          "description": "Keep customer informed of process",
+          "actions": [
+            "Explain investigation timeline",
+            "Provide temporary credit if applicable",
+            "Schedule follow-up contact",
+            "Send confirmation documentation"
+          ],
+          "validation": "Customer informed and documentation sent",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "loan_application": {
+      "name": "Loan Application Process",
+      "description": "Process customer loan applications",
+      "steps": [
+        {
+          "id": "loan_consultation",
+          "title": "Loan Consultation",
+          "description": "Understand customer loan needs",
+          "actions": [
+            "Discuss loan purpose and amount",
+            "Review customer financial situation",
+            "Explain available loan products",
+            "Provide rate and term information"
+          ],
+          "validation": "Loan needs assessed",
+          "nextStep": "application_submission"
+        },
+        {
+          "id": "application_submission",
+          "title": "Submit Loan Application",
+          "description": "Complete and submit loan application",
+          "actions": [
+            "Complete loan application form",
+            "Collect required documentation",
+            "Review application for completeness",
+            "Submit to underwriting team"
+          ],
+          "validation": "Application submitted for review",
+          "nextStep": "status_tracking"
+        },
+        {
+          "id": "status_tracking",
+          "title": "Application Status & Follow-up",
+          "description": "Track application and communicate status",
+          "actions": [
+            "Monitor application progress",
+            "Communicate status updates to customer",
+            "Request additional documentation if needed",
+            "Coordinate with underwriting team"
+          ],
+          "validation": "Customer kept informed of status",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "escalation_process": {
+      "name": "Financial Services Escalation",
+      "description": "Handle complex financial service issues",
+      "steps": [
+        {
+          "id": "issue_evaluation",
+          "title": "Evaluate Issue Complexity",
+          "description": "Assess if escalation is required",
+          "actions": [
+            "Review issue complexity and impact",
+            "Check regulatory implications",
+            "Assess customer relationship value",
+            "Document issue thoroughly"
+          ],
+          "validation": "Escalation need determined",
+          "nextStep": "escalation_routing"
+        },
+        {
+          "id": "escalation_routing",
+          "title": "Route to Specialist Team",
+          "description": "Transfer to appropriate specialist",
+          "actions": [
+            "Identify correct escalation team",
+            "Prepare detailed case summary",
+            "Ensure regulatory compliance",
+            "Execute warm transfer to specialist"
+          ],
+          "validation": "Successfully transferred to specialist",
+          "nextStep": "resolution_tracking"
+        },
+        {
+          "id": "resolution_tracking",
+          "title": "Track Resolution",
+          "description": "Monitor case resolution and follow-up",
+          "actions": [
+            "Monitor case progress",
+            "Ensure timely resolution",
+            "Communicate updates to customer",
+            "Document final resolution"
+          ],
+          "validation": "Case resolved and documented",
+          "nextStep": "completion"
+        }
+      ]
+    }
+  }
+}

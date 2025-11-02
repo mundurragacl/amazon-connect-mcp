@@ -1,0 +1,48 @@
+{
+  "name": "E-Commerce/Retail Layout",
+  "description": "Layout for retail and e-commerce cases with order and shipping details",
+  "_note": "Title and Status fields cannot be part of layouts - they are always displayed automatically. Custom fields must be created first with their IDs referenced here.",
+  "content": {
+    "basic": {
+      "topPanel": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Case Overview",
+              "fields": [
+                {"id": "case_reason"},
+                {"id": "customer_id"}
+              ]
+            }
+          }
+        ]
+      },
+      "moreInfo": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Order Details",
+              "fields": [
+                {"id": "order_number"},
+                {"id": "summary"}
+              ]
+            }
+          },
+          {
+            "fieldGroup": {
+              "name": "Resolution",
+              "fields": [
+                {"id": "resolution_notes"},
+                {"id": "reference_number"}
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requiredCustomFields": [
+    {"name": "Order Number", "type": "Text", "description": "Order reference number"},
+    {"name": "Resolution Notes", "type": "Text", "description": "Case resolution notes"}
+  ]
+}

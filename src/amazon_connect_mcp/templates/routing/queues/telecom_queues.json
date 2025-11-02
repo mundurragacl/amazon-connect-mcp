@@ -1,0 +1,50 @@
+{
+  "name": "Telecom Queue Configuration",
+  "description": "Queue configuration for telecommunications",
+  "industry": "Telecommunications",
+  "queues": [
+    {
+      "name": "General-Support",
+      "description": "General account and service inquiries",
+      "maxContacts": 100,
+      "hoursOfOperationId": "business_hours",
+      "outboundCallerIdName": "Customer Care"
+    },
+    {
+      "name": "Technical-Support",
+      "description": "Technical troubleshooting and device support",
+      "maxContacts": 60,
+      "hoursOfOperationId": "24x7",
+      "outboundCallerIdName": "Tech Support"
+    },
+    {
+      "name": "Billing",
+      "description": "Billing inquiries and payment processing",
+      "maxContacts": 50,
+      "hoursOfOperationId": "business_hours",
+      "outboundCallerIdName": "Billing"
+    },
+    {
+      "name": "Sales-Upgrades",
+      "description": "New services and device upgrades",
+      "maxContacts": 40,
+      "hoursOfOperationId": "business_hours",
+      "outboundCallerIdName": "Sales"
+    },
+    {
+      "name": "Retention",
+      "description": "Cancellation requests and retention offers",
+      "maxContacts": 25,
+      "hoursOfOperationId": "business_hours",
+      "outboundCallerIdName": "Customer Loyalty",
+      "priority": "high"
+    },
+    {
+      "name": "Network-Outages",
+      "description": "Network outage reporting and status",
+      "maxContacts": 30,
+      "hoursOfOperationId": "24x7",
+      "outboundCallerIdName": "Network Support"
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "_llm_guidance": {
+    "workflow": [
+      "1. profiles_create_domain(domain_name='telecom-customers')",
+      "2. profiles_create_profile(domain_name, first_name, last_name, phone, email, attributes)"
+    ],
+    "exampleUsage": {
+      "minimalProfile": {
+        "domain_name": "telecom-customers",
+        "first_name": "Mike",
+        "last_name": "Wilson",
+        "phone": "+1-555-321-0987",
+        "email": "mike.wilson@example.com"
+      },
+      "fullProfile": {
+        "domain_name": "telecom-customers",
+        "first_name": "Mike",
+        "last_name": "Wilson",
+        "phone": "+1-555-321-0987",
+        "email": "mike.wilson@example.com",
+        "attributes": {
+          "accountNumber": "ACC-123456789",
+          "accountType": "Family",
+          "accountStatus": "Active",
+          "customerSince": "2019-03-20",
+          "creditClass": "A",
+          "monthlyRecurringCharges": "189.99",
+          "autopayEnabled": "true",
+          "networkType": "5G",
+          "preferredContactMethod": "App"
+        }
+      }
+    },
+    "industryNotes": [
+      "CPNI (Customer Proprietary Network Information) protection required",
+      "Account status affects service availability",
+      "Network coverage impacts support routing",
+      "Device financing affects upgrade eligibility"
+    ]
+  },
+  "name": "Telecommunications Customer Profile",
+  "description": "Unified customer profile layout for telecom providers with service plans, device information, and usage patterns",
+  "industry": "Telecommunications",
+  "profileType": "Customer",
+  "requiredFields": {
+    "standard": ["_firstName", "_lastName", "_phone", "_email"],
+    "recommended": ["accountNumber", "accountType", "accountStatus"]
+  },
+  "layout": {
+    "sections": [
+      {
+        "id": "customer_identity",
+        "title": "Customer Identity",
+        "priority": 1,
+        "fields": [
+          {"key": "_firstName", "label": "First Name", "required": true},
+          {"key": "_lastName", "label": "Last Name", "required": true},
+          {"key": "_phone", "label": "Primary Phone", "required": true},
+          {"key": "_email", "label": "Email", "required": true},
+          {"key": "dateOfBirth", "label": "Date of Birth", "type": "date"},
+          {"key": "customerId", "label": "Customer ID", "type": "text", "unique": true},
+          {"key": "accountNumber", "label": "Account Number", "type": "text", "unique": true},
+          {"key": "socialSecurityNumber", "label": "SSN", "type": "encrypted", "masked": true}
+        ]
+      },
+      {
+        "id": "account_information",
+        "title": "Account Information",
+        "priority": 2,
+        "fields": [
+          {"key": "accountType", "label": "Account Type", "type": "select", "options": ["Individual", "Family", "Business", "Enterprise"]},
+          {"key": "accountStatus", "label": "Account Status", "type": "select", "options": ["Active", "Suspended", "Disconnected", "Past Due"]},
+          {"key": "customerSince", "label": "Customer Since", "type": "date"},
+          {"key": "creditClass", "label": "Credit Class", "type": "select", "options": ["A", "B", "C", "D"]},
+          {"key": "depositRequired", "label": "Deposit Required", "type": "boolean"},
+          {"key": "depositAmount", "label": "Deposit Amount", "type": "currency"},
+          {"key": "authorizedUsers", "label": "Authorized Users", "type": "list"}
+        ]
+      },
+      {
+        "id": "service_plans",
+        "title": "Service Plans",
+        "priority": 3,
+        "fields": [
+          {"key": "mobileLines", "label": "Mobile Lines", "type": "list"},
+          {"key": "internetService", "label": "Internet Service", "type": "object"},
+          {"key": "tvService", "label": "TV Service", "type": "object"},
+          {"key": "homePhoneService", "label": "Home Phone", "type": "object"},
+          {"key": "bundleDiscount", "label": "Bundle Discount", "type": "percentage"},
+          {"key": "monthlyRecurringCharges", "label": "Monthly Charges", "type": "currency"},
+          {"key": "contractEndDate", "label": "Contract End Date", "type": "date"}
+        ]
+      },
+      {
+        "id": "devices_equipment",
+        "title": "Devices & Equipment",
+        "priority": 4,
+        "fields": [
+          {"key": "mobileDevices", "label": "Mobile Devices", "type": "list"},
+          {"key": "modemRouter", "label": "Modem/Router", "type": "object"},
+          {"key": "tvBoxes", "label": "TV Boxes", "type": "list"},
+          {"key": "deviceFinancing", "label": "Device Financing", "type": "list"},
+          {"key": "insurancePlans", "label": "Device Insurance", "type": "list"},
+          {"key": "upgradeEligibility", "label": "Upgrade Eligibility", "type": "date"},
+          {"key": "tradeInCredit", "label": "Trade-in Credit", "type": "currency"}
+        ]
+      },
+      {
+        "id": "usage_patterns",
+        "title": "Usage Patterns",
+        "priority": 5,
+        "fields": [
+          {"key": "dataUsage", "label": "Monthly Data Usage", "type": "object"},
+          {"key": "voiceMinutes", "label": "Voice Minutes", "type": "number"},
+          {"key": "textMessages", "label": "Text Messages", "type": "number"},
+          {"key": "internationalUsage", "label": "International Usage", "type": "object"},
+          {"key": "roamingCharges", "label": "Roaming Charges", "type": "currency"},
+          {"key": "overageCharges", "label": "Overage Charges", "type": "currency"},
+          {"key": "peakUsageHours", "label": "Peak Usage Hours", "type": "text"}
+        ]
+      },
+      {
+        "id": "billing_payment",
+        "title": "Billing & Payment",
+        "priority": 6,
+        "fields": [
+          {"key": "billingAddress", "label": "Billing Address", "type": "address"},
+          {"key": "paymentMethod", "label": "Payment Method", "type": "text", "masked": true},
+          {"key": "autopayEnabled", "label": "Autopay Enabled", "type": "boolean"},
+          {"key": "paperlessBilling", "label": "Paperless Billing", "type": "boolean"},
+          {"key": "currentBalance", "label": "Current Balance", "type": "currency"},
+          {"key": "lastPaymentDate", "label": "Last Payment", "type": "date"},
+          {"key": "paymentHistory", "label": "Payment History", "type": "list"}
+        ]
+      },
+      {
+        "id": "support_preferences",
+        "title": "Support & Preferences",
+        "priority": 7,
+        "fields": [
+          {"key": "preferredContactMethod", "label": "Preferred Contact", "type": "select", "options": ["Phone", "Email", "SMS", "Chat", "App"]},
+          {"key": "languagePreference", "label": "Language", "type": "select", "options": ["English", "Spanish", "French", "Other"]},
+          {"key": "serviceAlerts", "label": "Service Alerts", "type": "boolean"},
+          {"key": "billingAlerts", "label": "Billing Alerts", "type": "boolean"},
+          {"key": "promotionalOffers", "label": "Promotional Offers", "type": "boolean"},
+          {"key": "supportTickets", "label": "Open Support Tickets", "type": "number"},
+          {"key": "satisfactionScore", "label": "Satisfaction Score", "type": "number"}
+        ]
+      },
+      {
+        "id": "network_technical",
+        "title": "Network & Technical",
+        "priority": 8,
+        "fields": [
+          {"key": "serviceAddress", "label": "Service Address", "type": "address"},
+          {"key": "networkCoverage", "label": "Network Coverage", "type": "select", "options": ["Excellent", "Good", "Fair", "Poor"]},
+          {"key": "signalStrength", "label": "Signal Strength", "type": "number"},
+          {"key": "networkType", "label": "Network Type", "type": "select", "options": ["5G", "4G LTE", "3G", "2G"]},
+          {"key": "outageHistory", "label": "Outage History", "type": "list"},
+          {"key": "speedTestResults", "label": "Speed Test Results", "type": "object"},
+          {"key": "technicalIssues", "label": "Recent Technical Issues", "type": "list"}
+        ]
+      }
+    ]
+  },
+  "integrations": {
+    "billing_systems": ["Amdocs", "Oracle BRM", "CSG", "Ericsson"],
+    "network_management": true,
+    "device_management": true,
+    "fraud_detection": true,
+    "customer_analytics": true
+  },
+  "compliance": {
+    "fcc_compliant": true,
+    "cpni_protected": true,
+    "gdpr_compliant": true,
+    "data_encryption": true,
+    "audit_logging": true,
+    "access_controls": ["role_based", "customer_consent", "regulatory_approval"]
+  }
+}

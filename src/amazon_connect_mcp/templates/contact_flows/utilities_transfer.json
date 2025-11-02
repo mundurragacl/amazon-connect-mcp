@@ -1,0 +1,87 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789110",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789110": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789111": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789112": {"position": {"x": 400, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789110",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Please hold while I connect you to the appropriate department for your utility service needs."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789111"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789111",
+      "Type": "CheckAttribute",
+      "Parameters": {
+        "Attribute": "Priority",
+        "ComparisonValue": "Critical"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789112",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789113",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.Priority", "Critical"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789114",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.ServiceType", "Outage"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789115",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.ServiceType", "3"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789112",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/customer-service"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789113",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/emergency-response"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789114",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/outage-reporting"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789115",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/billing-support"
+      }
+    }
+  ]
+}

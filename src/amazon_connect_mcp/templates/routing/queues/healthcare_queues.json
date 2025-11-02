@@ -1,0 +1,47 @@
+{
+  "name": "Healthcare Queue Configuration",
+  "description": "Queue configuration for healthcare contact center",
+  "industry": "Healthcare",
+  "queues": [
+    {
+      "name": "Appointments",
+      "description": "Appointment scheduling and management",
+      "maxContacts": 50,
+      "hoursOfOperationId": "healthcare_hours",
+      "outboundCallerIdName": "Healthcare Appointments",
+      "quickConnects": ["Scheduling", "Nursing", "Billing"]
+    },
+    {
+      "name": "Nursing-Triage",
+      "description": "Clinical triage and nursing support",
+      "maxContacts": 25,
+      "hoursOfOperationId": "healthcare_hours",
+      "outboundCallerIdName": "Healthcare Nursing",
+      "quickConnects": ["Provider", "Emergency", "Pharmacy"]
+    },
+    {
+      "name": "Billing-Insurance",
+      "description": "Billing inquiries and insurance verification",
+      "maxContacts": 40,
+      "hoursOfOperationId": "healthcare_hours",
+      "outboundCallerIdName": "Healthcare Billing",
+      "quickConnects": ["Insurance", "Collections", "Financial-Counselor"]
+    },
+    {
+      "name": "Pharmacy",
+      "description": "Prescription refills and pharmacy inquiries",
+      "maxContacts": 30,
+      "hoursOfOperationId": "healthcare_hours",
+      "outboundCallerIdName": "Healthcare Pharmacy",
+      "quickConnects": ["Provider", "Insurance"]
+    },
+    {
+      "name": "Urgent-OnCall",
+      "description": "After-hours urgent care line",
+      "maxContacts": 10,
+      "hoursOfOperationId": "24x7",
+      "outboundCallerIdName": "Healthcare Urgent",
+      "quickConnects": ["OnCall-Provider", "Emergency"]
+    }
+  ]
+}

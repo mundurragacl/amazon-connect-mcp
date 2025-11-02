@@ -1,0 +1,97 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789130",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789130": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789131": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789132": {"position": {"x": 400, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789130",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you for calling [Store Name]. Our customer service is currently closed. Our hours are Monday through Friday 8 AM to 8 PM, and weekends 10 AM to 6 PM."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789131"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789131",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "For order tracking, returns, or account questions, please visit our website or mobile app. You can also chat with our virtual assistant 24/7 online."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789132"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789132",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "To leave a message for our customer service team, press 1. To hear our hours again, press 2.",
+        "MaxDigits": 1,
+        "Timeout": "8"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789133",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789134",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "1"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789130",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "2"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789133",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you for calling. Please visit our website for immediate assistance or call back during business hours. Goodbye."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789135"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789134",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Please leave your name, order number if applicable, phone number, and message. We'll call you back within one business day."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789136"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789135",
+      "Type": "DisconnectParticipant"
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789136",
+      "Type": "StoreCustomerInput",
+      "Parameters": {
+        "InputTimeLimitSeconds": "120"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789135"
+      }
+    }
+  ]
+}

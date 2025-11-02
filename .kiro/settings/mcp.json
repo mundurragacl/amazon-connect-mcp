@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "amazon-connect": {
+      "command": "sh",
+      "args": ["-c", "cd /Users/matiasundurraga/Workspace/amazon-connect-mcp && source .venv/bin/activate && python -m amazon_connect_mcp.server"],
+      "env": {
+        "AWS_PROFILE": "default"
+      }
+    }
+  }
+}

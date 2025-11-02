@@ -1,0 +1,35 @@
+{
+  "name": "E-Commerce Extended Hours",
+  "description": "Extended hours for e-commerce with peak season adjustments",
+  "industry": "E-Commerce/Retail",
+  "timeZone": "America/New_York",
+  "config": [
+    {"Day": "MONDAY", "StartTime": {"Hours": 6, "Minutes": 0}, "EndTime": {"Hours": 23, "Minutes": 0}},
+    {"Day": "TUESDAY", "StartTime": {"Hours": 6, "Minutes": 0}, "EndTime": {"Hours": 23, "Minutes": 0}},
+    {"Day": "WEDNESDAY", "StartTime": {"Hours": 6, "Minutes": 0}, "EndTime": {"Hours": 23, "Minutes": 0}},
+    {"Day": "THURSDAY", "StartTime": {"Hours": 6, "Minutes": 0}, "EndTime": {"Hours": 23, "Minutes": 0}},
+    {"Day": "FRIDAY", "StartTime": {"Hours": 6, "Minutes": 0}, "EndTime": {"Hours": 23, "Minutes": 0}},
+    {"Day": "SATURDAY", "StartTime": {"Hours": 7, "Minutes": 0}, "EndTime": {"Hours": 22, "Minutes": 0}},
+    {"Day": "SUNDAY", "StartTime": {"Hours": 8, "Minutes": 0}, "EndTime": {"Hours": 21, "Minutes": 0}}
+  ],
+  "peakSeasonConfig": {
+    "blackFriday": {
+      "dates": ["2026-11-27", "2026-11-28", "2026-11-29", "2026-11-30"],
+      "hours": "24x7"
+    },
+    "cyberMonday": {
+      "dates": ["2026-11-30", "2026-12-01"],
+      "hours": "24x7"
+    },
+    "holidaySeason": {
+      "startDate": "2026-12-01",
+      "endDate": "2026-12-24",
+      "extendedHours": {"StartTime": {"Hours": 5, "Minutes": 0}, "EndTime": {"Hours": 24, "Minutes": 0}}
+    }
+  },
+  "afterHoursConfig": {
+    "action": "self_service",
+    "selfServiceOptions": ["order_status", "return_status", "store_locator"],
+    "message": "Our customer service team is currently unavailable. For order status, press 1. For return status, press 2. To find a store, press 3. Or visit our website for 24/7 self-service."
+  }
+}

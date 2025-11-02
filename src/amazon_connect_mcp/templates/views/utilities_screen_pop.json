@@ -1,0 +1,77 @@
+{
+  "name": "Utilities Account Screen Pop",
+  "description": "Service account information for utilities contact centers with outage status",
+  "industry": "Utilities",
+  "viewType": "Detail",
+  "template": {
+    "Head": {
+      "Title": "Service Account",
+      "Configuration": {"Layout": {"Columns": ["8", "4"]}}
+    },
+    "Body": [
+      {
+        "_id": "outage_alert",
+        "Type": "AlertBanner",
+        "Props": {
+          "Visible": "$.Service.OutageActive",
+          "Variant": "error",
+          "Message": "OUTAGE ALERT: Active outage at service address. Est. restoration: $.Service.OutageETA. Affected customers: $.Service.AffectedCustomers"
+        }
+      },
+      {
+        "_id": "customer_card",
+        "Type": "Card",
+        "Props": {
+          "Heading": "$.Customer.Name",
+          "Icon": "Home",
+          "Status": "$.Account.Status",
+          "Description": "Account: $.Account.AccountNumber | Service: $.Service.ServiceType"
+        }
+      },
+      {
+        "_id": "service_address",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Service Location"},
+        "Content": [
+          {"Label": "Address", "Value": "$.Service.ServiceAddress"},
+          {"Label": "Meter Number", "Value": "$.Service.MeterNumber", "Copyable": true},
+          {"Label": "Service Type", "Value": "$.Service.ServiceType"},
+          {"Label": "Rate Plan", "Value": "$.Service.RatePlan"}
+        ]
+      },
+      {
+        "_id": "usage_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Usage & Billing"},
+        "Content": [
+          {"Label": "Current Usage", "Value": "$.Usage.CurrentPeriod"},
+          {"Label": "Last Month", "Value": "$.Usage.LastMonth"},
+          {"Label": "Current Bill", "Value": "$.Billing.CurrentAmount"},
+          {"Label": "Due Date", "Value": "$.Billing.DueDate"},
+          {"Label": "Past Due", "Value": "$.Billing.PastDueAmount"}
+        ]
+      },
+      {
+        "_id": "payment_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Payment History"},
+        "Content": [
+          {"Label": "Last Payment", "Value": "$.Billing.LastPayment"},
+          {"Label": "Payment Method", "Value": "$.Billing.PaymentMethod"},
+          {"Label": "Budget Billing", "Value": "$.Billing.BudgetBillingStatus"}
+        ]
+      },
+      {
+        "_id": "quick_actions",
+        "Type": "Container",
+        "Content": [
+          {"_id": "outage_btn", "Type": "Button", "Props": {"Action": "ReportOutage", "Variant": "primary"}, "Content": ["Report Outage"]},
+          {"_id": "payment_btn", "Type": "Button", "Props": {"Action": "MakePayment"}, "Content": ["Make Payment"]},
+          {"_id": "arrangement_btn", "Type": "Button", "Props": {"Action": "PaymentArrangement"}, "Content": ["Payment Plan"]},
+          {"_id": "start_stop_btn", "Type": "Button", "Props": {"Action": "StartStopService"}, "Content": ["Start/Stop Service"]}
+        ]
+      }
+    ]
+  },
+  "actions": ["ReportOutage", "MakePayment", "PaymentArrangement", "StartStopService", "MeterReading", "BudgetBilling", "CreateCase"]
+}

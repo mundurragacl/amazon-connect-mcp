@@ -1,0 +1,136 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789012",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789012": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789013": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789014": {"position": {"x": 400, "y": 20}},
+      "12345678-1234-1234-1234-123456789015": {"position": {"x": 600, "y": 20}},
+      "12345678-1234-1234-1234-123456789016": {"position": {"x": 800, "y": 20}},
+      "12345678-1234-1234-1234-123456789017": {"position": {"x": 1000, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789012",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you for calling [Hospital Name]. Your call may be recorded for quality and training purposes. If this is a medical emergency, please hang up and dial 911."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789013"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789013",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "Please enter your date of birth using 8 digits, month, day, year. For example, for January 1st, 1990, press 01011990.",
+        "MaxDigits": 8,
+        "Timeout": "10",
+        "TimeoutAudio": "I'm sorry, I didn't receive your input. Let me transfer you to our registration team."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789014",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789014",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["True"]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789017",
+            "ErrorType": "InputTimeLimitExceeded"
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789014",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "PatientDOB": "$.CustomerInput",
+          "CallReason": "Healthcare"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789015"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789015",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "For appointments, press 1. For billing questions, press 2. For prescription refills, press 3. For test results, press 4. For all other inquiries, press 9.",
+        "MaxDigits": 1,
+        "Timeout": "8"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789016",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789016",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "1"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789016", 
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "2"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789016",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "3"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789016",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "4"]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789017",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789016",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "Department": "$.CustomerInput"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789017"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789017",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/12345678-1234-1234-1234-123456789012"
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "name": "Healthcare Agent Profiles",
+  "description": "Routing profiles for healthcare contact center agents",
+  "industry": "Healthcare",
+  "profiles": [
+    {
+      "name": "Scheduling-Agent",
+      "description": "Appointment scheduling specialists",
+      "defaultOutboundQueue": "Appointments",
+      "mediaConcurrencies": [
+        {"Channel": "VOICE", "Concurrency": 1},
+        {"Channel": "CHAT", "Concurrency": 2}
+      ],
+      "queueConfigs": [
+        {"QueueName": "Appointments", "Priority": 1, "Delay": 0},
+        {"QueueName": "General-Inquiries", "Priority": 2, "Delay": 30}
+      ]
+    },
+    {
+      "name": "Clinical-Support",
+      "description": "Nursing and clinical support staff",
+      "defaultOutboundQueue": "Nursing-Triage",
+      "mediaConcurrencies": [
+        {"Channel": "VOICE", "Concurrency": 1},
+        {"Channel": "CHAT", "Concurrency": 1}
+      ],
+      "queueConfigs": [
+        {"QueueName": "Nursing-Triage", "Priority": 1, "Delay": 0},
+        {"QueueName": "Urgent-OnCall", "Priority": 1, "Delay": 0}
+      ]
+    },
+    {
+      "name": "Billing-Specialist",
+      "description": "Billing and insurance specialists",
+      "defaultOutboundQueue": "Billing-Insurance",
+      "mediaConcurrencies": [
+        {"Channel": "VOICE", "Concurrency": 1},
+        {"Channel": "CHAT", "Concurrency": 2}
+      ],
+      "queueConfigs": [
+        {"QueueName": "Billing-Insurance", "Priority": 1, "Delay": 0},
+        {"QueueName": "General-Inquiries", "Priority": 3, "Delay": 60}
+      ]
+    }
+  ]
+}

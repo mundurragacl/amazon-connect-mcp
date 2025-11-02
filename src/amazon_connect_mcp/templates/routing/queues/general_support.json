@@ -1,0 +1,35 @@
+{
+  "name": "General Support Queue",
+  "description": "Standard queue for general customer support inquiries",
+  
+  "_llm_guidance": {
+    "tool": "config_create_queue",
+    "prerequisite": "hours_of_operation_id - create hours first with config_create_hours_of_operation",
+    "workflow": [
+      "1. Ensure session is set (set_session with instance_id and region)",
+      "2. Create hours of operation first (or use existing)",
+      "3. Call config_create_queue with hours_of_operation_id"
+    ]
+  },
+
+  "exampleUsage": {
+    "tool_call": {
+      "tool": "config_create_queue",
+      "params": {
+        "name": "General Support Queue",
+        "hours_of_operation_id": "<hours_id_from_previous_step>",
+        "description": "Standard queue for general customer support inquiries"
+      }
+    }
+  },
+
+  "maxContacts": 10,
+  "hoursOfOperationTemplate": "business_hours",
+  "outboundCallerConfig": {
+    "outboundCallerIdName": "Customer Support"
+  },
+  "tags": {
+    "Department": "Support",
+    "Type": "General"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Financial Services Queue Configuration",
+  "description": "Queue configuration for banking and financial services",
+  "industry": "Financial Services",
+  "queues": [
+    {
+      "name": "General-Banking",
+      "description": "General account inquiries",
+      "maxContacts": 100,
+      "hoursOfOperationId": "financial_services_hours",
+      "outboundCallerIdName": "Customer Service"
+    },
+    {
+      "name": "VIP-Banking",
+      "description": "Priority service for VIP customers",
+      "maxContacts": 20,
+      "hoursOfOperationId": "financial_services_hours",
+      "outboundCallerIdName": "VIP Services",
+      "priority": "highest"
+    },
+    {
+      "name": "Fraud-24x7",
+      "description": "Fraud reporting and investigation",
+      "maxContacts": 30,
+      "hoursOfOperationId": "24x7",
+      "outboundCallerIdName": "Fraud Department",
+      "priority": "critical"
+    },
+    {
+      "name": "Disputes",
+      "description": "Transaction disputes and chargebacks",
+      "maxContacts": 40,
+      "hoursOfOperationId": "financial_services_hours",
+      "outboundCallerIdName": "Disputes Team"
+    },
+    {
+      "name": "Loans",
+      "description": "Loan inquiries and applications",
+      "maxContacts": 30,
+      "hoursOfOperationId": "financial_services_hours",
+      "outboundCallerIdName": "Lending Services"
+    },
+    {
+      "name": "Card-Services",
+      "description": "Credit and debit card services",
+      "maxContacts": 50,
+      "hoursOfOperationId": "24x7",
+      "outboundCallerIdName": "Card Services"
+    }
+  ]
+}

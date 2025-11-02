@@ -1,0 +1,98 @@
+{
+  "name": "Telecom Support",
+  "description": "Template for telecommunications cases including billing, service issues, and account management",
+  "status": "Active",
+  "layoutName": "Telecom Support Layout",
+  "_llm_guidance": {
+    "workflow_steps": [
+      "1. Capture customer account details and service type",
+      "2. Identify issue category (billing, technical, service)",
+      "3. Document device/location information if applicable",
+      "4. Set priority based on service impact",
+      "5. Route to appropriate telecom specialist",
+      "6. Track resolution and update customer"
+    ],
+    "critical_notes": [
+      "Always verify account ownership before discussing service details",
+      "Service outages require immediate escalation and priority handling",
+      "Document device IMEI/serial numbers for equipment issues",
+      "Check network coverage maps for location-based issues"
+    ]
+  },
+  "requiredFields": {
+    "forCaseCreation": [{"fieldId": "title"}, {"fieldId": "case_reason"}],
+    "systemManaged": [{"fieldId": "status"}, {"fieldId": "created_date"}, {"fieldId": "case_id"}]
+  },
+  "dependencies": {
+    "required_integrations": ["customer_account_system", "network_monitoring"],
+    "optional_integrations": ["billing_system", "device_inventory"],
+    "related_templates": ["technical_support", "billing_inquiry"]
+  },
+  "caseReasonOptions": [
+    "Billing Inquiry",
+    "Service Outage",
+    "Plan Change",
+    "New Service",
+    "Technical Support",
+    "Equipment Issue",
+    "Network Coverage",
+    "Roaming Issue",
+    "Contract Inquiry",
+    "Cancellation Request",
+    "General Inquiry"
+  ],
+  "customFields": [
+    {
+      "name": "Account Number",
+      "type": "Text",
+      "required": false,
+      "example": "ACC-123456789"
+    },
+    {
+      "name": "Phone Number",
+      "type": "Text",
+      "required": false,
+      "example": "+1-555-123-4567"
+    },
+    {
+      "name": "Service Type",
+      "type": "SingleSelect",
+      "required": false,
+      "options": ["Mobile", "Internet", "TV", "Landline", "Bundle"]
+    },
+    {
+      "name": "Device Type",
+      "type": "Text",
+      "required": false,
+      "example": "iPhone 15 Pro"
+    },
+    {
+      "name": "Outage Location",
+      "type": "Text",
+      "required": false,
+      "example": "Downtown Seattle, WA"
+    },
+    {
+      "name": "Resolution Notes",
+      "type": "Text",
+      "required": false,
+      "example": "Reset network settings, issue resolved"
+    }
+  ],
+  "exampleUsage": {
+    "minimalCase": {
+      "title": "Service outage reported",
+      "case_reason": "Service Outage"
+    },
+    "fullCase": {
+      "title": "Mobile data not working in downtown area",
+      "case_reason": "Network Coverage",
+      "Account Number": "ACC-987654321",
+      "Phone Number": "+1-555-987-6543",
+      "Service Type": "Mobile",
+      "Device Type": "Samsung Galaxy S24",
+      "Outage Location": "Downtown Portland, OR",
+      "Resolution Notes": "Network tower maintenance scheduled, estimated resolution 2 hours"
+    }
+  }
+}

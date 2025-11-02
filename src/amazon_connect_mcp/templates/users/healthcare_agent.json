@@ -1,0 +1,38 @@
+{
+  "_llm_guidance": {
+    "workflow": [
+      "1. config_list_routing_profiles(instance_id) - get healthcare routing profile",
+      "2. Get security profiles via AWS CLI",
+      "3. config_create_user(...)"
+    ],
+    "exampleUsage": {
+      "createAgent": {
+        "instance_id": "dc7b631b-4015-4ecb-855f-b7b992c8dfcc",
+        "username": "healthcare-agent-001",
+        "first_name": "Sarah",
+        "last_name": "Johnson",
+        "password": "TempPass123!",
+        "routing_profile_id": "23e653f9-a2ca-45ac-b1c0-db09c2b2c79c",
+        "security_profile_ids": ["12f90ce8-85d0-41d6-bee0-fed6e5bbd4a5"]
+      }
+    }
+  },
+  "name": "Healthcare Agent",
+  "description": "Agent profile for healthcare contact center",
+  "industry": "Healthcare",
+  "role": "Agent",
+  "recommendedSecurityProfile": "Agent",
+  "skills": [
+    "Patient scheduling",
+    "Insurance verification",
+    "Medical records requests",
+    "Prescription refills",
+    "General inquiries"
+  ],
+  "training": [
+    "HIPAA compliance",
+    "Patient privacy",
+    "Medical terminology basics",
+    "Insurance verification process"
+  ]
+}

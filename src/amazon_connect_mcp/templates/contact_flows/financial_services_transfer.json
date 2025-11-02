@@ -1,0 +1,87 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789080",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789080": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789081": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789082": {"position": {"x": 400, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789080",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Please hold while I transfer you to the appropriate specialist who can best assist you with your banking needs."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789081"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789081",
+      "Type": "CheckAttribute",
+      "Parameters": {
+        "Attribute": "FraudAlert",
+        "ComparisonValue": "true"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789082",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789083",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.FraudAlert", "true"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789084",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.ServiceType", "3"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789085",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.ServiceType", "4"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789082",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/general-banking"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789083",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/fraud-team"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789084",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/loan-department"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789085",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/credit-card-services"
+      }
+    }
+  ]
+}

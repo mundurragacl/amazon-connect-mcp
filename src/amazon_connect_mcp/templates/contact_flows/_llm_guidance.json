@@ -1,0 +1,59 @@
+{
+  "_description": "LLM guidance for contact flow creation",
+
+  "contactFlowWorkflow": {
+    "step1_prerequisites": {
+      "required": ["session set with instance_id and region", "queue_id(s) for routing"],
+      "optional": ["prompt_id for audio prompts", "lambda_arn for integrations"]
+    },
+    "step2_prepareContent": {
+      "critical": "Contact flow content MUST be a JSON string, not an object",
+      "action": "Use json.dumps() on the template content before passing to API",
+      "example": "content=json.dumps(template_content)"
+    },
+    "step3_createFlow": {
+      "tool": "config_create_contact_flow",
+      "params": {
+        "name": "Flow Name",
+        "flow_type": "CONTACT_FLOW",
+        "content": "<JSON_STRING_of_flow_definition>"
+      }
+    }
+  },
+
+  "flowTypes": {
+    "CONTACT_FLOW": "Main inbound/outbound flow",
+    "CUSTOMER_QUEUE": "Plays while customer waits in queue",
+    "CUSTOMER_HOLD": "Plays while customer is on hold",
+    "CUSTOMER_WHISPER": "Plays to customer before agent connects",
+    "AGENT_HOLD": "Plays to agent while customer is on hold",
+    "AGENT_WHISPER": "Plays to agent before connecting to customer",
+    "OUTBOUND_WHISPER": "Plays during outbound call connection",
+    "AGENT_TRANSFER": "Handles agent-to-agent transfers",
+    "QUEUE_TRANSFER": "Handles queue transfers"
+  },
+
+  "templateCustomization": {
+    "queueIds": "Replace placeholder queue IDs with actual queue IDs from config_create_queue",
+    "promptText": "Customize MessageParticipant text for your organization",
+    "lambdaArns": "Replace Lambda ARNs if using integrations",
+    "transferNumbers": "Update external transfer phone numbers"
+  },
+
+  "commonErrors": {
+    "InvalidContactFlowException": "Content is not valid JSON string - use json.dumps()",
+    "ResourceNotFoundException": "Queue ID or other referenced resource doesn't exist",
+    "DuplicateResourceException": "Flow with same name exists"
+  },
+
+  "exampleUsage": {
+    "tool_call": {
+      "tool": "config_create_contact_flow",
+      "params": {
+        "name": "Main Inbound Flow",
+        "flow_type": "CONTACT_FLOW",
+        "content": "{\"Version\":\"2019-10-30\",\"StartAction\":\"...\",\"Actions\":[...]}"
+      }
+    }
+  }
+}

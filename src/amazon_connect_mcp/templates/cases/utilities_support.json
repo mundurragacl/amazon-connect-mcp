@@ -1,0 +1,95 @@
+{
+  "name": "Utilities Support",
+  "description": "Template for utilities cases including billing, outages, service requests, and meter readings",
+  "status": "Active",
+  "_llm_guidance": {
+    "workflow_steps": [
+      "1. Verify customer identity using account number and service address",
+      "2. Determine utility type and service category",
+      "3. For outages: Check system status and provide estimated restoration time",
+      "4. For billing: Review account history and usage patterns",
+      "5. For service requests: Validate address and schedule appropriately",
+      "6. Document resolution and follow-up requirements"
+    ],
+    "critical_notes": [
+      "Emergency cases require immediate escalation to dispatch",
+      "Outage reports must include estimated restoration time",
+      "Billing disputes require account verification before adjustments",
+      "Service address validation is critical for field work scheduling"
+    ]
+  },
+  "requiredFields": {
+    "forCaseCreation": [{"fieldId": "title"}, {"fieldId": "case_reason"}],
+    "systemManaged": [{"fieldId": "status"}, {"fieldId": "created_date"}, {"fieldId": "case_id"}]
+  },
+  "dependencies": {
+    "outage_management_system": "Required for outage status checks",
+    "billing_system": "Required for account and billing inquiries",
+    "field_service_system": "Required for service appointments"
+  },
+  "layoutName": "Utilities Support Layout",
+  "caseReasonOptions": [
+    "Billing Inquiry",
+    "Payment Arrangement", 
+    "Service Outage",
+    "New Service",
+    "Disconnect Request",
+    "Meter Reading",
+    "High Bill Complaint",
+    "Rebate/Program Inquiry",
+    "Emergency",
+    "General Inquiry"
+  ],
+  "customFields": [
+    {
+      "name": "Account Number",
+      "type": "Text",
+      "required": false,
+      "example": "UTL-123456789"
+    },
+    {
+      "name": "Service Address", 
+      "type": "Text",
+      "required": false,
+      "example": "123 Main St, Anytown, ST 12345"
+    },
+    {
+      "name": "Utility Type",
+      "type": "SingleSelect",
+      "required": false,
+      "options": ["Electric", "Gas", "Water", "Sewer", "Trash", "Multiple Services"]
+    },
+    {
+      "name": "Meter Number",
+      "type": "Text", 
+      "required": false,
+      "example": "MTR-987654321"
+    },
+    {
+      "name": "Outage Reported",
+      "type": "DateTime",
+      "required": false
+    },
+    {
+      "name": "Resolution Notes",
+      "type": "Text",
+      "required": false,
+      "example": "Scheduled technician visit for meter replacement on 2024-01-15"
+    }
+  ],
+  "exampleUsage": {
+    "minimalCase": {
+      "title": "Billing Inquiry",
+      "case_reason": "Billing Inquiry"
+    },
+    "fullCase": {
+      "title": "Service Outage - Electric",
+      "case_reason": "Service Outage",
+      "Account Number": "UTL-123456789",
+      "Service Address": "123 Main St, Anytown, ST 12345",
+      "Utility Type": "Electric",
+      "Outage Reported": "2024-01-10T14:30:00Z",
+      "Resolution Notes": "Outage affecting 150 customers, estimated restoration 6 PM"
+    }
+  }
+}

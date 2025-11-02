@@ -1,0 +1,58 @@
+{
+  "name": "Financial Services Agent Profiles",
+  "description": "Routing profiles for financial services agents",
+  "industry": "Financial Services",
+  "profiles": [
+    {
+      "name": "General-Banking-Agent",
+      "description": "General banking support agents",
+      "defaultOutboundQueue": "General-Banking",
+      "mediaConcurrencies": [
+        {"Channel": "VOICE", "Concurrency": 1},
+        {"Channel": "CHAT", "Concurrency": 2}
+      ],
+      "queueConfigs": [
+        {"QueueName": "General-Banking", "Priority": 1, "Delay": 0},
+        {"QueueName": "Card-Services", "Priority": 2, "Delay": 30}
+      ]
+    },
+    {
+      "name": "VIP-Banker",
+      "description": "Dedicated VIP customer support",
+      "defaultOutboundQueue": "VIP-Banking",
+      "mediaConcurrencies": [
+        {"Channel": "VOICE", "Concurrency": 1},
+        {"Channel": "CHAT", "Concurrency": 1}
+      ],
+      "queueConfigs": [
+        {"QueueName": "VIP-Banking", "Priority": 1, "Delay": 0}
+      ]
+    },
+    {
+      "name": "Fraud-Specialist",
+      "description": "Fraud investigation specialists",
+      "defaultOutboundQueue": "Fraud-24x7",
+      "mediaConcurrencies": [
+        {"Channel": "VOICE", "Concurrency": 1},
+        {"Channel": "CHAT", "Concurrency": 1}
+      ],
+      "queueConfigs": [
+        {"QueueName": "Fraud-24x7", "Priority": 1, "Delay": 0},
+        {"QueueName": "Disputes", "Priority": 2, "Delay": 0}
+      ]
+    },
+    {
+      "name": "Disputes-Agent",
+      "description": "Transaction dispute specialists",
+      "defaultOutboundQueue": "Disputes",
+      "mediaConcurrencies": [
+        {"Channel": "VOICE", "Concurrency": 1},
+        {"Channel": "CHAT", "Concurrency": 2}
+      ],
+      "queueConfigs": [
+        {"QueueName": "Disputes", "Priority": 1, "Delay": 0},
+        {"QueueName": "General-Banking", "Priority": 3, "Delay": 60}
+      ]
+    }
+  ]
+}

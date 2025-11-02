@@ -1,0 +1,101 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789070",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789070": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789071": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789072": {"position": {"x": 400, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789070",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "I'm transferring you to the appropriate department. Please hold while I connect you."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789071"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789071",
+      "Type": "CheckAttribute",
+      "Parameters": {
+        "Attribute": "Department",
+        "ComparisonValue": "1"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789072",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789073",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.Department", "1"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789074",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.Department", "2"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789075",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.Department", "3"]
+            }
+          },
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789076",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.Attributes.Department", "4"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789072",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/general-healthcare"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789073",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/appointments"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789074",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/billing"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789075",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/pharmacy"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789076",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/lab-results"
+      }
+    }
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "name": "Healthcare Step-by-Step Guides",
+  "description": "Comprehensive workflow guides for healthcare contact centers",
+  "industry": "Healthcare",
+  "guides": {
+    "patient_onboarding": {
+      "name": "Patient Onboarding Process",
+      "description": "Complete workflow for new patient registration and verification",
+      "steps": [
+        {
+          "id": "identity_verification",
+          "title": "Verify Patient Identity",
+          "description": "Confirm patient identity using required identifiers",
+          "actions": [
+            "Ask for full name and date of birth",
+            "Request Social Security Number (last 4 digits)",
+            "Verify address on file",
+            "Confirm phone number and email"
+          ],
+          "validation": "All identifiers must match system records",
+          "nextStep": "insurance_verification"
+        },
+        {
+          "id": "insurance_verification",
+          "title": "Insurance Verification",
+          "description": "Verify and update insurance information",
+          "actions": [
+            "Request insurance card information",
+            "Verify member ID and group number",
+            "Check coverage status and benefits",
+            "Update any changes in system"
+          ],
+          "validation": "Insurance must be active and verified",
+          "nextStep": "medical_history"
+        },
+        {
+          "id": "medical_history",
+          "title": "Medical History Review",
+          "description": "Review and update patient medical history",
+          "actions": [
+            "Review existing medical conditions",
+            "Update current medications",
+            "Note any allergies or adverse reactions",
+            "Document emergency contacts"
+          ],
+          "validation": "All critical medical information documented",
+          "nextStep": "appointment_scheduling"
+        },
+        {
+          "id": "appointment_scheduling",
+          "title": "Schedule Initial Appointment",
+          "description": "Schedule patient's first appointment",
+          "actions": [
+            "Determine appropriate provider type",
+            "Check provider availability",
+            "Schedule appointment within required timeframe",
+            "Send confirmation and preparation instructions"
+          ],
+          "validation": "Appointment scheduled and confirmed",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "prescription_refill": {
+      "name": "Prescription Refill Process",
+      "description": "Handle prescription refill requests efficiently",
+      "steps": [
+        {
+          "id": "patient_verification",
+          "title": "Verify Patient Identity",
+          "description": "Confirm patient identity for prescription access",
+          "actions": [
+            "Verify name and date of birth",
+            "Confirm pharmacy on file",
+            "Check for any prescription restrictions"
+          ],
+          "validation": "Patient identity confirmed",
+          "nextStep": "prescription_review"
+        },
+        {
+          "id": "prescription_review",
+          "title": "Review Prescription Details",
+          "description": "Review current prescription information",
+          "actions": [
+            "Locate prescription in system",
+            "Check refills remaining",
+            "Verify prescription is not expired",
+            "Review any provider notes"
+          ],
+          "validation": "Prescription eligible for refill",
+          "nextStep": "refill_processing"
+        },
+        {
+          "id": "refill_processing",
+          "title": "Process Refill Request",
+          "description": "Submit refill request to pharmacy",
+          "actions": [
+            "Submit electronic refill request",
+            "Confirm pharmacy receipt",
+            "Provide pickup timeframe to patient",
+            "Document refill in patient record"
+          ],
+          "validation": "Refill successfully processed",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "appointment_scheduling": {
+      "name": "Appointment Scheduling Workflow",
+      "description": "Schedule patient appointments efficiently",
+      "steps": [
+        {
+          "id": "appointment_type",
+          "title": "Determine Appointment Type",
+          "description": "Identify the type of appointment needed",
+          "actions": [
+            "Ask about reason for visit",
+            "Determine urgency level",
+            "Identify required provider specialty",
+            "Check if referral is needed"
+          ],
+          "validation": "Appointment type determined",
+          "nextStep": "provider_selection"
+        },
+        {
+          "id": "provider_selection",
+          "title": "Select Provider",
+          "description": "Choose appropriate healthcare provider",
+          "actions": [
+            "Review patient's preferred providers",
+            "Check provider availability",
+            "Consider location preferences",
+            "Verify insurance coverage for provider"
+          ],
+          "validation": "Provider selected and available",
+          "nextStep": "scheduling"
+        },
+        {
+          "id": "scheduling",
+          "title": "Schedule Appointment",
+          "description": "Book the appointment in system",
+          "actions": [
+            "Select available time slot",
+            "Enter appointment details",
+            "Add any special instructions",
+            "Send confirmation to patient"
+          ],
+          "validation": "Appointment successfully scheduled",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "escalation_process": {
+      "name": "Healthcare Escalation Process",
+      "description": "Handle complex cases requiring escalation",
+      "steps": [
+        {
+          "id": "issue_assessment",
+          "title": "Assess Issue Complexity",
+          "description": "Determine if escalation is needed",
+          "actions": [
+            "Evaluate issue complexity",
+            "Check if within agent authority",
+            "Review escalation criteria",
+            "Document issue details"
+          ],
+          "validation": "Escalation need confirmed",
+          "nextStep": "escalation_routing"
+        },
+        {
+          "id": "escalation_routing",
+          "title": "Route to Appropriate Team",
+          "description": "Transfer to specialized team or supervisor",
+          "actions": [
+            "Identify appropriate escalation team",
+            "Prepare comprehensive case summary",
+            "Transfer with warm handoff",
+            "Ensure patient remains informed"
+          ],
+          "validation": "Successfully transferred to specialist",
+          "nextStep": "follow_up"
+        },
+        {
+          "id": "follow_up",
+          "title": "Follow-up Documentation",
+          "description": "Document escalation and outcome",
+          "actions": [
+            "Document escalation reason",
+            "Record resolution details",
+            "Update patient record",
+            "Schedule follow-up if needed"
+          ],
+          "validation": "Escalation properly documented",
+          "nextStep": "completion"
+        }
+      ]
+    }
+  }
+}

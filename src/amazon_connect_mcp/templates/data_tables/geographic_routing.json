@@ -1,0 +1,70 @@
+{
+  "name": "Geographic Routing Rules",
+  "description": "Location-based routing for regional support centers",
+  "attributes": [
+    {"name": "area_code", "type": "text", "isPrimaryKey": true, "description": "Phone area code or region code"},
+    {"name": "region_name", "type": "text", "required": true, "description": "Region display name"},
+    {"name": "timezone", "type": "text", "required": true, "description": "IANA timezone"},
+    {"name": "primary_queue", "type": "text", "required": true, "description": "Primary regional queue"},
+    {"name": "language", "type": "text", "default": "en-US", "description": "Primary language"},
+    {"name": "secondary_language", "type": "text", "description": "Secondary language if bilingual"},
+    {"name": "regional_hours_start", "type": "text", "description": "Regional hours start (HH:MM local)"},
+    {"name": "regional_hours_end", "type": "text", "description": "Regional hours end (HH:MM local)"},
+    {"name": "overflow_region", "type": "text", "description": "Overflow to another region after hours"}
+  ],
+  "sampleData": [
+    {
+      "area_code": "212",
+      "region_name": "Northeast",
+      "timezone": "America/New_York",
+      "primary_queue": "Northeast-Queue",
+      "language": "en-US",
+      "secondary_language": "es-US",
+      "regional_hours_start": "08:00",
+      "regional_hours_end": "20:00",
+      "overflow_region": "Central"
+    },
+    {
+      "area_code": "312",
+      "region_name": "Central",
+      "timezone": "America/Chicago",
+      "primary_queue": "Central-Queue",
+      "language": "en-US",
+      "secondary_language": null,
+      "regional_hours_start": "07:00",
+      "regional_hours_end": "21:00",
+      "overflow_region": "West"
+    },
+    {
+      "area_code": "415",
+      "region_name": "West",
+      "timezone": "America/Los_Angeles",
+      "primary_queue": "West-Queue",
+      "language": "en-US",
+      "secondary_language": "es-US",
+      "regional_hours_start": "06:00",
+      "regional_hours_end": "22:00",
+      "overflow_region": "Central"
+    },
+    {
+      "area_code": "305",
+      "region_name": "Southeast",
+      "timezone": "America/New_York",
+      "primary_queue": "Southeast-Queue",
+      "language": "en-US",
+      "secondary_language": "es-US",
+      "regional_hours_start": "08:00",
+      "regional_hours_end": "20:00",
+      "overflow_region": "Central"
+    }
+  ],
+  "flowUsage": {
+    "description": "Route calls based on caller's area code",
+    "example": {
+      "action": "Evaluate",
+      "primaryAttribute": "area_code",
+      "primaryValue": "$.CustomerEndpoint.Address.substring(2,5)",
+      "returnAttributes": ["primary_queue", "timezone", "language", "regional_hours_start", "regional_hours_end"]
+    }
+  }
+}

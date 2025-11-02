@@ -1,0 +1,65 @@
+{
+  "name": "Service Level Agreements",
+  "description": "SLA configuration for different customer tiers and service types",
+  "attributes": [
+    {"name": "tier_name", "type": "text", "isPrimaryKey": true, "description": "Customer tier or segment name"},
+    {"name": "max_wait_time_seconds", "type": "number", "required": true, "description": "Maximum queue wait time in seconds"},
+    {"name": "callback_threshold_seconds", "type": "number", "description": "Wait time before offering callback"},
+    {"name": "priority_score", "type": "number", "required": true, "description": "Routing priority (higher = more priority)"},
+    {"name": "dedicated_queue", "type": "text", "description": "Dedicated queue for this tier"},
+    {"name": "escalation_time_minutes", "type": "number", "description": "Time before auto-escalation"},
+    {"name": "after_hours_routing", "type": "text", "description": "After-hours handling: voicemail, callback, emergency"},
+    {"name": "custom_greeting", "type": "text", "description": "Custom IVR greeting for this tier"}
+  ],
+  "sampleData": [
+    {
+      "tier_name": "VIP",
+      "max_wait_time_seconds": 30,
+      "callback_threshold_seconds": 15,
+      "priority_score": 100,
+      "dedicated_queue": "VIP-Support",
+      "escalation_time_minutes": 5,
+      "after_hours_routing": "emergency",
+      "custom_greeting": "Thank you for being a VIP member. You are our top priority."
+    },
+    {
+      "tier_name": "Premium",
+      "max_wait_time_seconds": 60,
+      "callback_threshold_seconds": 45,
+      "priority_score": 75,
+      "dedicated_queue": "Premium-Support",
+      "escalation_time_minutes": 10,
+      "after_hours_routing": "callback",
+      "custom_greeting": "Thank you for being a Premium member."
+    },
+    {
+      "tier_name": "Standard",
+      "max_wait_time_seconds": 180,
+      "callback_threshold_seconds": 120,
+      "priority_score": 50,
+      "dedicated_queue": "General-Support",
+      "escalation_time_minutes": 20,
+      "after_hours_routing": "voicemail",
+      "custom_greeting": null
+    },
+    {
+      "tier_name": "Basic",
+      "max_wait_time_seconds": 300,
+      "callback_threshold_seconds": 180,
+      "priority_score": 25,
+      "dedicated_queue": "General-Support",
+      "escalation_time_minutes": 30,
+      "after_hours_routing": "voicemail",
+      "custom_greeting": null
+    }
+  ],
+  "flowUsage": {
+    "description": "Look up customer tier to determine routing priority and SLA",
+    "example": {
+      "action": "Evaluate",
+      "primaryAttribute": "tier_name",
+      "primaryValue": "$.Attributes.CustomerTier",
+      "returnAttributes": ["max_wait_time_seconds", "priority_score", "dedicated_queue", "custom_greeting"]
+    }
+  }
+}

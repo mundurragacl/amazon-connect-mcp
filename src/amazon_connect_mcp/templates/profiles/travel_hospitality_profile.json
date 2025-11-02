@@ -1,0 +1,198 @@
+{
+  "_llm_guidance": {
+    "workflow": [
+      "1. profiles_create_domain(domain_name='travel-customers')",
+      "2. profiles_create_profile(domain_name, first_name, last_name, phone, email, attributes)"
+    ],
+    "exampleUsage": {
+      "minimalProfile": {
+        "domain_name": "travel-customers",
+        "first_name": "Emily",
+        "last_name": "Chen",
+        "phone": "+1-555-789-0123",
+        "email": "emily.chen@example.com"
+      },
+      "fullProfile": {
+        "domain_name": "travel-customers",
+        "first_name": "Emily",
+        "last_name": "Chen",
+        "phone": "+1-555-789-0123",
+        "email": "emily.chen@example.com",
+        "attributes": {
+          "membershipNumber": "TRV-987654321",
+          "membershipTier": "Platinum",
+          "loyaltyPoints": "125000",
+          "memberSince": "2017-08-10",
+          "travelPurpose": "Business",
+          "seatPreference": "Aisle",
+          "mealPreferences": "Vegetarian",
+          "preferredContactMethod": "App",
+          "globalEntryTSA": "true"
+        }
+      }
+    },
+    "industryNotes": [
+      "Passport/visa data requires encryption",
+      "Membership tier affects service priority",
+      "Upcoming reservations enable proactive support",
+      "Special requirements critical for accessibility"
+    ]
+  },
+  "name": "Travel Hospitality Customer Profile",
+  "description": "Unified customer profile layout for travel and hospitality with booking history, preferences, and loyalty programs",
+  "industry": "Travel/Hospitality",
+  "profileType": "Customer",
+  "requiredFields": {
+    "standard": ["_firstName", "_lastName", "_phone", "_email"],
+    "recommended": ["membershipNumber", "membershipTier", "travelPurpose"]
+  },
+  "layout": {
+    "sections": [
+      {
+        "id": "customer_identity",
+        "title": "Customer Identity",
+        "priority": 1,
+        "fields": [
+          {"key": "_firstName", "label": "First Name", "required": true},
+          {"key": "_lastName", "label": "Last Name", "required": true},
+          {"key": "_phone", "label": "Phone", "required": true},
+          {"key": "_email", "label": "Email", "required": true},
+          {"key": "dateOfBirth", "label": "Date of Birth", "type": "date"},
+          {"key": "customerId", "label": "Customer ID", "type": "text", "unique": true},
+          {"key": "passportNumber", "label": "Passport Number", "type": "encrypted", "masked": true},
+          {"key": "nationality", "label": "Nationality", "type": "text"},
+          {"key": "homeAddress", "label": "Home Address", "type": "address"}
+        ]
+      },
+      {
+        "id": "loyalty_membership",
+        "title": "Loyalty & Membership",
+        "priority": 2,
+        "fields": [
+          {"key": "loyaltyProgram", "label": "Loyalty Program", "type": "text"},
+          {"key": "membershipNumber", "label": "Membership Number", "type": "text"},
+          {"key": "membershipTier", "label": "Membership Tier", "type": "select", "options": ["Basic", "Silver", "Gold", "Platinum", "Diamond"]},
+          {"key": "loyaltyPoints", "label": "Loyalty Points", "type": "number"},
+          {"key": "memberSince", "label": "Member Since", "type": "date"},
+          {"key": "tierBenefits", "label": "Tier Benefits", "type": "list"},
+          {"key": "pointsExpiration", "label": "Points Expiration", "type": "date"}
+        ]
+      },
+      {
+        "id": "booking_history",
+        "title": "Booking History",
+        "priority": 3,
+        "fields": [
+          {"key": "totalBookings", "label": "Total Bookings", "type": "number"},
+          {"key": "totalSpent", "label": "Total Spent", "type": "currency"},
+          {"key": "averageBookingValue", "label": "Average Booking Value", "type": "currency"},
+          {"key": "lastBookingDate", "label": "Last Booking", "type": "date"},
+          {"key": "upcomingReservations", "label": "Upcoming Reservations", "type": "list"},
+          {"key": "pastReservations", "label": "Past Reservations", "type": "list"},
+          {"key": "cancellationRate", "label": "Cancellation Rate", "type": "percentage"},
+          {"key": "noShowRate", "label": "No-Show Rate", "type": "percentage"}
+        ]
+      },
+      {
+        "id": "travel_preferences",
+        "title": "Travel Preferences",
+        "priority": 4,
+        "fields": [
+          {"key": "preferredDestinations", "label": "Preferred Destinations", "type": "list"},
+          {"key": "travelPurpose", "label": "Travel Purpose", "type": "select", "options": ["Business", "Leisure", "Both"]},
+          {"key": "accommodationType", "label": "Accommodation Type", "type": "multiselect", "options": ["Hotel", "Resort", "Vacation Rental", "Hostel", "B&B"]},
+          {"key": "roomPreferences", "label": "Room Preferences", "type": "object"},
+          {"key": "flightPreferences", "label": "Flight Preferences", "type": "object"},
+          {"key": "seatPreference", "label": "Seat Preference", "type": "select", "options": ["Aisle", "Window", "Middle", "No Preference"]},
+          {"key": "mealPreferences", "label": "Meal Preferences", "type": "multiselect", "options": ["Vegetarian", "Vegan", "Kosher", "Halal", "Gluten-Free", "No Preference"]}
+        ]
+      },
+      {
+        "id": "special_requirements",
+        "title": "Special Requirements",
+        "priority": 5,
+        "fields": [
+          {"key": "accessibilityNeeds", "label": "Accessibility Needs", "type": "multiselect", "options": ["Wheelchair Access", "Hearing Impaired", "Visual Impaired", "Mobility Assistance"]},
+          {"key": "medicalRequirements", "label": "Medical Requirements", "type": "textarea"},
+          {"key": "dietaryRestrictions", "label": "Dietary Restrictions", "type": "multiselect"},
+          {"key": "allergies", "label": "Allergies", "type": "textarea"},
+          {"key": "specialAssistance", "label": "Special Assistance", "type": "textarea"},
+          {"key": "emergencyContact", "label": "Emergency Contact", "type": "object"},
+          {"key": "travelInsurance", "label": "Travel Insurance", "type": "boolean"}
+        ]
+      },
+      {
+        "id": "payment_billing",
+        "title": "Payment & Billing",
+        "priority": 6,
+        "fields": [
+          {"key": "paymentMethods", "label": "Payment Methods", "type": "list"},
+          {"key": "defaultPaymentMethod", "label": "Default Payment", "type": "text", "masked": true},
+          {"key": "billingAddress", "label": "Billing Address", "type": "address"},
+          {"key": "corporateAccount", "label": "Corporate Account", "type": "boolean"},
+          {"key": "expenseReporting", "label": "Expense Reporting", "type": "boolean"},
+          {"key": "invoicePreference", "label": "Invoice Preference", "type": "select", "options": ["Email", "Mail", "Corporate Portal"]},
+          {"key": "currencyPreference", "label": "Currency Preference", "type": "select"}
+        ]
+      },
+      {
+        "id": "communication_preferences",
+        "title": "Communication Preferences",
+        "priority": 7,
+        "fields": [
+          {"key": "preferredContactMethod", "label": "Preferred Contact", "type": "select", "options": ["Phone", "Email", "SMS", "App", "WhatsApp"]},
+          {"key": "languagePreference", "label": "Language", "type": "select", "options": ["English", "Spanish", "French", "German", "Italian", "Portuguese", "Other"]},
+          {"key": "timeZone", "label": "Time Zone", "type": "select"},
+          {"key": "bookingConfirmations", "label": "Booking Confirmations", "type": "boolean"},
+          {"key": "travelAlerts", "label": "Travel Alerts", "type": "boolean"},
+          {"key": "promotionalOffers", "label": "Promotional Offers", "type": "boolean"},
+          {"key": "newsletterSubscription", "label": "Newsletter", "type": "boolean"}
+        ]
+      },
+      {
+        "id": "service_history",
+        "title": "Service History",
+        "priority": 8,
+        "fields": [
+          {"key": "supportTickets", "label": "Support Tickets", "type": "number"},
+          {"key": "lastContactDate", "label": "Last Contact", "type": "date"},
+          {"key": "complaintHistory", "label": "Complaint History", "type": "list"},
+          {"key": "complimentHistory", "label": "Compliment History", "type": "list"},
+          {"key": "satisfactionScore", "label": "Satisfaction Score", "type": "number"},
+          {"key": "referralsMade", "label": "Referrals Made", "type": "number"},
+          {"key": "reviewsWritten", "label": "Reviews Written", "type": "number"},
+          {"key": "socialMediaMentions", "label": "Social Media Mentions", "type": "list"}
+        ]
+      },
+      {
+        "id": "travel_documents",
+        "title": "Travel Documents",
+        "priority": 9,
+        "fields": [
+          {"key": "passportExpiry", "label": "Passport Expiry", "type": "date"},
+          {"key": "visaRequirements", "label": "Visa Requirements", "type": "list"},
+          {"key": "frequentFlyerNumbers", "label": "Frequent Flyer Numbers", "type": "object"},
+          {"key": "travelDocuments", "label": "Travel Documents", "type": "list"},
+          {"key": "globalEntryTSA", "label": "Global Entry/TSA PreCheck", "type": "boolean"},
+          {"key": "knownTravelerNumber", "label": "Known Traveler Number", "type": "text"},
+          {"key": "redressNumber", "label": "Redress Number", "type": "text"}
+        ]
+      }
+    ]
+  },
+  "integrations": {
+    "booking_systems": ["Amadeus", "Sabre", "Travelport", "Expedia", "Booking.com"],
+    "payment_processing": true,
+    "loyalty_programs": true,
+    "travel_insurance": true,
+    "document_verification": true
+  },
+  "compliance": {
+    "pci_compliant": true,
+    "gdpr_compliant": true,
+    "data_encryption": true,
+    "audit_logging": true,
+    "travel_regulations": true,
+    "access_controls": ["role_based", "customer_consent", "travel_agent_access"]
+  }
+}

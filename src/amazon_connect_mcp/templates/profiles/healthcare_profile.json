@@ -1,0 +1,127 @@
+{
+  "_llm_guidance": {
+    "workflow": [
+      "1. profiles_create_domain(domain_name='healthcare-patients')",
+      "2. profiles_create_profile(domain_name, first_name, last_name, phone, email, attributes)"
+    ],
+    "exampleUsage": {
+      "minimalProfile": {
+        "domain_name": "healthcare-patients",
+        "first_name": "John",
+        "last_name": "Smith",
+        "phone": "+1-555-123-4567"
+      },
+      "fullProfile": {
+        "domain_name": "healthcare-patients",
+        "first_name": "John",
+        "last_name": "Smith",
+        "phone": "+1-555-123-4567",
+        "email": "john.smith@example.com",
+        "attributes": {
+          "dateOfBirth": "1985-03-15",
+          "medicalRecordNumber": "MRN-12345",
+          "primaryInsurance": "Blue Cross",
+          "insuranceMemberId": "BC-987654",
+          "coverageStatus": "Active",
+          "primaryProvider": "Dr. Sarah Johnson",
+          "allergies": "Penicillin",
+          "preferredContactMethod": "Phone"
+        }
+      }
+    },
+    "industryNotes": [
+      "HIPAA compliance required - avoid storing PHI in plain text",
+      "Use encrypted field type for SSN",
+      "Insurance verification integration recommended"
+    ]
+  },
+  "name": "Healthcare Patient Profile",
+  "description": "Unified customer profile layout for healthcare organizations with HIPAA-compliant patient data sections",
+  "industry": "Healthcare",
+  "profileType": "Customer",
+  "requiredFields": {
+    "standard": ["_firstName", "_lastName", "_phone"],
+    "recommended": ["_email", "dateOfBirth", "medicalRecordNumber"]
+  },
+  "layout": {
+    "sections": [
+      {
+        "id": "patient_identity",
+        "title": "Patient Identity",
+        "priority": 1,
+        "fields": [
+          {"key": "_firstName", "label": "First Name", "required": true},
+          {"key": "_lastName", "label": "Last Name", "required": true},
+          {"key": "_phone", "label": "Phone", "required": true},
+          {"key": "_email", "label": "Email"},
+          {"key": "dateOfBirth", "label": "Date of Birth", "type": "date", "required": true},
+          {"key": "medicalRecordNumber", "label": "MRN", "type": "text", "unique": true},
+          {"key": "socialSecurityNumber", "label": "SSN", "type": "encrypted", "masked": true}
+        ]
+      },
+      {
+        "id": "insurance_information",
+        "title": "Insurance Information",
+        "priority": 2,
+        "fields": [
+          {"key": "primaryInsurance", "label": "Primary Insurance", "type": "text"},
+          {"key": "insuranceMemberId", "label": "Member ID", "type": "text"},
+          {"key": "groupNumber", "label": "Group Number", "type": "text"},
+          {"key": "coverageStatus", "label": "Coverage Status", "type": "select", "options": ["Active", "Inactive", "Pending", "Expired"]},
+          {"key": "secondaryInsurance", "label": "Secondary Insurance", "type": "text"},
+          {"key": "copayAmount", "label": "Copay Amount", "type": "currency"}
+        ]
+      },
+      {
+        "id": "medical_information",
+        "title": "Medical Information",
+        "priority": 3,
+        "fields": [
+          {"key": "primaryProvider", "label": "Primary Care Provider", "type": "text"},
+          {"key": "preferredLocation", "label": "Preferred Location", "type": "text"},
+          {"key": "allergies", "label": "Allergies", "type": "textarea"},
+          {"key": "medications", "label": "Current Medications", "type": "textarea"},
+          {"key": "medicalConditions", "label": "Medical Conditions", "type": "textarea"},
+          {"key": "emergencyContact", "label": "Emergency Contact", "type": "text"},
+          {"key": "emergencyPhone", "label": "Emergency Phone", "type": "phone"}
+        ]
+      },
+      {
+        "id": "appointment_history",
+        "title": "Appointment History",
+        "priority": 4,
+        "fields": [
+          {"key": "lastVisitDate", "label": "Last Visit", "type": "date"},
+          {"key": "nextAppointment", "label": "Next Appointment", "type": "datetime"},
+          {"key": "appointmentHistory", "label": "Recent Appointments", "type": "list"},
+          {"key": "noShowCount", "label": "No-Show Count", "type": "number"},
+          {"key": "cancelledCount", "label": "Cancelled Count", "type": "number"}
+        ]
+      },
+      {
+        "id": "communication_preferences",
+        "title": "Communication Preferences",
+        "priority": 5,
+        "fields": [
+          {"key": "preferredContactMethod", "label": "Preferred Contact", "type": "select", "options": ["Phone", "Email", "SMS", "Portal"]},
+          {"key": "languagePreference", "label": "Language", "type": "select", "options": ["English", "Spanish", "French", "Other"]},
+          {"key": "appointmentReminders", "label": "Appointment Reminders", "type": "boolean"},
+          {"key": "marketingOptIn", "label": "Marketing Communications", "type": "boolean"},
+          {"key": "portalAccess", "label": "Patient Portal Access", "type": "boolean"}
+        ]
+      }
+    ]
+  },
+  "integrations": {
+    "ehr_systems": ["Epic", "Cerner", "Allscripts"],
+    "insurance_verification": true,
+    "appointment_scheduling": true,
+    "prescription_management": true
+  },
+  "compliance": {
+    "hipaa_compliant": true,
+    "data_encryption": true,
+    "audit_logging": true,
+    "access_controls": ["role_based", "patient_consent"]
+  }
+}

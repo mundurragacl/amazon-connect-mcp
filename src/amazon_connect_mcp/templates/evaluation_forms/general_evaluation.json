@@ -1,0 +1,345 @@
+{
+  "EvaluationFormTitle": "General Customer Service Quality Evaluation",
+  "Description": "Standard evaluation form for general customer service interactions across all industries",
+  "ScoringStrategy": {
+    "Mode": "QUESTION_ONLY",
+    "Status": "ENABLED"
+  },
+  "Items": [
+    {
+      "Section": {
+        "Title": "Opening & Customer Identification",
+        "RefId": "opening_section",
+        "Instructions": "Evaluate the opening of the interaction and customer identification process",
+        "Weight": 15.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Professional Greeting",
+              "Instructions": "Did the agent provide a professional and welcoming greeting?",
+              "RefId": "professional_greeting",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Warm, professional, and engaging greeting", "Score": 5},
+                  {"Text": "Good - Professional greeting with minor improvements", "Score": 4},
+                  {"Text": "Satisfactory - Standard professional greeting", "Score": 3},
+                  {"Text": "Needs Improvement - Greeting lacked professionalism", "Score": 2},
+                  {"Text": "Unsatisfactory - No greeting or unprofessional", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Customer Verification",
+              "Instructions": "Did the agent properly verify the customer's identity before proceeding?",
+              "RefId": "customer_verification",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Thorough verification with security awareness", "Score": 5},
+                  {"Text": "Good - Proper verification completed", "Score": 4},
+                  {"Text": "Satisfactory - Basic verification performed", "Score": 3},
+                  {"Text": "Needs Improvement - Incomplete verification", "Score": 2},
+                  {"Text": "Unsatisfactory - No verification attempted", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 35.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Purpose Identification",
+              "Instructions": "Did the agent clearly identify the purpose of the customer's call?",
+              "RefId": "purpose_identification",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Quickly identified purpose with clarifying questions", "Score": 5},
+                  {"Text": "Good - Purpose identified efficiently", "Score": 4},
+                  {"Text": "Satisfactory - Purpose eventually identified", "Score": 3},
+                  {"Text": "Needs Improvement - Slow to identify purpose", "Score": 2},
+                  {"Text": "Unsatisfactory - Failed to identify purpose", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 25.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Communication Skills",
+        "RefId": "communication_section",
+        "Instructions": "Assess overall communication effectiveness and interpersonal skills",
+        "Weight": 25.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Active Listening",
+              "Instructions": "Did the agent demonstrate active listening and understanding of customer needs?",
+              "RefId": "active_listening",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Exceptional listening with thoughtful responses", "Score": 5},
+                  {"Text": "Good - Good listening skills demonstrated", "Score": 4},
+                  {"Text": "Satisfactory - Adequate listening", "Score": 3},
+                  {"Text": "Needs Improvement - Some listening issues", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor listening skills", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 30.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Clarity & Articulation",
+              "Instructions": "Was the agent's communication clear, articulate, and easy to understand?",
+              "RefId": "clarity_articulation",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Crystal clear communication", "Score": 5},
+                  {"Text": "Good - Clear with minor areas for improvement", "Score": 4},
+                  {"Text": "Satisfactory - Generally clear", "Score": 3},
+                  {"Text": "Needs Improvement - Some unclear communication", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor communication clarity", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 25.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Empathy & Rapport",
+              "Instructions": "Did the agent show empathy and build rapport with the customer?",
+              "RefId": "empathy_rapport",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Strong empathy and excellent rapport", "Score": 5},
+                  {"Text": "Good - Good empathy and rapport building", "Score": 4},
+                  {"Text": "Satisfactory - Some empathy demonstrated", "Score": 3},
+                  {"Text": "Needs Improvement - Limited empathy", "Score": 2},
+                  {"Text": "Unsatisfactory - No empathy or rapport", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 25.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Professional Tone",
+              "Instructions": "Did the agent maintain a professional and courteous tone throughout?",
+              "RefId": "professional_tone",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Consistently professional and courteous", "Score": 5},
+                  {"Text": "Good - Professional with minor lapses", "Score": 4},
+                  {"Text": "Satisfactory - Generally professional", "Score": 3},
+                  {"Text": "Needs Improvement - Some unprofessional moments", "Score": 2},
+                  {"Text": "Unsatisfactory - Unprofessional tone", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 20.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Problem Resolution",
+        "RefId": "resolution_section",
+        "Instructions": "Evaluate effectiveness of problem-solving and issue resolution",
+        "Weight": 30.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Issue Understanding",
+              "Instructions": "Did the agent fully understand the customer's issue or request?",
+              "RefId": "issue_understanding",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Complete understanding with insightful questions", "Score": 5},
+                  {"Text": "Good - Good understanding with clarification", "Score": 4},
+                  {"Text": "Satisfactory - Eventually understood the issue", "Score": 3},
+                  {"Text": "Needs Improvement - Partial understanding", "Score": 2},
+                  {"Text": "Unsatisfactory - Failed to understand the issue", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 25.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Solution Effectiveness",
+              "Instructions": "Was the solution provided appropriate and effective for the customer's needs?",
+              "RefId": "solution_effectiveness",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Perfect solution that exceeded expectations", "Score": 5},
+                  {"Text": "Good - Effective solution with good approach", "Score": 4},
+                  {"Text": "Satisfactory - Adequate solution provided", "Score": 3},
+                  {"Text": "Needs Improvement - Partial or suboptimal solution", "Score": 2},
+                  {"Text": "Unsatisfactory - Ineffective or no solution", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 35.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "First Call Resolution",
+              "Instructions": "Was the issue resolved on the first contact without need for callback?",
+              "RefId": "first_call_resolution",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Complete resolution with verification", "Score": 5},
+                  {"Text": "Good - Issue resolved with minor follow-up", "Score": 4},
+                  {"Text": "Satisfactory - Mostly resolved", "Score": 3},
+                  {"Text": "Needs Improvement - Requires additional contact", "Score": 2},
+                  {"Text": "Unsatisfactory - Issue not resolved", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Product/Service Knowledge",
+        "RefId": "knowledge_section",
+        "Instructions": "Assess agent's knowledge of products, services, and procedures",
+        "Weight": 20.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Product Knowledge",
+              "Instructions": "Did the agent demonstrate appropriate knowledge of products and services?",
+              "RefId": "product_knowledge",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Expert knowledge with detailed insights", "Score": 5},
+                  {"Text": "Good - Strong knowledge with minor gaps", "Score": 4},
+                  {"Text": "Satisfactory - Adequate knowledge", "Score": 3},
+                  {"Text": "Needs Improvement - Limited knowledge", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor knowledge", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 50.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Procedure Adherence",
+              "Instructions": "Did the agent follow established procedures and policies correctly?",
+              "RefId": "procedure_adherence",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Perfect adherence to all procedures", "Score": 5},
+                  {"Text": "Good - Good adherence with minor deviations", "Score": 4},
+                  {"Text": "Satisfactory - Generally followed procedures", "Score": 3},
+                  {"Text": "Needs Improvement - Some procedure violations", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor procedure adherence", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 30.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Resource Utilization",
+              "Instructions": "Did the agent effectively use available tools and resources?",
+              "RefId": "resource_utilization",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Optimal use of all available resources", "Score": 5},
+                  {"Text": "Good - Good use of resources", "Score": 4},
+                  {"Text": "Satisfactory - Adequate resource usage", "Score": 3},
+                  {"Text": "Needs Improvement - Limited resource utilization", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor resource usage", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 20.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Call Closing",
+        "RefId": "closing_section",
+        "Instructions": "Evaluate the closing of the interaction and follow-up planning",
+        "Weight": 10.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Summary & Confirmation",
+              "Instructions": "Did the agent summarize the interaction and confirm customer satisfaction?",
+              "RefId": "summary_confirmation",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Comprehensive summary with clear confirmation", "Score": 5},
+                  {"Text": "Good - Good summary and confirmation", "Score": 4},
+                  {"Text": "Satisfactory - Basic summary provided", "Score": 3},
+                  {"Text": "Needs Improvement - Incomplete summary", "Score": 2},
+                  {"Text": "Unsatisfactory - No summary or confirmation", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 50.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Professional Closing",
+              "Instructions": "Did the agent close the interaction professionally and courteously?",
+              "RefId": "professional_closing",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Warm, professional closing", "Score": 5},
+                  {"Text": "Good - Professional closing", "Score": 4},
+                  {"Text": "Satisfactory - Standard closing", "Score": 3},
+                  {"Text": "Needs Improvement - Abrupt or unprofessional closing", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor or no closing", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 50.0
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

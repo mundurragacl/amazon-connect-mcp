@@ -1,0 +1,101 @@
+{
+  "name": "E-Commerce Disposition Form",
+  "description": "After-call work form for retail and e-commerce",
+  "industry": "E-Commerce/Retail",
+  "viewType": "Form",
+  "template": {
+    "Head": {"Title": "Call Disposition", "Configuration": {"Layout": {"Columns": ["12"]}}},
+    "Body": [
+      {
+        "_id": "disposition_form",
+        "Type": "Form",
+        "Props": {"Id": "EcommerceDisposition"},
+        "Content": [
+          {
+            "_id": "call_reason",
+            "Type": "Select",
+            "Props": {
+              "Label": "Call Reason",
+              "Required": true,
+              "Options": [
+                "Order Status",
+                "Shipping Inquiry",
+                "Return Request",
+                "Refund Request",
+                "Exchange Request",
+                "Product Inquiry",
+                "Damaged Item",
+                "Missing Item",
+                "Wrong Item",
+                "Price Match",
+                "Promo/Coupon Issue",
+                "Account Issue",
+                "Complaint",
+                "Other"
+              ]
+            }
+          },
+          {
+            "_id": "outcome",
+            "Type": "Select",
+            "Props": {
+              "Label": "Call Outcome",
+              "Required": true,
+              "Options": [
+                "Resolved - First Call",
+                "Return Initiated",
+                "Refund Processed",
+                "Replacement Sent",
+                "Discount Applied",
+                "Escalated",
+                "Transferred to Specialist",
+                "Callback Scheduled",
+                "Unresolved"
+              ]
+            }
+          },
+          {
+            "_id": "order_number",
+            "Type": "Input",
+            "Props": {"Label": "Order Number", "Type": "text"}
+          },
+          {
+            "_id": "refund_issued",
+            "Type": "Checkbox",
+            "Props": {"Label": "Refund Issued", "Id": "refundIssued"}
+          },
+          {
+            "_id": "refund_amount",
+            "Type": "Input",
+            "Props": {"Label": "Refund Amount", "Type": "number", "Prefix": "$", "Visible": "$.FormData.refundIssued"}
+          },
+          {
+            "_id": "return_label_sent",
+            "Type": "Checkbox",
+            "Props": {"Label": "Return Label Sent", "Id": "returnLabelSent"}
+          },
+          {
+            "_id": "customer_satisfaction",
+            "Type": "Select",
+            "Props": {
+              "Label": "Customer Satisfaction",
+              "Options": ["Very Satisfied", "Satisfied", "Neutral", "Dissatisfied", "Very Dissatisfied"]
+            }
+          },
+          {
+            "_id": "notes",
+            "Type": "TextArea",
+            "Props": {"Label": "Call Notes", "Rows": 4}
+          }
+        ]
+      },
+      {
+        "_id": "submit_btn",
+        "Type": "Button",
+        "Props": {"Action": "SubmitDisposition", "Variant": "primary"},
+        "Content": ["Complete Call"]
+      }
+    ]
+  },
+  "actions": ["SubmitDisposition"]
+}

@@ -1,0 +1,117 @@
+{
+  "name": "Financial Services",
+  "description": "Template for financial services cases including account inquiries, disputes, and transaction issues",
+  "status": "Active",
+
+  "_llm_guidance": {
+    "workflow": [
+      "1. Check/create Customer Profile first (customer_id requires profile ARN)",
+      "2. Create custom fields if they don't exist (use cases_list_fields to check)",
+      "3. Create case with minimal required fields: title + customer_id",
+      "4. Update case with additional fields after creation"
+    ],
+    "critical_notes": [
+      "customer_id MUST be a profile ARN format: arn:aws:profile:{region}:{account}:domains/{domain}/profiles/{id}",
+      "SingleSelect fields require exact value matches from the options arrays",
+      "Create case with minimal fields first, then update - avoids validation failures",
+      "PCI-DSS: Never store full card numbers - use last 4 digits only"
+    ]
+  },
+
+  "requiredFields": {
+    "_note": "Only 'title' is truly required for case creation. customer_id is system-required.",
+    "forCaseCreation": ["title", "customer_id"],
+    "systemManaged": ["status", "case_id", "created_datetime"]
+  },
+
+  "dependencies": {
+    "customerProfile": {
+      "required": true,
+      "tool": "profiles_create_profile",
+      "arnFormat": "arn:aws:profile:{region}:{account}:domains/{domain_name}/profiles/{profile_id}"
+    }
+  },
+
+  "customFields": [
+    {
+      "name": "Priority",
+      "type": "SingleSelect",
+      "required": true,
+      "options": ["Critical - Fraud/Security", "High - Financial Impact", "Medium - Standard Service", "Low - Information Request"]
+    },
+    {
+      "name": "Account Number",
+      "type": "Text",
+      "required": false,
+      "example": "****1234"
+    },
+    {
+      "name": "Account Type",
+      "type": "SingleSelect",
+      "required": false,
+      "options": ["Checking", "Savings", "Credit Card", "Investment", "Loan", "Mortgage"]
+    },
+    {
+      "name": "Customer Segment",
+      "type": "SingleSelect",
+      "required": false,
+      "options": ["Premier", "Preferred", "Standard", "New Customer"]
+    },
+    {
+      "name": "Transaction ID",
+      "type": "Text",
+      "required": false,
+      "example": "TXN-2026-001234"
+    },
+    {
+      "name": "Transaction Date",
+      "type": "DateTime",
+      "required": false,
+      "example": "2026-01-03T10:00:00Z"
+    },
+    {
+      "name": "Transaction Amount",
+      "type": "Number",
+      "required": false,
+      "example": 150.00
+    },
+    {
+      "name": "Dispute Reason",
+      "type": "SingleSelect",
+      "required": false,
+      "options": ["Unauthorized Transaction", "Duplicate Charge", "Incorrect Amount", "Service Not Received", "Merchandise Not Received", "Quality Issue", "Cancelled Transaction", "Other"]
+    },
+    {
+      "name": "Resolution Notes",
+      "type": "Text",
+      "required": false,
+      "example": "Provisional credit issued pending investigation"
+    },
+    {
+      "name": "Escalation Level",
+      "type": "SingleSelect",
+      "required": false,
+      "options": ["Tier 1 - Agent", "Tier 2 - Supervisor", "Tier 3 - Manager", "Executive Escalation"]
+    }
+  ],
+
+  "exampleUsage": {
+    "minimalCase": {
+      "fields": {
+        "title": "Transaction Dispute - Unauthorized Charge",
+        "customer_id": "arn:aws:profile:us-west-2:123456789:domains/MyDomain/profiles/abc123"
+      }
+    },
+    "fullCase": {
+      "fields": {
+        "title": "Transaction Dispute - Unauthorized Charge $150",
+        "customer_id": "arn:aws:profile:us-west-2:123456789:domains/MyDomain/profiles/abc123",
+        "Account Number": "****1234",
+        "Account Type": "Credit Card",
+        "Transaction ID": "TXN-2026-001234",
+        "Transaction Amount": 150.00,
+        "Dispute Reason": "Unauthorized Transaction"
+      }
+    }
+  }
+}

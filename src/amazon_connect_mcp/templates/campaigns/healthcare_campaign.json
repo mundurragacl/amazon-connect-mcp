@@ -1,0 +1,82 @@
+{
+  "_llm_guidance": {
+    "workflow": [
+      "1. campaigns_get_onboarding_status(connect_instance_id)",
+      "2. list_queues(instance_id) - get STANDARD queue ID",
+      "3. config_list_contact_flows(instance_id) - get OUTBOUND_WHISPER flow ID",
+      "4. campaigns_create(name, connect_instance_id, channel_subtype_config)",
+      "5. campaigns_start(campaign_id)",
+      "6. campaigns_put_outbound_requests(campaign_id, outbound_requests)"
+    ],
+    "exampleUsage": {
+      "createCampaign": {
+        "name": "Healthcare Appointment Reminders",
+        "connect_instance_id": "dc7b631b-4015-4ecb-855f-b7b992c8dfcc",
+        "channel_subtype_config": {
+          "telephony": {
+            "connectQueueId": "062d696e-37ab-4769-a38c-87acd6360773",
+            "outboundMode": {
+              "progressive": {"bandwidthAllocation": 1.0}
+            },
+            "defaultOutboundConfig": {
+              "connectContactFlowId": "d261b49b-d88e-45f8-be56-74e8916eae65",
+              "connectSourcePhoneNumber": "+15551234567"
+            }
+          }
+        }
+      },
+      "addContacts": {
+        "campaign_id": "6ec54be0-7e5b-4358-9654-ae731ba5cfd2",
+        "outbound_requests": [
+          {
+            "clientToken": "appt-reminder-001",
+            "expirationTime": "2026-01-05T18:00:00",
+            "channelSubtypeParameters": {
+              "telephony": {
+                "destinationPhoneNumber": "+15559876543",
+                "attributes": {
+                  "PatientName": "John Smith",
+                  "AppointmentDate": "2026-01-06",
+                  "AppointmentTime": "10:00 AM",
+                  "DoctorName": "Dr. Martinez",
+                  "Location": "Main Campus"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "industryNotes": [
+      "HIPAA: Don't include PHI in call attributes",
+      "Use appointment reminders to reduce no-shows",
+      "Consider time zones for scheduling"
+    ]
+  },
+  "name": "Healthcare Appointment Reminders",
+  "description": "Outbound campaign for patient appointment reminders and follow-ups",
+  "industry": "Healthcare",
+  "campaignType": "Appointment Reminder",
+  "channel": "telephony",
+  "outboundMode": "progressive",
+  "useCases": [
+    "Appointment reminders (24-48 hours before)",
+    "Post-visit follow-up calls",
+    "Prescription refill reminders",
+    "Annual wellness check scheduling",
+    "Lab result notifications"
+  ],
+  "recommendedAttributes": [
+    {"key": "PatientName", "description": "Patient's full name for personalization"},
+    {"key": "AppointmentDate", "description": "Date of appointment"},
+    {"key": "AppointmentTime", "description": "Time of appointment"},
+    {"key": "DoctorName", "description": "Provider name"},
+    {"key": "Location", "description": "Facility/clinic location"},
+    {"key": "ConfirmationNumber", "description": "Appointment confirmation ID"}
+  ],
+  "compliance": {
+    "hipaa": true,
+    "tcpa": true,
+    "optOutRequired": true
+  }
+}

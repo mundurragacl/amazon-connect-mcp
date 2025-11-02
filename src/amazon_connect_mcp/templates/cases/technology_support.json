@@ -1,0 +1,107 @@
+{
+  "name": "Technology Support",
+  "description": "Template for technology/SaaS support cases including technical issues, account management, and feature requests",
+  "status": "Active",
+  "_llm_guidance": {
+    "workflow_steps": [
+      "1. Create case template using cases_create_template",
+      "2. Create custom fields using cases_create_field for each field in customFields",
+      "3. Create case layout using cases_create_layout with technology_layout template",
+      "4. Create cases using create_case with template_id and field mappings"
+    ],
+    "critical_notes": [
+      "Severity field is required - must be set during case creation",
+      "Environment field should be populated for technical issues",
+      "Steps to Reproduce field is crucial for bug reports",
+      "Product Name and Version help with proper routing"
+    ]
+  },
+  "requiredFields": {
+    "forCaseCreation": [{"fieldId": "title"}, {"fieldId": "status"}, {"fieldId": "case_reason"}, {"fieldId": "severity"}],
+    "systemManaged": [{"fieldId": "case_id"}, {"fieldId": "created_time"}, {"fieldId": "last_modified_time"}]
+  },
+  "dependencies": {
+    "layout": "technology_layout",
+    "routing_profile": "technology_support_agent",
+    "queue": "technology_support"
+  },
+  "layoutName": "Technology Support Layout",
+  "caseReasonOptions": [
+    "Technical Issue",
+    "Bug Report",
+    "Feature Request",
+    "Account Access",
+    "Integration Help",
+    "Performance Issue",
+    "Security Concern",
+    "Billing Inquiry",
+    "License/Subscription",
+    "Training Request",
+    "General Inquiry"
+  ],
+  "severityOptions": ["Critical", "High", "Medium", "Low"],
+  "customFields": [
+    {
+      "name": "Product Name",
+      "type": "Text",
+      "required": false,
+      "example": "CloudSync Pro"
+    },
+    {
+      "name": "Version",
+      "type": "Text",
+      "required": false,
+      "example": "v2.1.3"
+    },
+    {
+      "name": "Environment",
+      "type": "SingleSelect",
+      "required": false,
+      "options": ["Production", "Staging", "Development", "Testing", "Demo"]
+    },
+    {
+      "name": "Error Code",
+      "type": "Text",
+      "required": false,
+      "example": "ERR_AUTH_401"
+    },
+    {
+      "name": "Severity",
+      "type": "SingleSelect",
+      "required": true,
+      "options": ["Critical", "High", "Medium", "Low"]
+    },
+    {
+      "name": "Steps to Reproduce",
+      "type": "Text",
+      "required": false,
+      "example": "1. Login to dashboard 2. Click Reports 3. Select date range 4. Error appears"
+    },
+    {
+      "name": "Resolution Notes",
+      "type": "Text",
+      "required": false,
+      "example": "Updated API endpoint configuration and cleared cache"
+    }
+  ],
+  "exampleUsage": {
+    "minimalCase": {
+      "title": "Login Issue",
+      "status": "Open",
+      "case_reason": "Technical Issue",
+      "severity": "High"
+    },
+    "fullCase": {
+      "title": "API Integration Timeout Error",
+      "status": "Open",
+      "case_reason": "Technical Issue",
+      "product_name": "CloudSync Pro",
+      "version": "v2.1.3",
+      "environment": "Production",
+      "error_code": "ERR_TIMEOUT_504",
+      "severity": "Critical",
+      "steps_to_reproduce": "1. Make API call to /sync endpoint 2. Wait 30 seconds 3. Timeout error occurs",
+      "resolution_notes": ""
+    }
+  }
+}

@@ -1,0 +1,269 @@
+{
+  "EvaluationFormTitle": "Healthcare Support Quality Evaluation",
+  "Description": "Comprehensive evaluation form for healthcare customer service interactions focusing on HIPAA compliance, empathy, and clinical accuracy",
+  "ScoringStrategy": {
+    "Mode": "QUESTION_ONLY",
+    "Status": "ENABLED"
+  },
+  "Items": [
+    {
+      "Section": {
+        "Title": "HIPAA Compliance & Privacy",
+        "RefId": "hipaa_section",
+        "Instructions": "Evaluate agent's adherence to HIPAA regulations and patient privacy protocols",
+        "Weight": 25.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Patient Identity Verification",
+              "Instructions": "Did the agent properly verify patient identity before discussing PHI?",
+              "RefId": "identity_verification",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Verified multiple identifiers", "Score": 5},
+                  {"Text": "Good - Verified required identifiers", "Score": 4},
+                  {"Text": "Satisfactory - Basic verification completed", "Score": 3},
+                  {"Text": "Needs Improvement - Incomplete verification", "Score": 2},
+                  {"Text": "Unsatisfactory - No verification attempted", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Information Sharing Appropriateness",
+              "Instructions": "Did the agent only share information appropriate for the caller's relationship to patient?",
+              "RefId": "info_sharing",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Perfect adherence to sharing rules", "Score": 5},
+                  {"Text": "Good - Appropriate sharing with minor clarification", "Score": 4},
+                  {"Text": "Satisfactory - Generally appropriate", "Score": 3},
+                  {"Text": "Needs Improvement - Some inappropriate sharing", "Score": 2},
+                  {"Text": "Unsatisfactory - Significant privacy violations", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 35.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Documentation Security",
+              "Instructions": "Did the agent handle documentation and system access securely?",
+              "RefId": "documentation_security",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Exemplary security practices", "Score": 5},
+                  {"Text": "Good - Secure with minor observations", "Score": 4},
+                  {"Text": "Satisfactory - Adequate security measures", "Score": 3},
+                  {"Text": "Needs Improvement - Some security concerns", "Score": 2},
+                  {"Text": "Unsatisfactory - Security protocols not followed", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 25.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Clinical Communication & Accuracy",
+        "RefId": "clinical_section",
+        "Instructions": "Assess accuracy of medical information and appropriate clinical communication",
+        "Weight": 25.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Medical Information Accuracy",
+              "Instructions": "Was medical information provided accurate and appropriate for agent's scope?",
+              "RefId": "medical_accuracy",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Accurate within scope, appropriate referrals", "Score": 5},
+                  {"Text": "Good - Mostly accurate with minor clarifications needed", "Score": 4},
+                  {"Text": "Satisfactory - Generally accurate", "Score": 3},
+                  {"Text": "Needs Improvement - Some inaccuracies noted", "Score": 2},
+                  {"Text": "Unsatisfactory - Significant inaccuracies or overreach", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 50.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Appropriate Clinical Boundaries",
+              "Instructions": "Did the agent maintain appropriate boundaries and refer to clinical staff when needed?",
+              "RefId": "clinical_boundaries",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Perfect boundary awareness", "Score": 5},
+                  {"Text": "Good - Appropriate boundaries with good referrals", "Score": 4},
+                  {"Text": "Satisfactory - Generally appropriate", "Score": 3},
+                  {"Text": "Needs Improvement - Some boundary issues", "Score": 2},
+                  {"Text": "Unsatisfactory - Inappropriate clinical advice given", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 50.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Empathy & Patient Care",
+        "RefId": "empathy_section",
+        "Instructions": "Evaluate demonstration of empathy and patient-centered communication",
+        "Weight": 20.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Empathy and Compassion",
+              "Instructions": "Did the agent demonstrate appropriate empathy for patient's situation?",
+              "RefId": "empathy_compassion",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Exceptional empathy and understanding", "Score": 5},
+                  {"Text": "Good - Clear empathy demonstrated", "Score": 4},
+                  {"Text": "Satisfactory - Adequate empathy shown", "Score": 3},
+                  {"Text": "Needs Improvement - Limited empathy", "Score": 2},
+                  {"Text": "Unsatisfactory - Lack of empathy or inappropriate response", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 60.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Patient Advocacy",
+              "Instructions": "Did the agent advocate for the patient's needs and concerns?",
+              "RefId": "patient_advocacy",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Strong patient advocacy", "Score": 5},
+                  {"Text": "Good - Clear advocacy efforts", "Score": 4},
+                  {"Text": "Satisfactory - Basic advocacy", "Score": 3},
+                  {"Text": "Needs Improvement - Limited advocacy", "Score": 2},
+                  {"Text": "Unsatisfactory - No advocacy demonstrated", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Communication & Professionalism",
+        "RefId": "communication_section",
+        "Instructions": "Assess overall communication skills and professional demeanor",
+        "Weight": 20.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Clear Communication",
+              "Instructions": "Was the agent's communication clear, professional, and easy to understand?",
+              "RefId": "clear_communication",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Crystal clear, professional communication", "Score": 5},
+                  {"Text": "Good - Clear with minor areas for improvement", "Score": 4},
+                  {"Text": "Satisfactory - Generally clear", "Score": 3},
+                  {"Text": "Needs Improvement - Some unclear communication", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor communication skills", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 50.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Active Listening",
+              "Instructions": "Did the agent demonstrate active listening and understanding of patient concerns?",
+              "RefId": "active_listening",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Exceptional listening skills", "Score": 5},
+                  {"Text": "Good - Good listening with appropriate responses", "Score": 4},
+                  {"Text": "Satisfactory - Adequate listening", "Score": 3},
+                  {"Text": "Needs Improvement - Some listening issues", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor listening skills", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 50.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Problem Resolution & Follow-up",
+        "RefId": "resolution_section",
+        "Instructions": "Evaluate effectiveness of problem resolution and follow-up planning",
+        "Weight": 10.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Issue Resolution Effectiveness",
+              "Instructions": "How effectively did the agent resolve or advance the patient's issue?",
+              "RefId": "resolution_effectiveness",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Issue fully resolved or clear next steps", "Score": 5},
+                  {"Text": "Good - Issue mostly resolved", "Score": 4},
+                  {"Text": "Satisfactory - Some progress made", "Score": 3},
+                  {"Text": "Needs Improvement - Limited progress", "Score": 2},
+                  {"Text": "Unsatisfactory - No meaningful progress", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 70.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Follow-up Planning",
+              "Instructions": "Did the agent establish appropriate follow-up plans or next steps?",
+              "RefId": "followup_planning",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Clear, comprehensive follow-up plan", "Score": 5},
+                  {"Text": "Good - Appropriate follow-up established", "Score": 4},
+                  {"Text": "Satisfactory - Basic follow-up planned", "Score": 3},
+                  {"Text": "Needs Improvement - Unclear follow-up", "Score": 2},
+                  {"Text": "Unsatisfactory - No follow-up established", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 30.0
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

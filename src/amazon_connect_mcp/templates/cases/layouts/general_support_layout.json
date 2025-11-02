@@ -1,0 +1,35 @@
+{
+  "name": "General Support Layout",
+  "description": "Standard layout for general customer support cases with Z-formation field display",
+  "_note": "Title and Status fields cannot be part of layouts - they are always displayed automatically",
+  "content": {
+    "basic": {
+      "topPanel": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Case Overview",
+              "fields": [
+                {"id": "case_reason"},
+                {"id": "customer_id"}
+              ]
+            }
+          }
+        ]
+      },
+      "moreInfo": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Details",
+              "fields": [
+                {"id": "summary"},
+                {"id": "reference_number"}
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,288 @@
+{
+  "EvaluationFormTitle": "Technology/SaaS Customer Support Evaluation",
+  "Description": "Comprehensive evaluation form for technology and SaaS customer support focusing on technical expertise, product knowledge, and solution delivery",
+  "ScoringStrategy": {
+    "Mode": "QUESTION_ONLY",
+    "Status": "ENABLED"
+  },
+  "Items": [
+    {
+      "Section": {
+        "Title": "Technical Expertise & Problem Solving",
+        "RefId": "technical_section",
+        "Instructions": "Evaluate agent's technical knowledge and problem-solving capabilities",
+        "Weight": 35.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Technical Issue Understanding",
+              "Instructions": "Did the agent quickly understand and accurately assess the technical issue?",
+              "RefId": "technical_understanding",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Immediate understanding with insightful analysis", "Score": 5},
+                  {"Text": "Good - Quick understanding with accurate assessment", "Score": 4},
+                  {"Text": "Satisfactory - Eventually understood the issue", "Score": 3},
+                  {"Text": "Needs Improvement - Slow to understand or misunderstood", "Score": 2},
+                  {"Text": "Unsatisfactory - Failed to understand the issue", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Solution Quality & Innovation",
+              "Instructions": "Was the solution provided effective, innovative, and appropriate for the customer's needs?",
+              "RefId": "solution_quality",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Innovative, comprehensive solution", "Score": 5},
+                  {"Text": "Good - Effective solution with good approach", "Score": 4},
+                  {"Text": "Satisfactory - Standard solution that works", "Score": 3},
+                  {"Text": "Needs Improvement - Partial or suboptimal solution", "Score": 2},
+                  {"Text": "Unsatisfactory - Ineffective or incorrect solution", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 35.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Code/Configuration Accuracy",
+              "Instructions": "If applicable, was any code, configuration, or technical guidance provided accurately?",
+              "RefId": "code_accuracy",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Perfect code/configuration with best practices", "Score": 5},
+                  {"Text": "Good - Accurate code/configuration", "Score": 4},
+                  {"Text": "Satisfactory - Generally correct with minor issues", "Score": 3},
+                  {"Text": "Needs Improvement - Some errors in code/configuration", "Score": 2},
+                  {"Text": "Unsatisfactory - Incorrect or harmful code/configuration", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 25.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Product Knowledge & Documentation",
+        "RefId": "product_section",
+        "Instructions": "Assess depth of product knowledge and use of documentation resources",
+        "Weight": 25.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Product Feature Knowledge",
+              "Instructions": "Did the agent demonstrate comprehensive knowledge of product features and capabilities?",
+              "RefId": "product_knowledge",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Expert-level product knowledge", "Score": 5},
+                  {"Text": "Good - Strong product knowledge with minor gaps", "Score": 4},
+                  {"Text": "Satisfactory - Adequate product knowledge", "Score": 3},
+                  {"Text": "Needs Improvement - Limited product knowledge", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor product knowledge", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 50.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Documentation & Resource Usage",
+              "Instructions": "Did the agent effectively use and reference appropriate documentation or resources?",
+              "RefId": "documentation_usage",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Perfect use of documentation and resources", "Score": 5},
+                  {"Text": "Good - Good use of available resources", "Score": 4},
+                  {"Text": "Satisfactory - Some use of documentation", "Score": 3},
+                  {"Text": "Needs Improvement - Limited resource utilization", "Score": 2},
+                  {"Text": "Unsatisfactory - No use of available resources", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 30.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Integration & Compatibility Guidance",
+              "Instructions": "Did the agent provide accurate guidance on integrations and compatibility issues?",
+              "RefId": "integration_guidance",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Comprehensive integration expertise", "Score": 5},
+                  {"Text": "Good - Good integration knowledge", "Score": 4},
+                  {"Text": "Satisfactory - Basic integration guidance", "Score": 3},
+                  {"Text": "Needs Improvement - Limited integration knowledge", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor integration guidance", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 20.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Customer Education & Empowerment",
+        "RefId": "education_section",
+        "Instructions": "Evaluate efforts to educate and empower the customer",
+        "Weight": 20.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Knowledge Transfer Quality",
+              "Instructions": "Did the agent effectively transfer knowledge to help the customer become more self-sufficient?",
+              "RefId": "knowledge_transfer",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Exceptional knowledge transfer and empowerment", "Score": 5},
+                  {"Text": "Good - Good educational approach", "Score": 4},
+                  {"Text": "Satisfactory - Some knowledge sharing", "Score": 3},
+                  {"Text": "Needs Improvement - Limited educational effort", "Score": 2},
+                  {"Text": "Unsatisfactory - No knowledge transfer", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 60.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Best Practices Guidance",
+              "Instructions": "Did the agent share relevant best practices and optimization tips?",
+              "RefId": "best_practices",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Comprehensive best practices guidance", "Score": 5},
+                  {"Text": "Good - Relevant best practices shared", "Score": 4},
+                  {"Text": "Satisfactory - Some best practices mentioned", "Score": 3},
+                  {"Text": "Needs Improvement - Limited best practices guidance", "Score": 2},
+                  {"Text": "Unsatisfactory - No best practices shared", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Communication & Collaboration",
+        "RefId": "communication_section",
+        "Instructions": "Assess communication effectiveness and collaborative approach",
+        "Weight": 12.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Technical Communication Clarity",
+              "Instructions": "Did the agent communicate technical concepts clearly and appropriately for the audience?",
+              "RefId": "technical_communication",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Perfect technical communication", "Score": 5},
+                  {"Text": "Good - Clear technical explanations", "Score": 4},
+                  {"Text": "Satisfactory - Generally understandable", "Score": 3},
+                  {"Text": "Needs Improvement - Some communication issues", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor technical communication", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 60.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Collaborative Problem Solving",
+              "Instructions": "Did the agent work collaboratively with the customer to solve the problem?",
+              "RefId": "collaborative_approach",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Highly collaborative and engaging", "Score": 5},
+                  {"Text": "Good - Good collaborative approach", "Score": 4},
+                  {"Text": "Satisfactory - Some collaboration", "Score": 3},
+                  {"Text": "Needs Improvement - Limited collaboration", "Score": 2},
+                  {"Text": "Unsatisfactory - No collaborative effort", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Issue Resolution & Follow-up",
+        "RefId": "resolution_section",
+        "Instructions": "Evaluate completeness of resolution and follow-up planning",
+        "Weight": 8.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Resolution Completeness",
+              "Instructions": "Was the technical issue completely resolved or a clear path to resolution established?",
+              "RefId": "resolution_completeness",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Complete resolution with verification", "Score": 5},
+                  {"Text": "Good - Issue resolved with minor follow-up", "Score": 4},
+                  {"Text": "Satisfactory - Significant progress made", "Score": 3},
+                  {"Text": "Needs Improvement - Partial resolution", "Score": 2},
+                  {"Text": "Unsatisfactory - Issue not resolved", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 70.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Escalation & Follow-up Planning",
+              "Instructions": "Did the agent establish appropriate escalation paths or follow-up procedures?",
+              "RefId": "escalation_planning",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Perfect escalation and follow-up planning", "Score": 5},
+                  {"Text": "Good - Appropriate escalation/follow-up", "Score": 4},
+                  {"Text": "Satisfactory - Basic follow-up established", "Score": 3},
+                  {"Text": "Needs Improvement - Unclear escalation/follow-up", "Score": 2},
+                  {"Text": "Unsatisfactory - No escalation/follow-up plan", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 30.0
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

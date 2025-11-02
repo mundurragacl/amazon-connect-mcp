@@ -1,0 +1,76 @@
+{
+  "name": "Product Support Matrix",
+  "description": "Product-specific support routing and information for technology companies",
+  "industry": "Technology/SaaS",
+  "attributes": [
+    {"name": "product_code", "type": "text", "isPrimaryKey": true, "description": "Product identifier"},
+    {"name": "product_name", "type": "text", "required": true, "description": "Product display name"},
+    {"name": "support_queue", "type": "text", "required": true, "description": "Primary support queue"},
+    {"name": "tier2_queue", "type": "text", "description": "Tier 2 escalation queue"},
+    {"name": "support_level", "type": "text", "description": "Support level: basic, standard, premium, enterprise"},
+    {"name": "knowledge_base_id", "type": "text", "description": "Associated knowledge base"},
+    {"name": "current_version", "type": "text", "description": "Current product version"},
+    {"name": "eol_date", "type": "text", "description": "End of life date if applicable"},
+    {"name": "known_issues_url", "type": "text", "description": "URL to known issues page"},
+    {"name": "remote_support_enabled", "type": "boolean", "default": true, "description": "Remote session support available"}
+  ],
+  "sampleData": [
+    {
+      "product_code": "PROD-A",
+      "product_name": "Enterprise Suite",
+      "support_queue": "Enterprise-Support",
+      "tier2_queue": "Enterprise-Tier2",
+      "support_level": "enterprise",
+      "knowledge_base_id": "kb-enterprise",
+      "current_version": "5.2.1",
+      "eol_date": null,
+      "known_issues_url": "https://support.example.com/enterprise/issues",
+      "remote_support_enabled": true
+    },
+    {
+      "product_code": "PROD-B",
+      "product_name": "Professional",
+      "support_queue": "Professional-Support",
+      "tier2_queue": "General-Tier2",
+      "support_level": "standard",
+      "knowledge_base_id": "kb-professional",
+      "current_version": "3.8.0",
+      "eol_date": null,
+      "known_issues_url": "https://support.example.com/pro/issues",
+      "remote_support_enabled": true
+    },
+    {
+      "product_code": "PROD-C",
+      "product_name": "Starter",
+      "support_queue": "General-Support",
+      "tier2_queue": null,
+      "support_level": "basic",
+      "knowledge_base_id": "kb-starter",
+      "current_version": "2.1.0",
+      "eol_date": null,
+      "known_issues_url": null,
+      "remote_support_enabled": false
+    },
+    {
+      "product_code": "LEGACY-1",
+      "product_name": "Classic (Legacy)",
+      "support_queue": "Legacy-Support",
+      "tier2_queue": null,
+      "support_level": "basic",
+      "knowledge_base_id": "kb-legacy",
+      "current_version": "1.9.5",
+      "eol_date": "2026-12-31",
+      "known_issues_url": null,
+      "remote_support_enabled": false
+    }
+  ],
+  "flowUsage": {
+    "description": "Route support calls based on product",
+    "example": {
+      "action": "Evaluate",
+      "primaryAttribute": "product_code",
+      "primaryValue": "$.Attributes.ProductCode",
+      "returnAttributes": ["support_queue", "support_level", "knowledge_base_id", "current_version"]
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "24x7 Operations",
+  "description": "24 hours a day, 7 days a week operation",
+  "timezone": "America/New_York",
+  "config": [
+    {
+      "day": "SUNDAY",
+      "startTime": {"hours": 0, "minutes": 0},
+      "endTime": {"hours": 23, "minutes": 59}
+    },
+    {
+      "day": "MONDAY",
+      "startTime": {"hours": 0, "minutes": 0},
+      "endTime": {"hours": 23, "minutes": 59}
+    },
+    {
+      "day": "TUESDAY",
+      "startTime": {"hours": 0, "minutes": 0},
+      "endTime": {"hours": 23, "minutes": 59}
+    },
+    {
+      "day": "WEDNESDAY",
+      "startTime": {"hours": 0, "minutes": 0},
+      "endTime": {"hours": 23, "minutes": 59}
+    },
+    {
+      "day": "THURSDAY",
+      "startTime": {"hours": 0, "minutes": 0},
+      "endTime": {"hours": 23, "minutes": 59}
+    },
+    {
+      "day": "FRIDAY",
+      "startTime": {"hours": 0, "minutes": 0},
+      "endTime": {"hours": 23, "minutes": 59}
+    },
+    {
+      "day": "SATURDAY",
+      "startTime": {"hours": 0, "minutes": 0},
+      "endTime": {"hours": 23, "minutes": 59}
+    }
+  ]
+}

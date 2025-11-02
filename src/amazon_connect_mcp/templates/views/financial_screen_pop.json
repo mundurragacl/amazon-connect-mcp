@@ -1,0 +1,75 @@
+{
+  "name": "Financial Services Account Screen Pop",
+  "description": "Account overview for banking and financial services with fraud alerts and transaction history",
+  "industry": "Financial Services",
+  "viewType": "Detail",
+  "template": {
+    "Head": {
+      "Title": "Account Overview",
+      "Configuration": {"Layout": {"Columns": ["8", "4"]}}
+    },
+    "Body": [
+      {
+        "_id": "fraud_alert",
+        "Type": "AlertBanner",
+        "Props": {
+          "Visible": "$.Account.FraudAlert",
+          "Variant": "error",
+          "Message": "FRAUD ALERT: Suspicious activity detected. Verify customer identity before proceeding."
+        }
+      },
+      {
+        "_id": "customer_header",
+        "Type": "Card",
+        "Props": {
+          "Heading": "$.Customer.Name",
+          "Icon": "Bank",
+          "Status": "$.Customer.Segment",
+          "Description": "Customer since $.Customer.MemberSince | Relationship Value: $.Customer.RelationshipValue"
+        }
+      },
+      {
+        "_id": "verification_section",
+        "Type": "Container",
+        "Props": {"Variant": "outlined"},
+        "Content": [
+          {"_id": "verify_btn", "Type": "Button", "Props": {"Action": "VerifyIdentity", "Variant": "primary"}, "Content": ["Verify Identity"]},
+          {"_id": "security_btn", "Type": "Button", "Props": {"Action": "SecurityQuestions"}, "Content": ["Security Questions"]},
+          {"_id": "otp_btn", "Type": "Button", "Props": {"Action": "SendOTP"}, "Content": ["Send OTP"]}
+        ]
+      },
+      {
+        "_id": "accounts_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Account Summary"},
+        "Content": [
+          {"Label": "Checking", "Value": "$.Accounts.CheckingBalance"},
+          {"Label": "Savings", "Value": "$.Accounts.SavingsBalance"},
+          {"Label": "Credit Card", "Value": "$.Accounts.CreditCardBalance"},
+          {"Label": "Total Relationship", "Value": "$.Accounts.TotalBalance"}
+        ]
+      },
+      {
+        "_id": "recent_transactions",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Recent Transactions"},
+        "Content": [
+          {"Label": "Last Transaction", "Value": "$.Transactions.LastTransaction"},
+          {"Label": "Amount", "Value": "$.Transactions.LastAmount"},
+          {"Label": "Pending", "Value": "$.Transactions.PendingCount"},
+          {"Label": "Disputed", "Value": "$.Transactions.DisputedCount"}
+        ]
+      },
+      {
+        "_id": "quick_actions",
+        "Type": "Container",
+        "Content": [
+          {"_id": "dispute_btn", "Type": "Button", "Props": {"Action": "FileDispute"}, "Content": ["File Dispute"]},
+          {"_id": "transfer_btn", "Type": "Button", "Props": {"Action": "TransferFunds"}, "Content": ["Transfer"]},
+          {"_id": "block_btn", "Type": "Button", "Props": {"Action": "BlockCard", "Variant": "destructive"}, "Content": ["Block Card"]}
+        ]
+      }
+    ]
+  },
+  "actions": ["VerifyIdentity", "SecurityQuestions", "SendOTP", "FileDispute", "TransferFunds", "BlockCard", "ViewStatements", "CreateCase"]
+}

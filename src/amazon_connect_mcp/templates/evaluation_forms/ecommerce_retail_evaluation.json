@@ -1,0 +1,269 @@
+{
+  "EvaluationFormTitle": "E-Commerce/Retail Customer Service Evaluation",
+  "Description": "Comprehensive evaluation form for retail customer service focusing on order management, product knowledge, and customer satisfaction",
+  "ScoringStrategy": {
+    "Mode": "QUESTION_ONLY",
+    "Status": "ENABLED"
+  },
+  "Items": [
+    {
+      "Section": {
+        "Title": "Product Knowledge & Information",
+        "RefId": "product_section",
+        "Instructions": "Evaluate agent's product knowledge and ability to provide accurate information",
+        "Weight": 25.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Product Knowledge Accuracy",
+              "Instructions": "Did the agent demonstrate accurate knowledge of products, features, and specifications?",
+              "RefId": "product_knowledge",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Expert product knowledge with detailed insights", "Score": 5},
+                  {"Text": "Good - Strong product knowledge with minor gaps", "Score": 4},
+                  {"Text": "Satisfactory - Adequate product knowledge", "Score": 3},
+                  {"Text": "Needs Improvement - Limited product knowledge", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor or inaccurate product knowledge", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 60.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Inventory & Availability Information",
+              "Instructions": "Was inventory and availability information provided accurately and promptly?",
+              "RefId": "inventory_accuracy",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Accurate, real-time inventory information", "Score": 5},
+                  {"Text": "Good - Accurate inventory with minor delays", "Score": 4},
+                  {"Text": "Satisfactory - Generally accurate inventory info", "Score": 3},
+                  {"Text": "Needs Improvement - Some inventory inaccuracies", "Score": 2},
+                  {"Text": "Unsatisfactory - Inaccurate or unavailable inventory info", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Order Management & Processing",
+        "RefId": "order_section",
+        "Instructions": "Assess handling of order-related inquiries and processes",
+        "Weight": 30.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Order Status & Tracking",
+              "Instructions": "Did the agent provide accurate order status and tracking information?",
+              "RefId": "order_tracking",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Comprehensive order tracking with proactive updates", "Score": 5},
+                  {"Text": "Good - Accurate tracking information provided", "Score": 4},
+                  {"Text": "Satisfactory - Basic order status provided", "Score": 3},
+                  {"Text": "Needs Improvement - Limited order information", "Score": 2},
+                  {"Text": "Unsatisfactory - Inaccurate or no order information", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Returns & Exchanges Processing",
+              "Instructions": "How effectively did the agent handle returns, exchanges, or refund requests?",
+              "RefId": "returns_processing",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Seamless returns process with clear guidance", "Score": 5},
+                  {"Text": "Good - Efficient returns processing", "Score": 4},
+                  {"Text": "Satisfactory - Standard returns handling", "Score": 3},
+                  {"Text": "Needs Improvement - Some returns process issues", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor returns handling", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 35.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Shipping & Delivery Solutions",
+              "Instructions": "Did the agent provide appropriate shipping options and delivery solutions?",
+              "RefId": "shipping_solutions",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Optimal shipping solutions with cost considerations", "Score": 5},
+                  {"Text": "Good - Appropriate shipping options provided", "Score": 4},
+                  {"Text": "Satisfactory - Basic shipping information", "Score": 3},
+                  {"Text": "Needs Improvement - Limited shipping guidance", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor shipping assistance", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 25.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Customer Experience & Satisfaction",
+        "RefId": "experience_section",
+        "Instructions": "Evaluate overall customer experience and satisfaction delivery",
+        "Weight": 20.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Personalization & Customer Recognition",
+              "Instructions": "Did the agent personalize the experience and recognize customer history/preferences?",
+              "RefId": "personalization",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Highly personalized with customer insights", "Score": 5},
+                  {"Text": "Good - Good personalization efforts", "Score": 4},
+                  {"Text": "Satisfactory - Some personalization", "Score": 3},
+                  {"Text": "Needs Improvement - Limited personalization", "Score": 2},
+                  {"Text": "Unsatisfactory - No personalization effort", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 50.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Proactive Customer Service",
+              "Instructions": "Did the agent proactively address potential issues or offer additional assistance?",
+              "RefId": "proactive_service",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Highly proactive with valuable suggestions", "Score": 5},
+                  {"Text": "Good - Some proactive assistance offered", "Score": 4},
+                  {"Text": "Satisfactory - Reactive but helpful", "Score": 3},
+                  {"Text": "Needs Improvement - Minimal proactive effort", "Score": 2},
+                  {"Text": "Unsatisfactory - No proactive service", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 50.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Communication & Efficiency",
+        "RefId": "communication_section",
+        "Instructions": "Assess communication effectiveness and interaction efficiency",
+        "Weight": 15.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Clear & Friendly Communication",
+              "Instructions": "Was the agent's communication clear, friendly, and appropriate for retail environment?",
+              "RefId": "clear_communication",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Exceptionally clear and friendly", "Score": 5},
+                  {"Text": "Good - Clear and friendly communication", "Score": 4},
+                  {"Text": "Satisfactory - Generally clear and pleasant", "Score": 3},
+                  {"Text": "Needs Improvement - Some communication issues", "Score": 2},
+                  {"Text": "Unsatisfactory - Poor communication skills", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 60.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Response Time & Efficiency",
+              "Instructions": "Did the agent respond promptly and handle the inquiry efficiently?",
+              "RefId": "response_efficiency",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Very prompt and highly efficient", "Score": 5},
+                  {"Text": "Good - Prompt with good efficiency", "Score": 4},
+                  {"Text": "Satisfactory - Reasonable response time", "Score": 3},
+                  {"Text": "Needs Improvement - Slow response or inefficient", "Score": 2},
+                  {"Text": "Unsatisfactory - Very slow or inefficient", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 40.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Section": {
+        "Title": "Problem Resolution & Value Addition",
+        "RefId": "resolution_section",
+        "Instructions": "Evaluate problem-solving effectiveness and value-added services",
+        "Weight": 10.0,
+        "Items": [
+          {
+            "Question": {
+              "Title": "Problem Resolution Effectiveness",
+              "Instructions": "How effectively did the agent resolve the customer's issue or inquiry?",
+              "RefId": "problem_resolution",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Issue completely resolved with added value", "Score": 5},
+                  {"Text": "Good - Issue resolved satisfactorily", "Score": 4},
+                  {"Text": "Satisfactory - Issue mostly resolved", "Score": 3},
+                  {"Text": "Needs Improvement - Partial resolution", "Score": 2},
+                  {"Text": "Unsatisfactory - Issue not resolved", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 70.0
+            }
+          },
+          {
+            "Question": {
+              "Title": "Upselling & Cross-selling Appropriateness",
+              "Instructions": "Were any upselling or cross-selling efforts appropriate and customer-focused?",
+              "RefId": "upselling_appropriateness",
+              "QuestionType": "SINGLESELECT",
+              "QuestionTypeProperties": {
+                "Options": [
+                  {"Text": "Excellent - Perfect timing and relevant suggestions", "Score": 5},
+                  {"Text": "Good - Appropriate and helpful suggestions", "Score": 4},
+                  {"Text": "Satisfactory - Some relevant suggestions", "Score": 3},
+                  {"Text": "Needs Improvement - Pushy or irrelevant suggestions", "Score": 2},
+                  {"Text": "Unsatisfactory - Inappropriate or excessive selling", "Score": 1}
+                ],
+                "DisplayAs": "DROPDOWN"
+              },
+              "Weight": 30.0
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

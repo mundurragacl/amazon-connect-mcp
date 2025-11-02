@@ -1,0 +1,255 @@
+{
+  "name": "Technology/SaaS Step-by-Step Guides",
+  "description": "Comprehensive workflow guides for technology and SaaS customer support",
+  "industry": "Technology/SaaS",
+  "guides": {
+    "technical_troubleshooting": {
+      "name": "Technical Issue Troubleshooting",
+      "description": "Systematic approach to resolving technical problems",
+      "steps": [
+        {
+          "id": "issue_identification",
+          "title": "Identify Technical Issue",
+          "description": "Gather information about the technical problem",
+          "actions": [
+            "Verify customer account and product access",
+            "Understand the specific issue or error",
+            "Determine when the issue started",
+            "Identify affected features or functionality",
+            "Check system status and known issues"
+          ],
+          "validation": "Issue clearly identified and documented",
+          "nextStep": "environment_assessment"
+        },
+        {
+          "id": "environment_assessment",
+          "title": "Assess Customer Environment",
+          "description": "Understand the customer's technical environment",
+          "actions": [
+            "Identify browser, OS, and device information",
+            "Check network connectivity and firewall settings",
+            "Review integration configurations",
+            "Verify user permissions and access levels",
+            "Document relevant system specifications"
+          ],
+          "validation": "Environment details collected",
+          "nextStep": "troubleshooting_steps"
+        },
+        {
+          "id": "troubleshooting_steps",
+          "title": "Execute Troubleshooting Steps",
+          "description": "Perform systematic troubleshooting",
+          "actions": [
+            "Start with basic troubleshooting steps",
+            "Clear cache and cookies if applicable",
+            "Test in different browsers or devices",
+            "Check for recent changes or updates",
+            "Reproduce the issue if possible"
+          ],
+          "validation": "Troubleshooting steps completed",
+          "nextStep": "resolution_implementation"
+        },
+        {
+          "id": "resolution_implementation",
+          "title": "Implement Resolution",
+          "description": "Apply the appropriate solution",
+          "actions": [
+            "Apply identified solution or workaround",
+            "Test resolution with customer",
+            "Verify issue is fully resolved",
+            "Document solution for future reference",
+            "Provide prevention recommendations"
+          ],
+          "validation": "Issue resolved and verified",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "account_onboarding": {
+      "name": "Customer Account Onboarding",
+      "description": "Guide new customers through product setup",
+      "steps": [
+        {
+          "id": "account_setup",
+          "title": "Set Up Customer Account",
+          "description": "Initialize customer account and access",
+          "actions": [
+            "Verify customer information and subscription",
+            "Create or activate user account",
+            "Set up initial user permissions",
+            "Configure basic account settings",
+            "Send welcome email with login credentials"
+          ],
+          "validation": "Account created and accessible",
+          "nextStep": "product_configuration"
+        },
+        {
+          "id": "product_configuration",
+          "title": "Configure Product Settings",
+          "description": "Set up product according to customer needs",
+          "actions": [
+            "Review customer's use case and requirements",
+            "Configure initial product settings",
+            "Set up integrations if needed",
+            "Create sample data or templates",
+            "Configure notification preferences"
+          ],
+          "validation": "Product configured for customer needs",
+          "nextStep": "training_resources"
+        },
+        {
+          "id": "training_resources",
+          "title": "Provide Training and Resources",
+          "description": "Ensure customer knows how to use the product",
+          "actions": [
+            "Share relevant documentation and tutorials",
+            "Schedule training session if applicable",
+            "Provide quick start guides",
+            "Explain support resources available",
+            "Set up success metrics and goals"
+          ],
+          "validation": "Training resources provided",
+          "nextStep": "follow_up_scheduling"
+        },
+        {
+          "id": "follow_up_scheduling",
+          "title": "Schedule Follow-up",
+          "description": "Plan ongoing support and check-ins",
+          "actions": [
+            "Schedule initial check-in call",
+            "Set up automated onboarding emails",
+            "Assign customer success manager if applicable",
+            "Create support tickets for any issues",
+            "Document onboarding completion"
+          ],
+          "validation": "Follow-up scheduled and documented",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "feature_request": {
+      "name": "Feature Request Process",
+      "description": "Handle customer feature requests and feedback",
+      "steps": [
+        {
+          "id": "request_capture",
+          "title": "Capture Feature Request",
+          "description": "Document the customer's feature request",
+          "actions": [
+            "Listen to customer's specific request",
+            "Understand the business use case",
+            "Document desired functionality",
+            "Assess impact on customer's workflow",
+            "Note any urgency or timeline requirements"
+          ],
+          "validation": "Feature request clearly documented",
+          "nextStep": "feasibility_assessment"
+        },
+        {
+          "id": "feasibility_assessment",
+          "title": "Assess Request Feasibility",
+          "description": "Evaluate the technical and business feasibility",
+          "actions": [
+            "Check if feature already exists",
+            "Review product roadmap for similar features",
+            "Assess technical complexity",
+            "Consider business impact and priority",
+            "Identify potential workarounds"
+          ],
+          "validation": "Feasibility assessed",
+          "nextStep": "request_routing"
+        },
+        {
+          "id": "request_routing",
+          "title": "Route Request Appropriately",
+          "description": "Send request to appropriate team for consideration",
+          "actions": [
+            "Submit to product management team",
+            "Include customer impact assessment",
+            "Provide technical requirements if known",
+            "Tag with appropriate priority level",
+            "Create tracking ticket for follow-up"
+          ],
+          "validation": "Request routed to product team",
+          "nextStep": "customer_communication"
+        },
+        {
+          "id": "customer_communication",
+          "title": "Communicate with Customer",
+          "description": "Keep customer informed of request status",
+          "actions": [
+            "Acknowledge receipt of request",
+            "Explain evaluation process",
+            "Provide realistic timeline expectations",
+            "Offer alternative solutions if available",
+            "Schedule follow-up communication"
+          ],
+          "validation": "Customer informed of process",
+          "nextStep": "completion"
+        }
+      ]
+    },
+    "escalation_process": {
+      "name": "Technical Escalation Process",
+      "description": "Handle complex technical issues requiring escalation",
+      "steps": [
+        {
+          "id": "escalation_criteria",
+          "title": "Evaluate Escalation Criteria",
+          "description": "Determine if escalation is necessary",
+          "actions": [
+            "Assess technical complexity of issue",
+            "Review customer impact and urgency",
+            "Check if issue requires developer involvement",
+            "Evaluate potential security implications",
+            "Consider customer tier and SLA requirements"
+          ],
+          "validation": "Escalation need confirmed",
+          "nextStep": "technical_documentation"
+        },
+        {
+          "id": "technical_documentation",
+          "title": "Prepare Technical Documentation",
+          "description": "Gather comprehensive technical information",
+          "actions": [
+            "Document complete issue reproduction steps",
+            "Gather system logs and error messages",
+            "Include environment and configuration details",
+            "Note all troubleshooting steps attempted",
+            "Prepare customer impact assessment"
+          ],
+          "validation": "Technical documentation complete",
+          "nextStep": "escalation_handoff"
+        },
+        {
+          "id": "escalation_handoff",
+          "title": "Hand Off to Technical Team",
+          "description": "Transfer case to appropriate technical specialist",
+          "actions": [
+            "Identify correct escalation team (L2, L3, Engineering)",
+            "Provide comprehensive technical briefing",
+            "Ensure all documentation is accessible",
+            "Set appropriate priority and SLA",
+            "Maintain customer communication responsibility"
+          ],
+          "validation": "Successfully escalated to technical team",
+          "nextStep": "resolution_coordination"
+        },
+        {
+          "id": "resolution_coordination",
+          "title": "Coordinate Resolution",
+          "description": "Manage resolution process and customer communication",
+          "actions": [
+            "Monitor progress with technical team",
+            "Provide regular updates to customer",
+            "Coordinate testing of proposed solutions",
+            "Ensure resolution meets customer needs",
+            "Document final resolution and lessons learned"
+          ],
+          "validation": "Issue resolved and documented",
+          "nextStep": "completion"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "_description": "Common guidance for all case templates - LLM MUST read this first",
+  
+  "CRITICAL_FIRST_STEP": {
+    "action": "ALWAYS call set_session FIRST",
+    "tool": "set_session",
+    "params": {"instance_id": "<instance_id>", "region": "<region>"},
+    "why": "ALL tools fail with ResourceNotFoundException if region doesn't match instance location"
+  },
+
+  "caseCreationWorkflow": {
+    "step0_setRegion": {
+      "tool": "set_session",
+      "params": {"instance_id": "<id>", "region": "<region>"},
+      "CRITICAL": "Do this FIRST or all subsequent calls fail with ResourceNotFoundException"
+    },
+    "step1_checkDomain": {
+      "tool": "list_domains_for_instance",
+      "fallback": "cases_create_domain",
+      "WARNING": "cases_create_domain takes ONLY 'name' param - NO description"
+    },
+    "step2_getProfilesDomain": {
+      "tool": "profiles_list_domains",
+      "purpose": "Get domain_name for creating customer profile"
+    },
+    "step3_createProfile": {
+      "tool": "profiles_create_profile",
+      "params": {"domain_name": "<from step2>", "first_name": "X", "last_name": "Y"},
+      "returns": "ProfileId"
+    },
+    "step4_constructProfileARN": {
+      "format": "arn:aws:profile:{region}:{account}:domains/{domain_name}/profiles/{profile_id}",
+      "example": "arn:aws:profile:us-east-1:512144631813:domains/MyDomain/profiles/abc123",
+      "CRITICAL": "customer_id MUST be this ARN format, NOT a plain string"
+    },
+    "step5_listExistingFields": {
+      "tool": "cases_list_fields",
+      "purpose": "Get existing field UUIDs - avoid recreating fields",
+      "note": "System fields have string IDs (title, status), custom fields have UUIDs"
+    },
+    "step6_createCase": {
+      "tool": "create_case",
+      "minimalParams": {
+        "domain_id": "<from step1>",
+        "template_id": "<from cases_list_templates>",
+        "fields": {"title": "string", "customer_id": "<ARN from step4>"}
+      },
+      "CRITICAL": "Start with ONLY title + customer_id, add other fields via update"
+    }
+  },
+
+  "layoutCreationGuidance": {
+    "tool": "cases_create_layout",
+    "CRITICAL_ERRORS": [
+      "❌ System fields (title, status, case_reason, customer_id) CANNOT be in layouts",
+      "❌ Using 'basicLayout' instead of 'basic' fails",
+      "✅ Only custom fields (UUID-based) can be in layout sections"
+    ],
+    "correctStructure": {
+      "content": {
+        "basic": {
+          "topPanel": {
+            "sections": [{"fieldGroup": {"name": "Section Name", "fields": [{"id": "<custom-field-uuid>"}]}}]
+          }
+        }
+      }
+    },
+    "wrongStructure": {
+      "content": {
+        "basicLayout": "WRONG - use 'basic'",
+        "fields": [{"id": "title"}]
+      }
+    }
+  },
+
+  "fieldIdMapping": {
+    "systemFields_CANNOT_USE_IN_LAYOUTS": ["title", "status", "case_reason", "customer_id", "reference_number", "assigned_user", "assigned_queue"],
+    "customFields": "Use cases_list_fields to get UUIDs - these CAN be in layouts"
+  },
+
+  "commonErrors": {
+    "ResourceNotFoundException": {
+      "cause": "Region mismatch - tool calling wrong region",
+      "solution": "Call set_session(instance_id, region) FIRST"
+    },
+    "customer_id_not_valid_ARN": {
+      "cause": "customer_id='cust-123' instead of ARN",
+      "solution": "Use full ARN: arn:aws:profile:{region}:{account}:domains/{domain}/profiles/{id}"
+    },
+    "system_fields_in_layout": {
+      "cause": "Layout contains title, status, or other system fields",
+      "solution": "Only use custom field UUIDs in layout sections"
+    },
+    "ValidationException_basicLayout": {
+      "cause": "Using 'basicLayout' key in layout content",
+      "solution": "Use 'basic' not 'basicLayout'"
+    },
+    "related_item_wrong_format": {
+      "cause": "Content passed as {body, contentType} instead of nested structure",
+      "solution": "Use {comment: {body: 'text', contentType: 'Text/Plain'}} for comments"
+    }
+  },
+
+  "relatedItemGuidance": {
+    "tool": "cases_create_related_item",
+    "item_types": ["Comment", "Contact"],
+    "CRITICAL": "Content must be nested under item type key",
+    "correctFormat": {
+      "Comment": {"content": {"comment": {"body": "Comment text", "contentType": "Text/Plain"}}},
+      "Contact": {"content": {"contact": {"contactArn": "arn:aws:connect:..."}}}
+    },
+    "wrongFormat": {
+      "content": {"body": "text", "contentType": "Text/Plain"}
+    }
+  },
+
+  "bestPractices": [
+    "1. ALWAYS call set_session first with correct region",
+    "2. Check existing resources before creating (list_* tools)",
+    "3. Create case with minimal fields (title + customer_id only)",
+    "4. Update case with additional fields after creation",
+    "5. Never put system fields in layouts",
+    "6. Use Text fields when unsure - SingleSelect requires exact matches"
+  ]
+}

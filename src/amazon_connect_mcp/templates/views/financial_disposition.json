@@ -1,0 +1,92 @@
+{
+  "name": "Financial Services Disposition Form",
+  "description": "After-call work form for banking and financial services",
+  "industry": "Financial Services",
+  "viewType": "Form",
+  "template": {
+    "Head": {"Title": "Call Disposition", "Configuration": {"Layout": {"Columns": ["12"]}}},
+    "Body": [
+      {
+        "_id": "disposition_form",
+        "Type": "Form",
+        "Props": {"Id": "FinancialDisposition"},
+        "Content": [
+          {
+            "_id": "call_reason",
+            "Type": "Select",
+            "Props": {
+              "Label": "Call Reason",
+              "Required": true,
+              "Options": [
+                "Account Inquiry",
+                "Balance Check",
+                "Transaction Dispute",
+                "Fraud Report",
+                "Card Services",
+                "Wire Transfer",
+                "Loan Inquiry",
+                "Payment Issue",
+                "Statement Request",
+                "Account Update",
+                "New Product Inquiry",
+                "Complaint",
+                "Other"
+              ]
+            }
+          },
+          {
+            "_id": "outcome",
+            "Type": "Select",
+            "Props": {
+              "Label": "Call Outcome",
+              "Required": true,
+              "Options": [
+                "Resolved - First Call",
+                "Dispute Filed",
+                "Fraud Case Opened",
+                "Transferred to Specialist",
+                "Escalated to Supervisor",
+                "Callback Scheduled",
+                "Documentation Sent",
+                "Account Updated",
+                "Unresolved - Pending"
+              ]
+            }
+          },
+          {
+            "_id": "identity_verified",
+            "Type": "Checkbox",
+            "Props": {"Label": "Identity Verified", "Id": "identityVerified"}
+          },
+          {
+            "_id": "fraud_suspected",
+            "Type": "Checkbox",
+            "Props": {"Label": "Fraud Suspected", "Id": "fraudSuspected"}
+          },
+          {
+            "_id": "compliance_disclosure",
+            "Type": "Checkbox",
+            "Props": {"Label": "Required Disclosures Provided", "Id": "complianceDisclosure"}
+          },
+          {
+            "_id": "transaction_amount",
+            "Type": "Input",
+            "Props": {"Label": "Transaction Amount (if applicable)", "Type": "number", "Prefix": "$"}
+          },
+          {
+            "_id": "notes",
+            "Type": "TextArea",
+            "Props": {"Label": "Call Notes", "Rows": 4, "Placeholder": "Enter call summary..."}
+          }
+        ]
+      },
+      {
+        "_id": "submit_btn",
+        "Type": "Button",
+        "Props": {"Action": "SubmitDisposition", "Variant": "primary"},
+        "Content": ["Complete Call"]
+      }
+    ]
+  },
+  "actions": ["SubmitDisposition"]
+}

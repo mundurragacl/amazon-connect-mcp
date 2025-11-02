@@ -1,0 +1,51 @@
+{
+  "name": "Outage and Incident Status",
+  "description": "Real-time outage and incident information for proactive customer communication",
+  "attributes": [
+    {"name": "incident_id", "type": "text", "isPrimaryKey": true, "description": "Unique incident identifier"},
+    {"name": "incident_type", "type": "text", "required": true, "description": "Type: outage, degradation, maintenance"},
+    {"name": "affected_service", "type": "text", "required": true, "description": "Affected service or product"},
+    {"name": "affected_regions", "type": "text", "description": "Comma-separated list of affected regions"},
+    {"name": "status", "type": "text", "required": true, "description": "Status: investigating, identified, monitoring, resolved"},
+    {"name": "severity", "type": "text", "required": true, "description": "Severity: critical, major, minor"},
+    {"name": "start_time", "type": "text", "required": true, "description": "Incident start time (ISO 8601)"},
+    {"name": "estimated_resolution", "type": "text", "description": "Estimated resolution time"},
+    {"name": "customer_message", "type": "text", "description": "Message to play/display to customers"},
+    {"name": "is_active", "type": "boolean", "default": true, "description": "Whether incident is currently active"}
+  ],
+  "sampleData": [
+    {
+      "incident_id": "INC-2026-001",
+      "incident_type": "outage",
+      "affected_service": "Mobile App",
+      "affected_regions": "Northeast,Southeast",
+      "status": "identified",
+      "severity": "major",
+      "start_time": "2026-01-03T14:30:00Z",
+      "estimated_resolution": "2026-01-03T18:00:00Z",
+      "customer_message": "We are aware of issues affecting our mobile app in the Northeast and Southeast regions. Our team is working to resolve this. Estimated resolution: 6 PM EST.",
+      "is_active": true
+    },
+    {
+      "incident_id": "INC-2026-002",
+      "incident_type": "maintenance",
+      "affected_service": "Online Portal",
+      "affected_regions": "All",
+      "status": "monitoring",
+      "severity": "minor",
+      "start_time": "2026-01-04T02:00:00Z",
+      "estimated_resolution": "2026-01-04T06:00:00Z",
+      "customer_message": "Scheduled maintenance will occur tonight from 2 AM to 6 AM EST. Some services may be temporarily unavailable.",
+      "is_active": true
+    }
+  ],
+  "flowUsage": {
+    "description": "Check for active incidents affecting customer's service",
+    "example": {
+      "action": "Scan",
+      "filterAttribute": "is_active",
+      "filterValue": true,
+      "returnAttributes": ["incident_type", "affected_service", "status", "customer_message", "estimated_resolution"]
+    }
+  }
+}

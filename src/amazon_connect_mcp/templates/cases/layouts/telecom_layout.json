@@ -1,0 +1,41 @@
+{
+  "name": "Telecom Support Layout",
+  "description": "Layout for telecommunications cases with service and account details",
+  "_note": "Title and Status fields cannot be part of layouts - they are always displayed automatically",
+  "content": {
+    "basic": {
+      "topPanel": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Service Overview",
+              "fields": [
+                {"id": "case_reason"},
+                {"id": "account_number"},
+                {"id": "customer_id"}
+              ]
+            }
+          }
+        ]
+      },
+      "moreInfo": {
+        "sections": [
+          {
+            "fieldGroup": {
+              "name": "Service Details",
+              "fields": [
+                {"id": "phone_number"},
+                {"id": "summary"}
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requiredCustomFields": [
+    {"name": "Account Number", "type": "Text"},
+    {"name": "Phone Number", "type": "Text"},
+    {"name": "Resolution Notes", "type": "Text"}
+  ]
+}

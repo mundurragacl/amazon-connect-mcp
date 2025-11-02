@@ -1,0 +1,77 @@
+{
+  "name": "Travel Booking Screen Pop",
+  "description": "Reservation and booking information for travel and hospitality contact centers",
+  "industry": "Travel/Hospitality",
+  "viewType": "Detail",
+  "template": {
+    "Head": {
+      "Title": "Reservation Details",
+      "Configuration": {"Layout": {"Columns": ["7", "5"]}}
+    },
+    "Body": [
+      {
+        "_id": "travel_alert",
+        "Type": "AlertBanner",
+        "Props": {
+          "Visible": "$.Booking.TravelAlert",
+          "Variant": "warning",
+          "Message": "$.Booking.TravelAlertMessage"
+        }
+      },
+      {
+        "_id": "guest_card",
+        "Type": "Card",
+        "Props": {
+          "Heading": "$.Guest.Name",
+          "Icon": "User",
+          "Status": "$.Guest.LoyaltyStatus",
+          "Description": "Loyalty #: $.Guest.LoyaltyNumber | Points: $.Guest.PointsBalance"
+        }
+      },
+      {
+        "_id": "booking_card",
+        "Type": "Card",
+        "Props": {
+          "Heading": "Confirmation: $.Booking.ConfirmationNumber",
+          "Icon": "Calendar",
+          "Status": "$.Booking.Status",
+          "Description": "$.Booking.TripSummary"
+        }
+      },
+      {
+        "_id": "itinerary_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Itinerary"},
+        "Content": [
+          {"Label": "Check-in", "Value": "$.Booking.CheckInDate"},
+          {"Label": "Check-out", "Value": "$.Booking.CheckOutDate"},
+          {"Label": "Destination", "Value": "$.Booking.Destination"},
+          {"Label": "Room/Flight", "Value": "$.Booking.RoomOrFlight"},
+          {"Label": "Guests", "Value": "$.Booking.GuestCount"}
+        ]
+      },
+      {
+        "_id": "payment_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Payment"},
+        "Content": [
+          {"Label": "Total", "Value": "$.Booking.TotalAmount"},
+          {"Label": "Paid", "Value": "$.Booking.AmountPaid"},
+          {"Label": "Balance Due", "Value": "$.Booking.BalanceDue"},
+          {"Label": "Cancellation Policy", "Value": "$.Booking.CancellationPolicy"}
+        ]
+      },
+      {
+        "_id": "quick_actions",
+        "Type": "Container",
+        "Content": [
+          {"_id": "modify_btn", "Type": "Button", "Props": {"Action": "ModifyBooking", "Variant": "primary"}, "Content": ["Modify Booking"]},
+          {"_id": "upgrade_btn", "Type": "Button", "Props": {"Action": "UpgradeRoom"}, "Content": ["Upgrade"]},
+          {"_id": "cancel_btn", "Type": "Button", "Props": {"Action": "CancelBooking", "Variant": "destructive"}, "Content": ["Cancel"]},
+          {"_id": "refund_btn", "Type": "Button", "Props": {"Action": "ProcessRefund"}, "Content": ["Refund"]}
+        ]
+      }
+    ]
+  },
+  "actions": ["ModifyBooking", "UpgradeRoom", "CancelBooking", "ProcessRefund", "AddServices", "RedeemPoints", "CreateCase"]
+}

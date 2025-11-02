@@ -1,0 +1,58 @@
+{
+  "name": "Utilities 24x7 Emergency",
+  "description": "24/7 operation for utilities with emergency line always available",
+  "industry": "Utilities",
+  "timeZone": "America/New_York",
+  "config": [
+    {"Day": "MONDAY", "StartTime": {"Hours": 0, "Minutes": 0}, "EndTime": {"Hours": 23, "Minutes": 59}},
+    {"Day": "TUESDAY", "StartTime": {"Hours": 0, "Minutes": 0}, "EndTime": {"Hours": 23, "Minutes": 59}},
+    {"Day": "WEDNESDAY", "StartTime": {"Hours": 0, "Minutes": 0}, "EndTime": {"Hours": 23, "Minutes": 59}},
+    {"Day": "THURSDAY", "StartTime": {"Hours": 0, "Minutes": 0}, "EndTime": {"Hours": 23, "Minutes": 59}},
+    {"Day": "FRIDAY", "StartTime": {"Hours": 0, "Minutes": 0}, "EndTime": {"Hours": 23, "Minutes": 59}},
+    {"Day": "SATURDAY", "StartTime": {"Hours": 0, "Minutes": 0}, "EndTime": {"Hours": 23, "Minutes": 59}},
+    {"Day": "SUNDAY", "StartTime": {"Hours": 0, "Minutes": 0}, "EndTime": {"Hours": 23, "Minutes": 59}}
+  ],
+  "queueSchedules": {
+    "emergency": {
+      "name": "Emergency-Queue",
+      "hours": "24x7",
+      "priority": "highest",
+      "description": "Gas leaks, downed power lines, emergencies"
+    },
+    "outageReporting": {
+      "name": "Outage-Queue",
+      "hours": "24x7",
+      "priority": "high",
+      "description": "Power/service outage reporting"
+    },
+    "billing": {
+      "name": "Billing-Queue",
+      "hours": {
+        "weekday": {"start": "07:00", "end": "19:00"},
+        "saturday": {"start": "08:00", "end": "14:00"},
+        "sunday": "closed"
+      },
+      "priority": "normal"
+    },
+    "newService": {
+      "name": "NewService-Queue",
+      "hours": {
+        "weekday": {"start": "08:00", "end": "18:00"},
+        "weekend": "closed"
+      },
+      "priority": "normal"
+    }
+  },
+  "emergencyConfig": {
+    "gasLeak": {
+      "priority": "critical",
+      "immediateTransfer": true,
+      "message": "If you smell gas, leave the area immediately and call 911. Stay on the line to report to our emergency team."
+    },
+    "downedLine": {
+      "priority": "critical",
+      "immediateTransfer": true,
+      "message": "Stay away from downed power lines. Do not touch anything in contact with the line. Stay on the line to report."
+    }
+  }
+}

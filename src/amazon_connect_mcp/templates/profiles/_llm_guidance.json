@@ -1,0 +1,32 @@
+{
+  "_category_guidance": {
+    "description": "Customer Profiles templates define unified customer data structures for Amazon Connect",
+    "workflow": [
+      "1. Create domain: profiles_create_domain(domain_name)",
+      "2. Create profile: profiles_create_profile(domain_name, first_name, last_name, phone, email, attributes)",
+      "3. Search profiles: profiles_search(domain_name, key_name, values)",
+      "4. Update profile: profiles_update_profile(domain_name, profile_id, ...)"
+    ],
+    "fieldMapping": {
+      "standardFields": {
+        "_firstName": "first_name parameter",
+        "_lastName": "last_name parameter", 
+        "_phone": "phone parameter",
+        "_email": "email parameter"
+      },
+      "customFields": "Pass as attributes dict: {\"fieldKey\": \"value\"}"
+    },
+    "searchKeys": [
+      "_email - Search by email address",
+      "_phone - Search by phone number",
+      "_account - Search by account ID",
+      "_fullName - Search by full name"
+    ],
+    "criticalNotes": [
+      "Domain must exist before creating profiles",
+      "Standard fields use underscore prefix (_firstName)",
+      "Custom attributes are stored in Attributes dict",
+      "Profile IDs are returned on creation for subsequent operations"
+    ]
+  }
+}

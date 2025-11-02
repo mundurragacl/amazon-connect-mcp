@@ -1,0 +1,140 @@
+{
+  "name": "Call Disposition",
+  "description": "Form view for after-call work - disposition codes, notes, and follow-up",
+  "viewType": "Form",
+  "template": {
+    "AttributeBar": [
+      {"Label": "Contact ID", "Value": "$.Contact.ContactId", "Copyable": true},
+      {"Label": "Duration", "Value": "$.Contact.Duration"},
+      {"Label": "Customer", "Value": "$.Customer.Name"}
+    ],
+    "Heading": "After Contact Work",
+    "SubHeading": "Complete the following before ending ACW",
+    "Sections": [
+      {
+        "_id": "disposition",
+        "Type": "FormSection",
+        "Heading": "Disposition",
+        "Items": [
+          {
+            "Type": "FormSelect",
+            "Label": "Outcome",
+            "Name": "outcome",
+            "Required": true,
+            "Options": [
+              {"Label": "Resolved - First Contact", "Value": "resolved_first"},
+              {"Label": "Resolved - Follow-up Required", "Value": "resolved_followup"},
+              {"Label": "Escalated", "Value": "escalated"},
+              {"Label": "Transferred", "Value": "transferred"},
+              {"Label": "Customer Disconnected", "Value": "disconnected"},
+              {"Label": "No Resolution - Customer Choice", "Value": "no_resolution"}
+            ]
+          },
+          {
+            "Type": "FormSelect",
+            "Label": "Contact Reason",
+            "Name": "contact_reason",
+            "Required": true,
+            "Options": [
+              {"Label": "Billing Inquiry", "Value": "billing"},
+              {"Label": "Technical Support", "Value": "technical"},
+              {"Label": "Account Management", "Value": "account"},
+              {"Label": "Order Status", "Value": "order"},
+              {"Label": "Sales", "Value": "sales"},
+              {"Label": "Complaint", "Value": "complaint"},
+              {"Label": "General Inquiry", "Value": "general"}
+            ]
+          },
+          {
+            "Type": "FormSelect",
+            "Label": "Customer Sentiment",
+            "Name": "sentiment",
+            "Options": [
+              {"Label": "Very Satisfied", "Value": "very_satisfied"},
+              {"Label": "Satisfied", "Value": "satisfied"},
+              {"Label": "Neutral", "Value": "neutral"},
+              {"Label": "Dissatisfied", "Value": "dissatisfied"},
+              {"Label": "Very Dissatisfied", "Value": "very_dissatisfied"}
+            ]
+          }
+        ]
+      },
+      {
+        "_id": "notes",
+        "Type": "FormSection",
+        "Heading": "Notes",
+        "Items": [
+          {
+            "Type": "FormTextArea",
+            "Label": "Contact Summary",
+            "Name": "summary",
+            "Required": true,
+            "Placeholder": "Brief summary of the contact and resolution",
+            "Rows": 3
+          },
+          {
+            "Type": "FormTextArea",
+            "Label": "Internal Notes",
+            "Name": "internal_notes",
+            "Placeholder": "Notes for internal reference (not visible to customer)",
+            "Rows": 2
+          }
+        ]
+      },
+      {
+        "_id": "followup",
+        "Type": "FormSection",
+        "Heading": "Follow-up",
+        "Items": [
+          {
+            "Type": "FormCheckbox",
+            "Label": "Follow-up Required",
+            "Name": "followup_required"
+          },
+          {
+            "Type": "FormSelect",
+            "Label": "Follow-up Type",
+            "Name": "followup_type",
+            "Options": [
+              {"Label": "Callback", "Value": "callback"},
+              {"Label": "Email", "Value": "email"},
+              {"Label": "Task", "Value": "task"},
+              {"Label": "Case Update", "Value": "case_update"}
+            ]
+          },
+          {
+            "Type": "FormInput",
+            "InputType": "datetime-local",
+            "Label": "Follow-up Date/Time",
+            "Name": "followup_datetime"
+          },
+          {
+            "Type": "FormTextArea",
+            "Label": "Follow-up Notes",
+            "Name": "followup_notes",
+            "Placeholder": "What needs to be done in the follow-up",
+            "Rows": 2
+          }
+        ]
+      }
+    ],
+    "Next": {
+      "Label": "Complete ACW",
+      "Details": {"action": "complete_acw"}
+    },
+    "Cancel": {
+      "Label": "Save Draft"
+    }
+  },
+  "outputMapping": {
+    "outcome": "$.FormData.outcome",
+    "contactReason": "$.FormData.contact_reason",
+    "sentiment": "$.FormData.sentiment",
+    "summary": "$.FormData.summary",
+    "internalNotes": "$.FormData.internal_notes",
+    "followupRequired": "$.FormData.followup_required",
+    "followupType": "$.FormData.followup_type",
+    "followupDatetime": "$.FormData.followup_datetime",
+    "followupNotes": "$.FormData.followup_notes"
+  }
+}

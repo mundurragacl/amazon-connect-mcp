@@ -1,0 +1,79 @@
+{
+  "name": "Insurance Policy Screen Pop",
+  "description": "Policy and claims information for insurance contact centers",
+  "industry": "Insurance",
+  "viewType": "Detail",
+  "template": {
+    "Head": {
+      "Title": "Policy Overview",
+      "Configuration": {"Layout": {"Columns": ["8", "4"]}}
+    },
+    "Body": [
+      {
+        "_id": "claim_alert",
+        "Type": "AlertBanner",
+        "Props": {
+          "Visible": "$.Claims.ActiveClaim",
+          "Variant": "info",
+          "Message": "ACTIVE CLAIM: $.Claims.ActiveClaimNumber - Status: $.Claims.ActiveClaimStatus"
+        }
+      },
+      {
+        "_id": "policyholder_card",
+        "Type": "Card",
+        "Props": {
+          "Heading": "$.Policyholder.Name",
+          "Icon": "Shield",
+          "Status": "$.Policy.Status",
+          "Description": "Policy: $.Policy.PolicyNumber | Type: $.Policy.PolicyType"
+        }
+      },
+      {
+        "_id": "policy_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Policy Details"},
+        "Content": [
+          {"Label": "Policy Number", "Value": "$.Policy.PolicyNumber", "Copyable": true},
+          {"Label": "Type", "Value": "$.Policy.PolicyType"},
+          {"Label": "Coverage", "Value": "$.Policy.CoverageAmount"},
+          {"Label": "Deductible", "Value": "$.Policy.Deductible"},
+          {"Label": "Effective Date", "Value": "$.Policy.EffectiveDate"},
+          {"Label": "Expiration", "Value": "$.Policy.ExpirationDate"}
+        ]
+      },
+      {
+        "_id": "premium_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Premium & Billing"},
+        "Content": [
+          {"Label": "Premium", "Value": "$.Billing.PremiumAmount"},
+          {"Label": "Frequency", "Value": "$.Billing.PaymentFrequency"},
+          {"Label": "Next Due", "Value": "$.Billing.NextDueDate"},
+          {"Label": "Payment Method", "Value": "$.Billing.PaymentMethod"}
+        ]
+      },
+      {
+        "_id": "claims_section",
+        "Type": "AttributeSection",
+        "Props": {"Heading": "Claims History"},
+        "Content": [
+          {"Label": "Total Claims", "Value": "$.Claims.TotalClaims"},
+          {"Label": "Open Claims", "Value": "$.Claims.OpenClaims"},
+          {"Label": "Last Claim", "Value": "$.Claims.LastClaimDate"},
+          {"Label": "Claims Paid", "Value": "$.Claims.TotalPaid"}
+        ]
+      },
+      {
+        "_id": "quick_actions",
+        "Type": "Container",
+        "Content": [
+          {"_id": "claim_btn", "Type": "Button", "Props": {"Action": "FileClaim", "Variant": "primary"}, "Content": ["File Claim"]},
+          {"_id": "status_btn", "Type": "Button", "Props": {"Action": "ClaimStatus"}, "Content": ["Claim Status"]},
+          {"_id": "docs_btn", "Type": "Button", "Props": {"Action": "RequestDocuments"}, "Content": ["Request Docs"]},
+          {"_id": "quote_btn", "Type": "Button", "Props": {"Action": "GetQuote"}, "Content": ["Get Quote"]}
+        ]
+      }
+    ]
+  },
+  "actions": ["FileClaim", "ClaimStatus", "RequestDocuments", "GetQuote", "UpdatePolicy", "MakePayment", "CreateCase"]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "Financial Services Hours",
+  "description": "Extended hours for financial services with fraud line 24/7",
+  "industry": "Financial Services",
+  "timeZone": "America/New_York",
+  "config": [
+    {"Day": "MONDAY", "StartTime": {"Hours": 7, "Minutes": 0}, "EndTime": {"Hours": 22, "Minutes": 0}},
+    {"Day": "TUESDAY", "StartTime": {"Hours": 7, "Minutes": 0}, "EndTime": {"Hours": 22, "Minutes": 0}},
+    {"Day": "WEDNESDAY", "StartTime": {"Hours": 7, "Minutes": 0}, "EndTime": {"Hours": 22, "Minutes": 0}},
+    {"Day": "THURSDAY", "StartTime": {"Hours": 7, "Minutes": 0}, "EndTime": {"Hours": 22, "Minutes": 0}},
+    {"Day": "FRIDAY", "StartTime": {"Hours": 7, "Minutes": 0}, "EndTime": {"Hours": 22, "Minutes": 0}},
+    {"Day": "SATURDAY", "StartTime": {"Hours": 8, "Minutes": 0}, "EndTime": {"Hours": 18, "Minutes": 0}},
+    {"Day": "SUNDAY", "StartTime": {"Hours": 9, "Minutes": 0}, "EndTime": {"Hours": 17, "Minutes": 0}}
+  ],
+  "specialQueues": {
+    "fraud": {
+      "name": "Fraud-24x7",
+      "hours": "24x7",
+      "description": "Fraud reporting available 24/7"
+    },
+    "lostCard": {
+      "name": "LostCard-24x7",
+      "hours": "24x7",
+      "description": "Lost/stolen card reporting 24/7"
+    }
+  },
+  "afterHoursConfig": {
+    "action": "limited_service",
+    "availableServices": ["fraud_reporting", "card_block", "balance_inquiry"],
+    "message": "Our full-service team is currently unavailable. For fraud reporting or to block a lost card, press 1. For automated account balance, press 2. For all other inquiries, please call back during business hours."
+  }
+}

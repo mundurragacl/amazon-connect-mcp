@@ -1,0 +1,128 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "12345678-1234-1234-1234-123456789030",
+  "Metadata": {
+    "entryPointPosition": {"x": 20, "y": 20},
+    "snapToGrid": false,
+    "ActionMetadata": {
+      "12345678-1234-1234-1234-123456789030": {"position": {"x": 20, "y": 20}},
+      "12345678-1234-1234-1234-123456789031": {"position": {"x": 200, "y": 20}},
+      "12345678-1234-1234-1234-123456789032": {"position": {"x": 400, "y": 20}},
+      "12345678-1234-1234-1234-123456789033": {"position": {"x": 600, "y": 20}},
+      "12345678-1234-1234-1234-123456789034": {"position": {"x": 800, "y": 20}}
+    }
+  },
+  "Actions": [
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789030",
+      "Type": "MessageParticipant",
+      "Parameters": {
+        "Text": "Thank you for calling [Bank Name]. Your call may be monitored or recorded for quality assurance. For your security, please do not provide sensitive information until connected to an agent."
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789031"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789031",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "If you suspect fraudulent activity on your account, press 1 immediately. For account balances and recent transactions, press 2. For loan inquiries, press 3. For credit card services, press 4. For all other banking services, press 9.",
+        "MaxDigits": 1,
+        "Timeout": "8"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789032",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789033",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "1"]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789034",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789032",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "ServiceType": "$.CustomerInput",
+          "Priority": "Normal"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789034"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789033",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "ServiceType": "Fraud",
+          "Priority": "High",
+          "FraudAlert": "true"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789035"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789034",
+      "Type": "GetParticipantInput",
+      "Parameters": {
+        "Text": "Please enter your account number followed by the pound key, or press 0 to speak with a representative.",
+        "MaxDigits": 12,
+        "Timeout": "15"
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789036",
+        "Conditions": [
+          {
+            "NextAction": "12345678-1234-1234-1234-123456789036",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": ["$.CustomerInput", "0"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789035",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/fraud-team"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789036",
+      "Type": "SetContactAttributes",
+      "Parameters": {
+        "Attributes": {
+          "AccountNumber": "$.CustomerInput"
+        }
+      },
+      "Transitions": {
+        "NextAction": "12345678-1234-1234-1234-123456789037"
+      }
+    },
+    {
+      "Identifier": "12345678-1234-1234-1234-123456789037",
+      "Type": "TransferContactToQueue",
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:123456789012:instance/12345678-1234-1234-1234-123456789012/queue/banking-support"
+      }
+    }
+  ]
+}
