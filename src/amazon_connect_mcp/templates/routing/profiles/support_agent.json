@@ -1,0 +1,39 @@
+{
+  "name": "Support Agent Profile",
+  "description": "Routing profile for general support agents handling voice, chat, and tasks",
+  "defaultOutboundQueueTemplate": "general_support",
+  "mediaConcurrencies": [
+    {
+      "channel": "VOICE",
+      "concurrency": 1,
+      "crossChannelBehavior": {
+        "behaviorType": "ROUTE_CURRENT_CHANNEL_ONLY"
+      }
+    },
+    {
+      "channel": "CHAT",
+      "concurrency": 3,
+      "crossChannelBehavior": {
+        "behaviorType": "ROUTE_ANY_CHANNEL"
+      }
+    },
+    {
+      "channel": "TASK",
+      "concurrency": 5,
+      "crossChannelBehavior": {
+        "behaviorType": "ROUTE_ANY_CHANNEL"
+      }
+    }
+  ],
+  "queueConfigs": [
+    {
+      "queueTemplate": "general_support",
+      "priority": 1,
+      "delay": 0
+    }
+  ],
+  "tags": {
+    "Role": "Support",
+    "Level": "Standard"
+  }
+}

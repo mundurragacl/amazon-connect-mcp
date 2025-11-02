@@ -1,0 +1,13 @@
+{
+  "name": "General Support Queue",
+  "description": "Standard queue for general customer support inquiries",
+  "maxContacts": 10,
+  "hoursOfOperationTemplate": "business_hours",
+  "outboundCallerConfig": {
+    "outboundCallerIdName": "Customer Support"
+  },
+  "tags": {
+    "Department": "Support",
+    "Type": "General"
+  }
+}

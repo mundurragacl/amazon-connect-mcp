@@ -1,0 +1,52 @@
+{
+  "name": "Technical Support",
+  "description": "Template for technical support and troubleshooting cases",
+  "status": "Active",
+  "requiredFields": [
+    {"fieldId": "title"},
+    {"fieldId": "status"},
+    {"fieldId": "severity"},
+    {"fieldId": "product"}
+  ],
+  "layout": {
+    "topPanel": [
+      {"fieldId": "title", "label": "Case Title"},
+      {"fieldId": "status", "label": "Status"},
+      {"fieldId": "severity", "label": "Severity"},
+      {"fieldId": "product", "label": "Product"}
+    ],
+    "moreInfo": [
+      {"fieldId": "product_version", "label": "Product Version"},
+      {"fieldId": "environment", "label": "Environment"},
+      {"fieldId": "error_code", "label": "Error Code"},
+      {"fieldId": "error_message", "label": "Error Message"},
+      {"fieldId": "steps_to_reproduce", "label": "Steps to Reproduce"},
+      {"fieldId": "expected_behavior", "label": "Expected Behavior"},
+      {"fieldId": "actual_behavior", "label": "Actual Behavior"},
+      {"fieldId": "workaround", "label": "Workaround"},
+      {"fieldId": "resolution", "label": "Resolution"}
+    ]
+  },
+  "fields": {
+    "title": {"type": "Text", "required": true, "maxLength": 200},
+    "status": {"type": "SingleSelect", "required": true, "options": ["New", "Investigating", "Waiting for Info", "In Progress", "Testing Fix", "Resolved", "Closed"]},
+    "severity": {"type": "SingleSelect", "required": true, "options": ["Critical - System Down", "High - Major Impact", "Medium - Limited Impact", "Low - Minor Issue"]},
+    "product": {"type": "SingleSelect", "required": true, "options": ["Product A", "Product B", "Product C", "Mobile App", "Web Portal", "API", "Other"]},
+    "product_version": {"type": "Text", "maxLength": 50},
+    "environment": {"type": "SingleSelect", "options": ["Production", "Staging", "Development", "Test"]},
+    "error_code": {"type": "Text", "maxLength": 100},
+    "error_message": {"type": "Text", "multiline": true, "maxLength": 2000},
+    "steps_to_reproduce": {"type": "Text", "multiline": true, "maxLength": 5000},
+    "expected_behavior": {"type": "Text", "multiline": true, "maxLength": 2000},
+    "actual_behavior": {"type": "Text", "multiline": true, "maxLength": 2000},
+    "workaround": {"type": "Text", "multiline": true, "maxLength": 2000},
+    "resolution": {"type": "Text", "multiline": true, "maxLength": 5000}
+  },
+  "conditions": [
+    {
+      "type": "conditionallyRequired",
+      "targetField": "error_message",
+      "condition": {"field": "error_code", "isNotEmpty": true}
+    }
+  ]
+}

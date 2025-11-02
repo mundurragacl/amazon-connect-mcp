@@ -1,0 +1,129 @@
+{
+  "name": "Emergency Routing",
+  "description": "Data table for emergency routing overrides and custom messaging",
+  "attributes": [
+    {
+      "name": "queue_id",
+      "type": "text",
+      "isPrimaryKey": true,
+      "description": "Queue identifier or 'ALL' for global"
+    },
+    {
+      "name": "is_emergency",
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "description": "Whether emergency mode is active"
+    },
+    {
+      "name": "emergency_type",
+      "type": "text",
+      "description": "Type of emergency (outage, weather, staffing, etc.)"
+    },
+    {
+      "name": "redirect_enabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to redirect to another queue"
+    },
+    {
+      "name": "redirect_queue_id",
+      "type": "text",
+      "description": "Queue to redirect calls to"
+    },
+    {
+      "name": "voicemail_enabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to offer voicemail option"
+    },
+    {
+      "name": "callback_enabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to offer callback option"
+    },
+    {
+      "name": "custom_message",
+      "type": "text",
+      "description": "Custom IVR message for emergency"
+    },
+    {
+      "name": "estimated_resolution",
+      "type": "text",
+      "description": "Estimated time to resolution"
+    },
+    {
+      "name": "last_updated",
+      "type": "text",
+      "description": "Timestamp of last update"
+    },
+    {
+      "name": "updated_by",
+      "type": "text",
+      "description": "User who made the update"
+    }
+  ],
+  "sampleData": [
+    {
+      "queue_id": "ALL",
+      "is_emergency": false,
+      "emergency_type": null,
+      "redirect_enabled": false,
+      "voicemail_enabled": false,
+      "callback_enabled": false,
+      "custom_message": null,
+      "last_updated": "2026-01-01T00:00:00Z",
+      "updated_by": "system"
+    },
+    {
+      "queue_id": "technical_support",
+      "is_emergency": false,
+      "emergency_type": null,
+      "redirect_enabled": false,
+      "voicemail_enabled": true,
+      "callback_enabled": true,
+      "custom_message": null,
+      "last_updated": "2026-01-01T00:00:00Z",
+      "updated_by": "system"
+    }
+  ],
+  "emergencyExamples": [
+    {
+      "queue_id": "ALL",
+      "is_emergency": true,
+      "emergency_type": "system_outage",
+      "redirect_enabled": false,
+      "voicemail_enabled": true,
+      "callback_enabled": true,
+      "custom_message": "We are currently experiencing technical difficulties. Please leave a voicemail or request a callback, and we will contact you as soon as possible.",
+      "estimated_resolution": "2 hours",
+      "last_updated": "2026-01-03T10:30:00Z",
+      "updated_by": "admin@company.com"
+    },
+    {
+      "queue_id": "sales",
+      "is_emergency": true,
+      "emergency_type": "staffing",
+      "redirect_enabled": true,
+      "redirect_queue_id": "general_support",
+      "voicemail_enabled": false,
+      "callback_enabled": true,
+      "custom_message": "Our sales team is currently unavailable. You can speak with a general support agent or request a callback from our sales team.",
+      "estimated_resolution": "Tomorrow 9 AM",
+      "last_updated": "2026-01-03T14:00:00Z",
+      "updated_by": "supervisor@company.com"
+    }
+  ],
+  "flowUsage": {
+    "description": "Check emergency status at start of flow before routing",
+    "example": {
+      "action": "Evaluate",
+      "queries": [
+        {"primaryAttribute": "queue_id", "primaryValue": "ALL"},
+        {"primaryAttribute": "queue_id", "primaryValue": "$.Queue.Id"}
+      ],
+      "returnAttributes": ["is_emergency", "emergency_type", "redirect_enabled", "redirect_queue_id", "custom_message"]
+    }
+  }
+}

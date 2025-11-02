@@ -1,0 +1,106 @@
+{
+  "name": "Case Creation Form",
+  "description": "Form view for agents to create new cases during or after contact",
+  "viewType": "Form",
+  "template": {
+    "AttributeBar": [
+      {"Label": "Customer", "Value": "$.Customer.Name"},
+      {"Label": "Contact ID", "Value": "$.Contact.ContactId", "Copyable": true}
+    ],
+    "Heading": "Create New Case",
+    "SubHeading": "Enter case details below",
+    "Sections": [
+      {
+        "_id": "case_basics",
+        "Type": "FormSection",
+        "Heading": "Case Information",
+        "Items": [
+          {
+            "Type": "FormInput",
+            "InputType": "text",
+            "Label": "Case Title",
+            "Name": "title",
+            "Required": true,
+            "Placeholder": "Brief description of the issue"
+          },
+          {
+            "Type": "FormSelect",
+            "Label": "Category",
+            "Name": "category",
+            "Required": true,
+            "Options": [
+              {"Label": "General Inquiry", "Value": "general"},
+              {"Label": "Billing", "Value": "billing"},
+              {"Label": "Technical Support", "Value": "technical"},
+              {"Label": "Sales", "Value": "sales"},
+              {"Label": "Complaint", "Value": "complaint"}
+            ]
+          },
+          {
+            "Type": "FormSelect",
+            "Label": "Priority",
+            "Name": "priority",
+            "Required": true,
+            "Options": [
+              {"Label": "Low", "Value": "low"},
+              {"Label": "Medium", "Value": "medium"},
+              {"Label": "High", "Value": "high"},
+              {"Label": "Urgent", "Value": "urgent"}
+            ],
+            "DefaultValue": "medium"
+          }
+        ]
+      },
+      {
+        "_id": "case_details",
+        "Type": "FormSection",
+        "Heading": "Details",
+        "Items": [
+          {
+            "Type": "FormTextArea",
+            "Label": "Description",
+            "Name": "description",
+            "Required": true,
+            "Placeholder": "Detailed description of the customer's issue",
+            "Rows": 4
+          },
+          {
+            "Type": "FormTextArea",
+            "Label": "Initial Notes",
+            "Name": "notes",
+            "Placeholder": "Any additional notes or context",
+            "Rows": 2
+          }
+        ]
+      },
+      {
+        "_id": "customer_info",
+        "Type": "DataSection",
+        "Heading": "Customer Information",
+        "isEditable": false,
+        "Items": [
+          {"Label": "Name", "Value": "$.Customer.Name"},
+          {"Label": "Phone", "Value": "$.Customer.PhoneNumber"},
+          {"Label": "Email", "Value": "$.Customer.Email"},
+          {"Label": "Account", "Value": "$.Customer.AccountNumber"}
+        ]
+      }
+    ],
+    "Next": {
+      "Label": "Create Case",
+      "Details": {"action": "create_case"}
+    },
+    "Cancel": {
+      "Label": "Cancel"
+    }
+  },
+  "outputMapping": {
+    "title": "$.FormData.title",
+    "category": "$.FormData.category",
+    "priority": "$.FormData.priority",
+    "description": "$.FormData.description",
+    "notes": "$.FormData.notes",
+    "customerId": "$.Customer.ProfileId",
+    "contactId": "$.Contact.ContactId"
+  }
+}

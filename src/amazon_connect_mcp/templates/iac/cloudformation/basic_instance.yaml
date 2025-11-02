@@ -1,0 +1,188 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  Amazon Connect Basic Instance Setup
+  Deploys a Connect instance with basic configuration including hours of operation,
+  queue, and routing profile.
+
+Parameters:
+  InstanceAlias:
+    Type: String
+    Description: Unique alias for the Amazon Connect instance
+    MinLength: 1
+    MaxLength: 45
+    AllowedPattern: ^[a-z][a-z0-9-]*$
+    ConstraintDescription: Must start with lowercase letter, contain only lowercase letters, numbers, and hyphens
+
+  Timezone:
+    Type: String
+    Description: Timezone for hours of operation
+    Default: America/New_York
+    AllowedValues:
+      - America/New_York
+      - America/Chicago
+      - America/Denver
+      - America/Los_Angeles
+      - America/Phoenix
+      - Europe/London
+      - Europe/Paris
+      - Asia/Tokyo
+      - Asia/Singapore
+      - Australia/Sydney
+
+  EnableContactLens:
+    Type: String
+    Description: Enable Contact Lens for conversational analytics
+    Default: 'true'
+    AllowedValues:
+      - 'true'
+      - 'false'
+
+Resources:
+  # Amazon Connect Instance
+  ConnectInstance:
+    Type: AWS::Connect::Instance
+    Properties:
+      InstanceAlias: !Ref InstanceAlias
+      IdentityManagementType: CONNECT_MANAGED
+      Attributes:
+        InboundCalls: true
+        OutboundCalls: true
+        ContactflowLogs: true
+        ContactLens: !Ref EnableContactLens
+        AutoResolveBestVoices: true
+        UseCustomTTSVoices: false
+        EarlyMedia: true
+
+  # Hours of Operation - Business Hours
+  BusinessHours:
+    Type: AWS::Connect::HoursOfOperation
+    Properties:
+      InstanceArn: !GetAtt ConnectInstance.Arn
+      Name: Business Hours
+      Description: Standard business hours Monday-Friday 8am-5pm
+      TimeZone: !Ref Timezone
+      Config:
+        - Day: MONDAY
+          StartTime:
+            Hours: 8
+            Minutes: 0
+          EndTime:
+            Hours: 17
+            Minutes: 0
+        - Day: TUESDAY
+          StartTime:
+            Hours: 8
+            Minutes: 0
+          EndTime:
+            Hours: 17
+            Minutes: 0
+        - Day: WEDNESDAY
+          StartTime:
+            Hours: 8
+            Minutes: 0
+          EndTime:
+            Hours: 17
+            Minutes: 0
+        - Day: THURSDAY
+          StartTime:
+            Hours: 8
+            Minutes: 0
+          EndTime:
+            Hours: 17
+            Minutes: 0
+        - Day: FRIDAY
+          StartTime:
+            Hours: 8
+            Minutes: 0
+          EndTime:
+            Hours: 17
+            Minutes: 0
+      Tags:
+        - Key: Environment
+          Value: Production
+
+  # General Support Queue
+  GeneralSupportQueue:
+    Type: AWS::Connect::Queue
+    Properties:
+      InstanceArn: !GetAtt ConnectInstance.Arn
+      Name: General Support
+      Description: Queue for general customer support inquiries
+      HoursOfOperationArn: !GetAtt BusinessHours.HoursOfOperationArn
+      MaxContacts: 10
+      Status: ENABLED
+      Tags:
+        - Key: Department
+          Value: Support
+        - Key: Type
+          Value: General
+
+  # Support Agent Routing Profile
+  SupportAgentProfile:
+    Type: AWS::Connect::RoutingProfile
+    Properties:
+      InstanceArn: !GetAtt ConnectInstance.Arn
+      Name: Support Agent
+      Description: Routing profile for support agents
+      DefaultOutboundQueueArn: !GetAtt GeneralSupportQueue.QueueArn
+      MediaConcurrencies:
+        - Channel: VOICE
+          Concurrency: 1
+        - Channel: CHAT
+          Concurrency: 3
+        - Channel: TASK
+          Concurrency: 5
+      QueueConfigs:
+        - Delay: 0
+          Priority: 1
+          QueueReference:
+            Channel: VOICE
+            QueueArn: !GetAtt GeneralSupportQueue.QueueArn
+        - Delay: 0
+          Priority: 1
+          QueueReference:
+            Channel: CHAT
+            QueueArn: !GetAtt GeneralSupportQueue.QueueArn
+        - Delay: 0
+          Priority: 1
+          QueueReference:
+            Channel: TASK
+            QueueArn: !GetAtt GeneralSupportQueue.QueueArn
+      Tags:
+        - Key: Role
+          Value: Support
+
+Outputs:
+  InstanceId:
+    Description: Amazon Connect Instance ID
+    Value: !Ref ConnectInstance
+    Export:
+      Name: !Sub ${AWS::StackName}-InstanceId
+
+  InstanceArn:
+    Description: Amazon Connect Instance ARN
+    Value: !GetAtt ConnectInstance.Arn
+    Export:
+      Name: !Sub ${AWS::StackName}-InstanceArn
+
+  InstanceUrl:
+    Description: Amazon Connect Instance URL
+    Value: !Sub https://${InstanceAlias}.my.connect.aws
+
+  BusinessHoursArn:
+    Description: Business Hours ARN
+    Value: !GetAtt BusinessHours.HoursOfOperationArn
+    Export:
+      Name: !Sub ${AWS::StackName}-BusinessHoursArn
+
+  GeneralSupportQueueArn:
+    Description: General Support Queue ARN
+    Value: !GetAtt GeneralSupportQueue.QueueArn
+    Export:
+      Name: !Sub ${AWS::StackName}-GeneralSupportQueueArn
+
+  SupportAgentProfileArn:
+    Description: Support Agent Routing Profile ARN
+    Value: !GetAtt SupportAgentProfile.RoutingProfileArn
+    Export:
+      Name: !Sub ${AWS::StackName}-SupportAgentProfileArn

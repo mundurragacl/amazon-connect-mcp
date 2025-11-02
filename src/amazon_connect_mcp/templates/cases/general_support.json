@@ -1,0 +1,34 @@
+{
+  "name": "General Support",
+  "description": "Standard template for general customer support cases",
+  "status": "Active",
+  "requiredFields": [
+    {"fieldId": "title"},
+    {"fieldId": "status"},
+    {"fieldId": "priority"}
+  ],
+  "layout": {
+    "topPanel": [
+      {"fieldId": "title", "label": "Case Title"},
+      {"fieldId": "status", "label": "Status"},
+      {"fieldId": "priority", "label": "Priority"},
+      {"fieldId": "category", "label": "Category"}
+    ],
+    "moreInfo": [
+      {"fieldId": "description", "label": "Description"},
+      {"fieldId": "customer_id", "label": "Customer ID"},
+      {"fieldId": "contact_reason", "label": "Contact Reason"},
+      {"fieldId": "resolution_notes", "label": "Resolution Notes"}
+    ]
+  },
+  "fields": {
+    "title": {"type": "Text", "required": true, "maxLength": 200},
+    "status": {"type": "SingleSelect", "required": true, "options": ["Open", "In Progress", "Pending Customer", "Resolved", "Closed"]},
+    "priority": {"type": "SingleSelect", "required": true, "options": ["Low", "Medium", "High", "Urgent"]},
+    "category": {"type": "SingleSelect", "options": ["General Inquiry", "Billing", "Technical", "Sales", "Complaint", "Other"]},
+    "description": {"type": "Text", "multiline": true, "maxLength": 5000},
+    "customer_id": {"type": "Text", "maxLength": 50},
+    "contact_reason": {"type": "Text", "maxLength": 500},
+    "resolution_notes": {"type": "Text", "multiline": true, "maxLength": 5000}
+  }
+}

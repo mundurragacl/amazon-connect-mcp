@@ -1,0 +1,32 @@
+{
+  "name": "Business Hours",
+  "description": "Standard business hours Monday-Friday 8am-5pm",
+  "timezone": "America/New_York",
+  "config": [
+    {
+      "day": "MONDAY",
+      "startTime": {"hours": 8, "minutes": 0},
+      "endTime": {"hours": 17, "minutes": 0}
+    },
+    {
+      "day": "TUESDAY",
+      "startTime": {"hours": 8, "minutes": 0},
+      "endTime": {"hours": 17, "minutes": 0}
+    },
+    {
+      "day": "WEDNESDAY",
+      "startTime": {"hours": 8, "minutes": 0},
+      "endTime": {"hours": 17, "minutes": 0}
+    },
+    {
+      "day": "THURSDAY",
+      "startTime": {"hours": 8, "minutes": 0},
+      "endTime": {"hours": 17, "minutes": 0}
+    },
+    {
+      "day": "FRIDAY",
+      "startTime": {"hours": 8, "minutes": 0},
+      "endTime": {"hours": 17, "minutes": 0}
+    }
+  ]
+}
