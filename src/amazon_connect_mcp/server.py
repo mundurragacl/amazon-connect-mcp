@@ -2,6 +2,7 @@
 from fastmcp import FastMCP
 
 from .tools import core, cases, contacts, config, analytics, profiles, campaigns, ai, wizard
+from .tools.visualizer import open_visualizer
 
 mcp = FastMCP(
     "amazon-connect-mcp",
@@ -21,6 +22,9 @@ TIER 2 (Search for these when needed):
 - profiles_* : Customer profiles
 - campaigns_* : Outbound campaigns
 - ai_* : Amazon Q in Connect
+
+QUICK ACCESS:
+- qic_search: Use when user says "QiC", "Q in Connect", or wants to search Connect knowledge base
 
 WIZARD & TEMPLATES:
 - template_list, template_get, template_customize
@@ -144,11 +148,40 @@ mcp.tool()(ai.ai_get_recommendations)
 mcp.tool()(ai.ai_create_session)
 mcp.tool()(ai.ai_list_quick_responses)
 mcp.tool()(ai.ai_search_quick_responses)
+mcp.tool()(ai.qic_search)
 
 # ============================================
 # WIZARD & TEMPLATES
 # ============================================
 wizard.register_wizard_tools(mcp)
+
+
+# ============================================
+# VISUALIZER
+# ============================================
+@mcp.tool()
+async def layout_visualizer() -> dict:
+    """Launch the Cases Layout Visualizer in your browser.
+    
+    Opens a drag-and-drop interface to:
+    - Select industry templates (retail, healthcare, etc.)
+    - Drag fields into Top Panel (always visible) or More Info (tabbed)
+    - Reorder fields by dragging within panels
+    - See generated JSON layout code in real-time
+    - Copy the JSON for use with cases_create_layout
+    """
+    filepath = open_visualizer()
+    return {
+        "status": "opened",
+        "file": filepath,
+        "instructions": [
+            "1. Select an industry template from the dropdown",
+            "2. Drag fields to Top Panel or More Info section",
+            "3. Drag fields within a panel to reorder them",
+            "4. Copy the generated JSON",
+            "5. Use with cases_create_layout(domain_id, name, content)"
+        ]
+    }
 
 
 def main():

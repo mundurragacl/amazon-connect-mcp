@@ -51,16 +51,45 @@
 
   "layoutCreationGuidance": {
     "tool": "cases_create_layout",
+    "VISUAL_DESIGNER": {
+      "tip": "💡 Use `layout_visualizer` tool to design layouts visually with drag-and-drop!",
+      "features": ["Select industry templates", "Drag fields to panels", "See 2-column preview", "Copy generated JSON"],
+      "when_to_suggest": "Always offer this when user asks about case layouts"
+    },
     "CRITICAL_ERRORS": [
-      "❌ System fields (title, status, case_reason, customer_id) CANNOT be in layouts",
+      "❌ System fields (title, status) are ALWAYS displayed - don't add to layout",
       "❌ Using 'basicLayout' instead of 'basic' fails",
-      "✅ Only custom fields (UUID-based) can be in layout sections"
+      "✅ Only custom fields (UUID-based) can be in layout sections",
+      "✅ System fields like customer_id, summary, reference_number CAN be rearranged"
     ],
+    "sectionBehavior": {
+      "topPanel": {
+        "description": "ALWAYS VISIBLE - Shows even when viewing Activity Feed, Comments, or other subsections",
+        "bestFor": ["Customer identity", "Loyalty status", "Key metrics", "Case timestamps", "Priority indicators"]
+      },
+      "moreInfo": {
+        "description": "TABBED SECTION - Visible only when 'More Information' tab is selected",
+        "bestFor": ["Detailed order info", "Shipping details", "Payment information", "Product details", "Resolution notes"]
+      }
+    },
+    "fieldDisplayOrder": "Fields display in two columns, left to right, top to bottom within each section",
+    "API_CONSTRAINTS": {
+      "CRITICAL": "Each panel (topPanel, moreInfo) can have MAX 1 section",
+      "max_fields_per_group": 100,
+      "workaround": "Put ALL fields for a panel in ONE fieldGroup"
+    },
     "correctStructure": {
       "content": {
         "basic": {
           "topPanel": {
-            "sections": [{"fieldGroup": {"name": "Section Name", "fields": [{"id": "<custom-field-uuid>"}]}}]
+            "sections": [
+              {"fieldGroup": {"name": "Customer & Timeline", "fields": [{"id": "<loyalty-uuid>"}, {"id": "<orders-uuid>"}, {"id": "<priority-uuid>"}]}}
+            ]
+          },
+          "moreInfo": {
+            "sections": [
+              {"fieldGroup": {"name": "Order & Shipping Details", "fields": [{"id": "<order-uuid>"}, {"id": "<tracking-uuid>"}, {"id": "<payment-uuid>"}]}}
+            ]
           }
         }
       }
@@ -70,6 +99,10 @@
         "basicLayout": "WRONG - use 'basic'",
         "fields": [{"id": "title"}]
       }
+    },
+    "retailLayoutPattern": {
+      "topPanel_alwaysVisible": ["customer_id", "loyalty_tier", "total_orders", "created_datetime", "last_updated_datetime"],
+      "moreInfo_tabbed": ["order_number", "order_status", "tracking_number", "shipping_carrier", "payment_method", "payment_status", "refund_amount"]
     }
   },
 

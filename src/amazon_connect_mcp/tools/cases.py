@@ -95,15 +95,26 @@ async def cases_create_layout(
     name: str,
     content: dict
 ) -> dict:
-    """Create a case layout."""
+    """Create a case layout.
+    
+    💡 TIP: Use the `layout_visualizer` tool to design layouts visually with drag-and-drop!
+    It generates the correct JSON structure for you.
+    """
     client = get_cases_client(_get_session_region())
-    return client.create_layout(domainId=domain_id, name=name, content=content)
+    result = client.create_layout(domainId=domain_id, name=name, content=content)
+    result["_tip"] = "Use `layout_visualizer` tool to design layouts visually with drag-and-drop"
+    return result
 
 
 async def cases_list_layouts(domain_id: str, max_results: int = 25) -> dict:
-    """List case layouts."""
+    """List case layouts.
+    
+    💡 TIP: Use the `layout_visualizer` tool to design new layouts visually!
+    """
     client = get_cases_client(_get_session_region())
-    return client.list_layouts(domainId=domain_id, maxResults=max_results)
+    result = client.list_layouts(domainId=domain_id, maxResults=max_results)
+    result["_tip"] = "Use `layout_visualizer` tool to design new layouts visually with drag-and-drop"
+    return result
 
 
 # Case Operations
