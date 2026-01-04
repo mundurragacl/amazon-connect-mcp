@@ -25,3 +25,4 @@ packages = ["src/amazon_connect_mcp"]
 
 [project.scripts]
 amazon-connect-mcp = "amazon_connect_mcp.server:main"
+connect-layout-builder = "amazon_connect_mcp.tools.visualizer_server:run_visualizer"

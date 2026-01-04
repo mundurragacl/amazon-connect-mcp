@@ -101,3 +101,41 @@ async def ai_search_quick_responses(
         },
         maxResults=max_results,
     )
+
+
+async def qic_search(query: str, max_results: int = 5) -> dict:
+    """Search Amazon Q in Connect knowledge base. Use this for 'QiC', 'Q in Connect', or knowledge base searches.
+    
+    Auto-discovers the first available assistant and searches its knowledge base.
+    """
+    client = get_wisdom_client(_get_session_region())
+    
+    # Auto-discover assistant
+    assistants = client.list_assistants()
+    if not assistants.get("assistantSummaries"):
+        return {"error": "No Amazon Q assistants found. Create one in the Connect console first."}
+    
+    assistant_id = assistants["assistantSummaries"][0]["assistantId"]
+    
+    # Query the assistant
+    results = client.query_assistant(
+        assistantId=assistant_id,
+        queryText=query,
+        maxResults=max_results,
+    )
+    
+    # Extract simplified results
+    simplified = []
+    for r in results.get("results", []):
+        doc = r.get("document", {})
+        simplified.append({
+            "title": doc.get("title", {}).get("text", ""),
+            "excerpt": doc.get("excerpt", {}).get("text", ""),
+            "relevance": r.get("relevanceScore", 0)
+        })
+    
+    return {
+        "assistant": assistants["assistantSummaries"][0]["name"],
+        "query": query,
+        "results": simplified
+    }

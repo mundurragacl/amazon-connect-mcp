@@ -1,39 +1,54 @@
 {
   "name": "E-Commerce/Retail Layout",
-  "description": "Layout for retail and e-commerce cases with order and shipping details",
-  "_note": "Title and Status fields cannot be part of layouts - they are always displayed automatically. Custom fields must be created first with their IDs referenced here.",
+  "description": "Layout for retail and e-commerce cases with customer info always visible and order details in More Information tab",
+  
+  "_llm_guidance": {
+    "sections_explained": {
+      "topPanel": "ALWAYS VISIBLE - Shows even when viewing Activity Feed, Comments, or other subsections",
+      "moreInfo": "TABBED SECTION - Visible when agent clicks 'More Information' tab"
+    },
+    "API_CONSTRAINTS": {
+      "CRITICAL": "Each panel (topPanel, moreInfo) can have MAX 1 section with MAX 1 fieldGroup",
+      "max_fields_per_group": 100,
+      "title_status_excluded": "Title and Status fields CANNOT be in layouts - always displayed automatically"
+    },
+    "workflow": [
+      "1. Create custom fields first using cases_create_field",
+      "2. Get field IDs from cases_list_fields",
+      "3. Create layout with cases_create_layout - ONE section per panel",
+      "4. Link layout to template via layoutConfiguration.defaultLayout"
+    ]
+  },
+
   "content": {
     "basic": {
       "topPanel": {
+        "_description": "Always visible - customer identity, loyalty, timestamps",
         "sections": [
           {
             "fieldGroup": {
-              "name": "Case Overview",
+              "name": "Customer & Timeline",
               "fields": [
-                {"id": "case_reason"},
-                {"id": "customer_id"}
+                {"id": "loyalty_tier_field_id", "_name": "Loyalty Tier"},
+                {"id": "total_orders_field_id", "_name": "Total Orders"},
+                {"id": "priority_field_id", "_name": "Priority"}
               ]
             }
           }
         ]
       },
       "moreInfo": {
+        "_description": "Tabbed section - order, shipping, payment details",
         "sections": [
           {
             "fieldGroup": {
-              "name": "Order Details",
+              "name": "Order & Shipping Details",
               "fields": [
-                {"id": "order_number"},
-                {"id": "summary"}
-              ]
-            }
-          },
-          {
-            "fieldGroup": {
-              "name": "Resolution",
-              "fields": [
-                {"id": "resolution_notes"},
-                {"id": "reference_number"}
+                {"id": "order_number_field_id", "_name": "Order Number"},
+                {"id": "order_status_field_id", "_name": "Order Status"},
+                {"id": "tracking_number_field_id", "_name": "Tracking Number"},
+                {"id": "payment_status_field_id", "_name": "Payment Status"},
+                {"id": "resolution_notes_field_id", "_name": "Resolution Notes"}
               ]
             }
           }
@@ -41,8 +56,57 @@
       }
     }
   },
+
   "requiredCustomFields": [
-    {"name": "Order Number", "type": "Text", "description": "Order reference number"},
-    {"name": "Resolution Notes", "type": "Text", "description": "Case resolution notes"}
-  ]
+    {"name": "Loyalty Tier", "type": "SingleSelect", "options": ["VIP", "Gold", "Silver", "Bronze", "New Customer"]},
+    {"name": "Total Orders", "type": "Number"},
+    {"name": "Order Number", "type": "Text"},
+    {"name": "Order Status", "type": "SingleSelect", "options": ["Processing", "Shipped", "Delivered", "Cancelled", "Returned"]},
+    {"name": "Tracking Number", "type": "Text"},
+    {"name": "Payment Status", "type": "SingleSelect", "options": ["Confirmed", "Pending", "Failed", "Refunded"]},
+    {"name": "Resolution Notes", "type": "Text"}
+  ],
+
+  "exampleApiCall": {
+    "_note": "Replace field IDs with actual UUIDs from cases_list_fields",
+    "tool": "cases_create_layout",
+    "params": {
+      "domain_id": "your-domain-id",
+      "name": "Retail Layout",
+      "content": {
+        "basic": {
+          "topPanel": {
+            "sections": [
+              {
+                "fieldGroup": {
+                  "name": "Customer & Timeline",
+                  "fields": [
+                    {"id": "63d48c3d-0540-4676-9803-339ca32a1d65"},
+                    {"id": "136bba28-e1ea-4a8e-ad60-3c0bd0d72f36"},
+                    {"id": "0b2a40b2-0082-4cdc-9c24-d2b02e46ab85"}
+                  ]
+                }
+              }
+            ]
+          },
+          "moreInfo": {
+            "sections": [
+              {
+                "fieldGroup": {
+                  "name": "Order & Shipping Details",
+                  "fields": [
+                    {"id": "016ee382-6f24-4870-9dfd-2cdcc33f28b5"},
+                    {"id": "bcc91c28-3300-4331-813e-bcadc965c787"},
+                    {"id": "62ffb852-f2b2-4d1b-a5e2-133f323dae2a"},
+                    {"id": "0eaf0d55-3614-41a0-9448-e314e8fb6a74"},
+                    {"id": "780834f6-7da0-4d0a-a64f-dbc3ea9933d8"}
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
 }
