@@ -1,10 +1,14 @@
 """Tier 2: Customer Profiles tools - Defer loaded."""
-from ..aws_clients import get_profiles_client
+from ..aws_clients import get_profiles_client, get_connect_client
 from .config import _session_context
 
 
 def _get_session_region():
     return _session_context.get("region")
+
+
+def _get_session_instance():
+    return _session_context.get("instance_id")
 
 
 async def profiles_create_profile(
@@ -113,7 +117,85 @@ async def profiles_create_domain(
 ) -> dict:
     """Create a profile domain."""
     client = get_profiles_client(_get_session_region())
-    return client.create_domain(
+    result = client.create_domain(
         DomainName=domain_name,
         DefaultExpirationDays=default_expiration_days,
     )
+    result["_llm_guidance"] = {
+        "nextSteps": [
+            "1. Associate this domain with your Connect instance using profiles_associate_domain",
+            "2. Then associate Cases domain using cases_associate_domain (requires profiles first)"
+        ],
+        "workflow": {
+            "step1": {"tool": "profiles_associate_domain", "params": {"domain_name": domain_name}},
+            "step2": {"tool": "cases_associate_domain", "note": "Do this AFTER profiles association"}
+        },
+        "CRITICAL": "Cases integration requires Customer Profiles to be associated FIRST"
+    }
+    return result
+
+
+async def profiles_associate_domain(
+    domain_name: str,
+    instance_id: str | None = None,
+    object_type_name: str = "CTR"
+) -> dict:
+    """Associate a Customer Profiles domain with a Connect instance.
+    
+    This enables Customer Profiles for the instance, allowing contact data
+    to flow into customer profiles automatically.
+    
+    Args:
+        domain_name: The Customer Profiles domain name to associate
+        instance_id: Connect instance ID (uses session if not provided)
+        object_type_name: Object type for the integration (default: CTR for Contact Trace Records)
+    
+    Returns:
+        Integration details including domain, URI, and creation time
+    
+    IMPORTANT: This must be done BEFORE associating Cases domain.
+    The correct order is:
+    1. Create profiles domain (profiles_create_domain)
+    2. Associate profiles domain (this tool)
+    3. Create cases domain (cases_create_domain)  
+    4. Associate cases domain (cases_associate_domain)
+    """
+    region = _get_session_region()
+    effective_instance_id = instance_id or _get_session_instance()
+    
+    if not effective_instance_id:
+        return {
+            "error": "No instance_id provided and no session set",
+            "action": "Call set_session(instance_id, region) first or provide instance_id parameter"
+        }
+    
+    if not region:
+        return {
+            "error": "No region set in session",
+            "action": "Call set_session(instance_id, region) first"
+        }
+    
+    # Get the instance ARN
+    connect_client = get_connect_client(region)
+    instance_info = connect_client.describe_instance(InstanceId=effective_instance_id)
+    instance_arn = instance_info["Instance"]["Arn"]
+    
+    # Create the integration
+    profiles_client = get_profiles_client(region)
+    result = profiles_client.put_integration(
+        DomainName=domain_name,
+        Uri=instance_arn,
+        ObjectTypeName=object_type_name
+    )
+    
+    result["_llm_guidance"] = {
+        "status": "Customer Profiles domain associated successfully",
+        "nextStep": {
+            "description": "Now you can associate a Cases domain",
+            "tool": "cases_associate_domain",
+            "note": "Cases requires Customer Profiles to be associated first"
+        },
+        "whatThisDoes": f"Contact data (CTR) from instance will now flow into {domain_name} profiles"
+    }
+    
+    return result

@@ -70,6 +70,7 @@ mcp.tool()(cases.cases_list_cases_for_contact)
 mcp.tool()(cases.cases_create_domain)
 mcp.tool()(cases.cases_list_domains)
 mcp.tool()(cases.cases_get_domain)
+mcp.tool()(cases.cases_associate_domain)
 
 # Contacts
 mcp.tool()(contacts.contacts_start_outbound_voice)
@@ -123,6 +124,7 @@ mcp.tool()(profiles.profiles_delete_profile)
 mcp.tool()(profiles.profiles_merge)
 mcp.tool()(profiles.profiles_list_domains)
 mcp.tool()(profiles.profiles_create_domain)
+mcp.tool()(profiles.profiles_associate_domain)
 
 # Campaigns
 mcp.tool()(campaigns.campaigns_create)
