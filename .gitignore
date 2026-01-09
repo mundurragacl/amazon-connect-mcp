@@ -26,3 +26,6 @@ htmlcov/
 
 # OS
 .DS_Store
+
+# Kiro settings (contains AWS profile info)
+.kiro/settings/
