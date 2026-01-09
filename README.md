@@ -157,6 +157,21 @@ Add to `.kiro/settings/mcp.json` (workspace) or `~/.kiro/settings/mcp.json` (glo
 
 Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
+**Recommended (macOS/Linux):**
+```json
+{
+  "mcpServers": {
+    "amazon-connect": {
+      "command": "/path/to/amazon-connect-mcp/.venv/bin/amazon-connect-mcp",
+      "env": {
+        "AWS_PROFILE": "your-profile"
+      }
+    }
+  }
+}
+```
+
+**Alternative (if above doesn't work):**
 ```json
 {
   "mcpServers": {
