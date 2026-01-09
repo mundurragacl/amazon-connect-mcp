@@ -1,8 +1,8 @@
 """Amazon Connect MCP Server."""
 from fastmcp import FastMCP
 
-from .tools import core, cases, contacts, config, analytics, profiles, campaigns, ai, wizard
-from .tools.visualizer import open_visualizer
+from amazon_connect_mcp.tools import core, cases, contacts, config, analytics, profiles, campaigns, ai, wizard
+from amazon_connect_mcp.tools.visualizer import open_visualizer
 
 mcp = FastMCP(
     "amazon-connect-mcp",
