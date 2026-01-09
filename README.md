@@ -8,7 +8,7 @@ An MCP (Model Context Protocol) server that enables AI assistants to interact wi
 
 ## Features
 
-- **86 Tools** covering all major Amazon Connect services
+- **88 Tools** covering all major Amazon Connect services
 - **91 Configuration Templates** - Industry-specific templates for cases, views, routing, and more
 - **Multi-Region Support** - List instances across all AWS regions
 - **Setup Wizard** - Guided setup for new Connect instances
@@ -19,11 +19,11 @@ An MCP (Model Context Protocol) server that enables AI assistants to interact wi
 | Category | Tools | Description |
 |----------|-------|-------------|
 | **Core** | 9 | Instance management, metrics, contacts, cases |
-| **Cases** | 16 | Case templates, fields, layouts, domains |
+| **Cases** | 17 | Case templates, fields, layouts, domains |
 | **Contacts** | 8 | Voice, chat, tasks, transfers, recording |
 | **Config** | 17 | Flows, queues, routing profiles, users |
 | **Analytics** | 5 | Metrics, evaluations, performance |
-| **Profiles** | 8 | Customer profile management |
+| **Profiles** | 9 | Customer profile management |
 | **Campaigns** | 10 | Outbound campaign management |
 | **AI** | 8 | Amazon Q in Connect integration |
 | **Templates** | 3 | Template management |

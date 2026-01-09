@@ -215,6 +215,53 @@ From testing, these caused the most iterations:
 | AI list_knowledge_bases wrong param | assistantId doesn't exist in API | Removed param - API lists all KBs |
 | AI search wrong format | API requires specific query structure | Tool handles format internally, user passes simple string |
 | AI list_knowledge_bases wrong param | assistantId doesn't exist in API | Removed param - API lists all KBs |
+| Cases permissions error | Customer Profiles not associated first | Integration order guidance |
+
+## Domain Association Workflow
+
+**CRITICAL ORDER**: When setting up Cases and Customer Profiles, the order matters:
+
+```
+1. set_session(instance_id, region)     # ALWAYS FIRST
+2. profiles_create_domain(domain_name)   # Create profiles domain
+3. profiles_associate_domain(domain_name) # Associate with Connect instance
+4. cases_create_domain(name)             # Create cases domain  
+5. cases_associate_domain(domain_id)     # Associate with Connect instance
+```
+
+**Why this order?**
+- Cases integration requires Customer Profiles to be associated FIRST
+- If you skip profiles association, Cases will show "requires custom permissions" error
+- The Connect console won't let you enable Cases without Profiles
+
+**Common mistake:**
+```
+❌ Wrong:
+1. cases_create_domain("MyCases")
+2. cases_associate_domain(domain_id)  # FAILS - Profiles not set up
+
+✅ Correct:
+1. set_session(instance_id, region)
+2. profiles_create_domain("MyProfiles")
+3. profiles_associate_domain("MyProfiles")  # CTR data flows in
+4. cases_create_domain("MyCases")
+5. cases_associate_domain(domain_id)        # Now works!
+```
+
+Add this to templates:
+
+```json
+{
+  "INTEGRATION_ORDER": {
+    "warning": "Cases requires Customer Profiles to be associated first",
+    "workflow": [
+      "1. profiles_associate_domain - enables CTR data flow",
+      "2. cases_associate_domain - enables Cases feature"
+    ],
+    "error_if_skipped": "Cases will show 'requires custom permissions' in console"
+  }
+}
+```
 
 ## Cross-Region Gotchas
 
