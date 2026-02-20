@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![FastMCP](https://img.shields.io/badge/FastMCP-2.x-green.svg)](https://gofastmcp.com)
+[![MCP Badge](https://lobehub.com/badge/mcp/mundurragacl-amazon-connect-mcp)](https://lobehub.com/mcp/mundurragacl-amazon-connect-mcp)
 
 An MCP (Model Context Protocol) server that enables AI assistants to interact with Amazon Connect contact centers. Built with FastMCP and boto3.
 
