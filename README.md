@@ -15,6 +15,15 @@ An MCP (Model Context Protocol) server that enables AI assistants to interact wi
 - **Setup Wizard** - Guided setup for new Connect instances
 - **Infrastructure as Code** - Generate CloudFormation templates
 
+### MCP Capabilities
+
+This server implements the full Model Context Protocol specification:
+
+- **Tools** - 88 tools for interacting with Amazon Connect services (cases, contacts, analytics, AI, etc.)
+- **Prompts** - Pre-configured prompts for common workflows like instance setup, case creation, and contact center configuration
+- **Resources** - Access to 91+ configuration templates as contextual resources that can be attached to conversations
+- **Skills** - Specialized capabilities including the Setup Wizard for guided instance configuration and IaC generation
+
 ### Tool Categories
 
 | Category | Tools | Description |
@@ -250,6 +259,70 @@ wizard_get_iac_template(
     region="us-east-1"
 )
 ```
+
+## MCP Capabilities Reference
+
+This server provides the full Model Context Protocol specification with tools, prompts, resources, and skills.
+
+### Tools (88 Available)
+
+Core operations for Amazon Connect management:
+
+1. `list_instances` - List all Connect instances across AWS regions
+2. `describe_instance` - Get detailed information about a specific instance
+3. `get_current_metrics` - Retrieve real-time contact center metrics
+4. `create_case` - Create a new customer support case
+5. `search_cases` - Search cases with filters and sorting
+6. `cases_create_template` - Create custom case templates
+7. `contacts_start_outbound_voice` - Initiate outbound voice calls
+8. `config_create_queue` - Create new contact queues
+9. `profiles_search` - Search customer profiles
+10. `ai_query_assistant` - Query Amazon Q in Connect for answers
+
+### Prompts (Workflow Guidance)
+
+Pre-configured prompts for common workflows embedded in templates:
+
+1. **Instance Setup** - Step-by-step guidance for new Connect instance configuration
+2. **Case Creation Workflow** - Complete workflow from domain setup to case creation
+3. **Customer Profile Integration** - Associate Customer Profiles with Connect instance
+4. **Queue Configuration** - Create queues with hours of operation and routing
+5. **Agent Workspace Setup** - Configure agent views and screen pops
+6. **Outbound Campaign Launch** - Set up and start outbound calling campaigns
+7. **Contact Flow Design** - Build IVR flows with proper error handling
+8. **Analytics Setup** - Configure metrics collection and reporting
+9. **AI Integration** - Enable Amazon Q in Connect with knowledge bases
+10. **Multi-Region Deployment** - Deploy across multiple AWS regions
+
+### Resources (91+ Templates)
+
+Configuration templates accessible as contextual resources:
+
+1. **Cases Templates** - 20 industry-specific case templates (healthcare, finance, retail, etc.)
+2. **Agent Views** - 15 screen pop and disposition form templates
+3. **Data Tables** - 8 routing and configuration tables (holidays, SLAs, outages)
+4. **Hours of Operation** - 6 schedule templates (24x7, business hours, healthcare)
+5. **Queue Configurations** - Industry-specific queue setups
+6. **Routing Profiles** - Agent skill-based routing templates
+7. **Contact Flows** - 15 IVR flow templates by industry
+8. **Evaluation Forms** - 6 quality management templates
+9. **Customer Profile Layouts** - Unified customer view configurations
+10. **CloudFormation Templates** - Infrastructure as Code for instance deployment
+
+### Skills (Specialized Capabilities)
+
+Advanced capabilities for complex operations:
+
+1. **Setup Wizard** - Guided instance setup with use case selection (basic, cases, AI, enterprise)
+2. **IaC Generator** - Generate CloudFormation templates from configuration choices
+3. **Template Customizer** - Customize templates with overrides and industry-specific fields
+4. **Layout Visualizer** - Drag-and-drop interface for designing case layouts
+5. **Multi-Region Discovery** - Automatically discover instances across all AWS regions
+6. **Domain Association** - Properly sequence Customer Profiles and Cases integration
+7. **Workflow Validator** - Validate configuration dependencies before deployment
+8. **Template Loader** - Dynamic template loading with LLM guidance
+9. **Session Management** - Region-aware session handling for API calls
+10. **Error Recovery** - Automatic retry and fallback for common API errors
 
 ## Available Templates
 
